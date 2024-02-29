@@ -1,0 +1,6 @@
+framework module Pods_SwiftCreekSDK {
+  umbrella header "Pods-SwiftCreekSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

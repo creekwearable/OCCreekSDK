@@ -1,0 +1,6 @@
+framework module OCCreekSDK {
+  umbrella header "OCCreekSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
