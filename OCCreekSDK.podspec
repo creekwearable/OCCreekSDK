@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/bean/OCCreekSDK.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.platform = :ios, '9.0'
+  s.platform = :ios, '12.0'
   
   s.vendored_frameworks = [
   'Creek/sbc.framework',
@@ -44,7 +44,7 @@ TODO: Add long description of the pod here.
   'Creek/FlutterPluginRegistrant.framework',
   'Creek/path_provider_foundation.framework']
   
-  s.dependency 'Flutter'
+#  s.dependency 'Flutter'
 
 #  s.source_files = 'OCCreekSDK/Classes/extension/*','OCCreekSDK/Classes/gen/*'
   s.source_files = 'OCCreekSDK/Classes/extension/*'
@@ -54,10 +54,10 @@ TODO: Add long description of the pod here.
     ss.source_files = "OCCreekSDK/Classes/gen/*.pbobjc.{h,m}"
     ss.header_mappings_dir = "OCCreekSDK/Classes/gen"
     ss.requires_arc = false
-#    ss.dependency "Protobuf", '~> 3.11'
+    ss.dependency "Protobuf", '~> 3.11'
   end
 #  s.requires_arc = false
-  s.dependency "Protobuf", '~> 3.24.4'
+#  s.dependency "Protobuf", '~> 3.24.4'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1', }
   
   

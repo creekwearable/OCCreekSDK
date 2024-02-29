@@ -143,6 +143,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
 
             break
         case "Set User Information":
+
             CreekInterFace.instance().getUserInfo { model in
                 let data = model
                 data.personalInfo.year = 2024

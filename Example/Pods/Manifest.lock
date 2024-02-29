@@ -1,13 +1,10 @@
 PODS:
-  - Flutter (3.13.0)
   - IQKeyboardManagerSwift (6.5.15)
   - MBProgressHUD (1.2.0)
   - OCCreekSDK (0.1.0):
-    - Flutter
     - OCCreekSDK/Protos (= 0.1.0)
     - Protobuf (~> 3.24.4)
   - OCCreekSDK/Protos (0.1.0):
-    - Flutter
     - Protobuf (~> 3.24.4)
   - Protobuf (3.24.4)
   - SnapKit (5.6.0)
@@ -22,7 +19,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Flutter
     - IQKeyboardManagerSwift
     - MBProgressHUD
     - Protobuf
@@ -34,10 +30,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Flutter: 8ff16720b007bae16abfe75ef9fe3ee45ead486a
   IQKeyboardManagerSwift: 79fab21f451441935788dc5d80ded21c32685904
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OCCreekSDK: d96851f2a65db1cfdd8e9e3cfafff67586c04764
+  OCCreekSDK: 110d4304350089bd538df15181722c93fc5fbe3b
   Protobuf: 351e9022fe13a6e2af00e9aefc22077cb88520f8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711

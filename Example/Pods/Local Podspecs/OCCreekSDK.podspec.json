@@ -32,16 +32,13 @@
     "Creek/FlutterPluginRegistrant.framework",
     "Creek/path_provider_foundation.framework"
   ],
+  "source_files": "OCCreekSDK/Classes/extension/*",
+  "public_header_files": "OCCreekSDK/Classes/extension/*.h",
   "dependencies": {
-    "Flutter": [
-
-    ],
     "Protobuf": [
       "~> 3.24.4"
     ]
   },
-  "source_files": "OCCreekSDK/Classes/extension/*",
-  "public_header_files": "OCCreekSDK/Classes/extension/*.h",
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",
     "GCC_PREPROCESSOR_DEFINITIONS": "$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1"
