@@ -12,6 +12,7 @@
 
 #import "ActivityModel.h"
 #import "CreekInterFace.h"
+#import "DialParseModel.h"
 #import "EnumValue.h"
 #import "EphemerisModel.h"
 #import "EventReportModel.h"

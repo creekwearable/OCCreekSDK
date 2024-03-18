@@ -20,6 +20,18 @@
 		078D40D32B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota in Resources */ = {isa = PBXBuildFile; fileRef = 078D40D22B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota */; };
 		0798DAB82B8F236000500B53 /* ephemeris.gnss in Resources */ = {isa = PBXBuildFile; fileRef = 0798DAB62B8F236000500B53 /* ephemeris.gnss */; };
 		0798DAB92B8F236000500B53 /* offlineEphemeris.agnss in Resources */ = {isa = PBXBuildFile; fileRef = 0798DAB72B8F236000500B53 /* offlineEphemeris.agnss */; };
+		07A00DF62BA54E6F00AFC4B4 /* CASIO01_01.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF02BA54E6E00AFC4B4 /* CASIO01_01.zip */; };
+		07A00DF72BA54E6F00AFC4B4 /* Fun061101_03.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF12BA54E6F00AFC4B4 /* Fun061101_03.zip */; };
+		07A00DF82BA54E6F00AFC4B4 /* Act06_1201_03.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF22BA54E6F00AFC4B4 /* Act06_1201_03.zip */; };
+		07A00DF92BA54E6F00AFC4B4 /* acti06_2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF32BA54E6F00AFC4B4 /* acti06_2.zip */; };
+		07A00DFA2BA54E6F00AFC4B4 /* Fun_061211_05_2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF42BA54E6F00AFC4B4 /* Fun_061211_05_2.zip */; };
+		07A00DFB2BA54E6F00AFC4B4 /* func6_pink.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF52BA54E6F00AFC4B4 /* func6_pink.zip */; };
+		07A00DFD2BA54EA300AFC4B4 /* BaseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00DFC2BA54EA300AFC4B4 /* BaseSheetView.swift */; };
+		07A00DFF2BA54EAB00AFC4B4 /* extension_color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00DFE2BA54EAB00AFC4B4 /* extension_color.swift */; };
+		07A00E012BA54EE400AFC4B4 /* DialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E002BA54EE400AFC4B4 /* DialViewController.swift */; };
+		07A00E032BA54EF800AFC4B4 /* DialDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */; };
+		07A00E052BA54F9400AFC4B4 /* ZBSlideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */; };
+		07A00E072BA54FA300AFC4B4 /* CustomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E062BA54FA300AFC4B4 /* CustomSheetView.swift */; };
 		ED2CC2E576E45E03B0131B12 /* Pods_SwiftCreekSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B13C4B580A306CB72485A1 /* Pods_SwiftCreekSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +138,20 @@
 		078D40D22B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = lw10_v1.0.42_24020401.ota; sourceTree = "<group>"; };
 		0798DAB62B8F236000500B53 /* ephemeris.gnss */ = {isa = PBXFileReference; lastKnownFileType = file; path = ephemeris.gnss; sourceTree = "<group>"; };
 		0798DAB72B8F236000500B53 /* offlineEphemeris.agnss */ = {isa = PBXFileReference; lastKnownFileType = file; path = offlineEphemeris.agnss; sourceTree = "<group>"; };
+		07A00DEE2BA5402100AFC4B4 /* DialParseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialParseModel.h; sourceTree = "<group>"; };
+		07A00DEF2BA5402100AFC4B4 /* DialParseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialParseModel.m; sourceTree = "<group>"; };
+		07A00DF02BA54E6E00AFC4B4 /* CASIO01_01.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = CASIO01_01.zip; sourceTree = "<group>"; };
+		07A00DF12BA54E6F00AFC4B4 /* Fun061101_03.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Fun061101_03.zip; sourceTree = "<group>"; };
+		07A00DF22BA54E6F00AFC4B4 /* Act06_1201_03.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Act06_1201_03.zip; sourceTree = "<group>"; };
+		07A00DF32BA54E6F00AFC4B4 /* acti06_2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = acti06_2.zip; sourceTree = "<group>"; };
+		07A00DF42BA54E6F00AFC4B4 /* Fun_061211_05_2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Fun_061211_05_2.zip; sourceTree = "<group>"; };
+		07A00DF52BA54E6F00AFC4B4 /* func6_pink.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = func6_pink.zip; sourceTree = "<group>"; };
+		07A00DFC2BA54EA300AFC4B4 /* BaseSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSheetView.swift; sourceTree = "<group>"; };
+		07A00DFE2BA54EAB00AFC4B4 /* extension_color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension_color.swift; sourceTree = "<group>"; };
+		07A00E002BA54EE400AFC4B4 /* DialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialViewController.swift; sourceTree = "<group>"; };
+		07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialDetailsViewController.swift; sourceTree = "<group>"; };
+		07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZBSlideBar.swift; sourceTree = "<group>"; };
+		07A00E062BA54FA300AFC4B4 /* CustomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSheetView.swift; sourceTree = "<group>"; };
 		07E89D5D2B8850E4004DFEED /* NoiseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoiseModel.h; sourceTree = "<group>"; };
 		07E89D5E2B8850E4004DFEED /* NoiseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoiseModel.m; sourceTree = "<group>"; };
 		07E89D602B886E5D004DFEED /* StressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StressModel.h; sourceTree = "<group>"; };
@@ -316,6 +342,8 @@
 				07E89D7C2B887C49004DFEED /* EphemerisModel.m */,
 				07E89D7E2B887CC5004DFEED /* NoticeUpdateModel.h */,
 				07E89D7F2B887CC5004DFEED /* NoticeUpdateModel.m */,
+				07A00DEE2BA5402100AFC4B4 /* DialParseModel.h */,
+				07A00DEF2BA5402100AFC4B4 /* DialParseModel.m */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -323,14 +351,24 @@
 		078B62142B86F69000BCEFC3 /* SwiftCreekSDK */ = {
 			isa = PBXGroup;
 			children = (
+				07A00DF22BA54E6F00AFC4B4 /* Act06_1201_03.zip */,
+				07A00DF32BA54E6F00AFC4B4 /* acti06_2.zip */,
+				07A00DF02BA54E6E00AFC4B4 /* CASIO01_01.zip */,
+				07A00DF42BA54E6F00AFC4B4 /* Fun_061211_05_2.zip */,
+				07A00DF12BA54E6F00AFC4B4 /* Fun061101_03.zip */,
+				07A00DF52BA54E6F00AFC4B4 /* func6_pink.zip */,
 				0798DAB62B8F236000500B53 /* ephemeris.gnss */,
 				0798DAB72B8F236000500B53 /* offlineEphemeris.agnss */,
 				078D40D22B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota */,
 				078B62272B86F78F00BCEFC3 /* base */,
 				078B62152B86F69000BCEFC3 /* AppDelegate.swift */,
 				078B62192B86F69000BCEFC3 /* ViewController.swift */,
+				07A00E002BA54EE400AFC4B4 /* DialViewController.swift */,
+				07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */,
 				078B622F2B86F7D500BCEFC3 /* CommandReplyViewController.swift */,
 				078B622E2B86F7D500BCEFC3 /* ScanDeviceViewController.swift */,
+				07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */,
+				07A00E062BA54FA300AFC4B4 /* CustomSheetView.swift */,
 				078B621B2B86F69000BCEFC3 /* Main.storyboard */,
 				078B621E2B86F69100BCEFC3 /* Assets.xcassets */,
 				078B62202B86F69100BCEFC3 /* LaunchScreen.storyboard */,
@@ -342,6 +380,8 @@
 		078B62272B86F78F00BCEFC3 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				07A00DFE2BA54EAB00AFC4B4 /* extension_color.swift */,
+				07A00DFC2BA54EA300AFC4B4 /* BaseSheetView.swift */,
 				078B62282B86F78F00BCEFC3 /* GlobalDefine.swift */,
 				078B62292B86F78F00BCEFC3 /* PonyAlert.swift */,
 				078B622A2B86F78F00BCEFC3 /* PonyBaseViewController.swift */,
@@ -410,7 +450,7 @@
 				078B620F2B86F68F00BCEFC3 /* Sources */,
 				078B62102B86F68F00BCEFC3 /* Frameworks */,
 				078B62112B86F68F00BCEFC3 /* Resources */,
-				18898458E3A586AA7DCA56B6 /* [CP] Embed Pods Frameworks */,
+				EFA4C574D00ABB487D6445A8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -466,7 +506,13 @@
 				078B62222B86F69100BCEFC3 /* LaunchScreen.storyboard in Resources */,
 				0798DAB92B8F236000500B53 /* offlineEphemeris.agnss in Resources */,
 				0798DAB82B8F236000500B53 /* ephemeris.gnss in Resources */,
+				07A00DF82BA54E6F00AFC4B4 /* Act06_1201_03.zip in Resources */,
 				078B621F2B86F69100BCEFC3 /* Assets.xcassets in Resources */,
+				07A00DFA2BA54E6F00AFC4B4 /* Fun_061211_05_2.zip in Resources */,
+				07A00DFB2BA54E6F00AFC4B4 /* func6_pink.zip in Resources */,
+				07A00DF62BA54E6F00AFC4B4 /* CASIO01_01.zip in Resources */,
+				07A00DF72BA54E6F00AFC4B4 /* Fun061101_03.zip in Resources */,
+				07A00DF92BA54E6F00AFC4B4 /* acti06_2.zip in Resources */,
 				078B621D2B86F69000BCEFC3 /* Main.storyboard in Resources */,
 				078D40D32B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota in Resources */,
 			);
@@ -475,53 +521,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18898458E3A586AA7DCA56B6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SwiftCreekSDK/Pods-SwiftCreekSDK-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${PODS_ROOT}/../../Creek/sbc.framework",
-				"${PODS_ROOT}/../../Creek/App.framework",
-				"${PODS_ROOT}/../../Creek/creek_blue_manage.framework",
-				"${PODS_ROOT}/../../Creek/flutter_blue_plus.framework",
-				"${PODS_ROOT}/../../Creek/Flutter.framework",
-				"${PODS_ROOT}/../../Creek/sqflite.framework",
-				"${PODS_ROOT}/../../Creek/Protobuf.framework",
-				"${PODS_ROOT}/../../Creek/shared_preferences_foundation.framework",
-				"${PODS_ROOT}/../../Creek/FMDB.framework",
-				"${PODS_ROOT}/../../Creek/path_provider_foundation.framework",
-				"${BUILT_PRODUCTS_DIR}/OCCreekSDK/OCCreekSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sbc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/App.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/creek_blue_manage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_blue_plus.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqflite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/shared_preferences_foundation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/path_provider_foundation.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCCreekSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftCreekSDK/Pods-SwiftCreekSDK-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		67D17C8D0A9ED45B39D0A43A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,6 +543,65 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EFA4C574D00ABB487D6445A8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftCreekSDK/Pods-SwiftCreekSDK-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${PODS_ROOT}/../../Creek/sbc.framework",
+				"${PODS_ROOT}/../../Creek/App.framework",
+				"${PODS_ROOT}/../../Creek/creek_blue_manage.framework",
+				"${PODS_ROOT}/../../Creek/flutter_blue_plus.framework",
+				"${PODS_ROOT}/../../Creek/Flutter.framework",
+				"${PODS_ROOT}/../../Creek/sqflite.framework",
+				"${PODS_ROOT}/../../Creek/Protobuf.framework",
+				"${PODS_ROOT}/../../Creek/shared_preferences_foundation.framework",
+				"${PODS_ROOT}/../../Creek/FMDB.framework",
+				"${PODS_ROOT}/../../Creek/actres.framework",
+				"${PODS_ROOT}/../../Creek/image_clipper.framework",
+				"${PODS_ROOT}/../../Creek/lz4.framework",
+				"${PODS_ROOT}/../../Creek/ActResSdk.framework",
+				"${PODS_ROOT}/../../Creek/path_provider_foundation.framework",
+				"${BUILT_PRODUCTS_DIR}/OCCreekSDK/OCCreekSDK.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sbc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/App.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/creek_blue_manage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_blue_plus.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Flutter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqflite.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/shared_preferences_foundation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/actres.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/image_clipper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/lz4.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActResSdk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/path_provider_foundation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCCreekSDK.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZIPFoundation.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftCreekSDK/Pods-SwiftCreekSDK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -552,11 +610,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				078B621A2B86F69000BCEFC3 /* ViewController.swift in Sources */,
+				07A00E052BA54F9400AFC4B4 /* ZBSlideBar.swift in Sources */,
 				078B62312B86F7D500BCEFC3 /* CommandReplyViewController.swift in Sources */,
+				07A00E072BA54FA300AFC4B4 /* CustomSheetView.swift in Sources */,
+				07A00DFF2BA54EAB00AFC4B4 /* extension_color.swift in Sources */,
 				078B622B2B86F78F00BCEFC3 /* GlobalDefine.swift in Sources */,
+				07A00E012BA54EE400AFC4B4 /* DialViewController.swift in Sources */,
 				078B62162B86F69000BCEFC3 /* AppDelegate.swift in Sources */,
 				078B622C2B86F78F00BCEFC3 /* PonyAlert.swift in Sources */,
+				07A00DFD2BA54EA300AFC4B4 /* BaseSheetView.swift in Sources */,
 				078B622D2B86F78F00BCEFC3 /* PonyBaseViewController.swift in Sources */,
+				07A00E032BA54EF800AFC4B4 /* DialDetailsViewController.swift in Sources */,
 				078B62302B86F7D500BCEFC3 /* ScanDeviceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

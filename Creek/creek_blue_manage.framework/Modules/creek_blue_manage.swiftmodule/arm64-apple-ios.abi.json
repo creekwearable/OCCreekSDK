@@ -36,7 +36,7 @@
               {
                 "kind": "TypeNominal",
                 "name": "FlutterPluginRegistrar",
-                "printedName": "Flutter.FlutterPluginRegistrar",
+                "printedName": "any Flutter.FlutterPluginRegistrar",
                 "usr": "c:objc(pl)FlutterPluginRegistrar"
               }
             ],
@@ -201,13 +201,5 @@
     ],
     "json_format_version": 8
   },
-  "ConstValues": [
-    {
-      "filePath": "\/Users\/bean\/Documents\/项目\/creekbluemanage\/ios\/Classes\/SwiftCreekBlueManagePlugin.swift",
-      "kind": "StringLiteral",
-      "offset": 213,
-      "length": 19,
-      "value": "\"creek_blue_manage\""
-    }
-  ]
+  "ConstValues": []
 }

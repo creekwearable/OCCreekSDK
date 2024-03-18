@@ -1,42 +1,49 @@
 PODS:
-  - IQKeyboardManagerSwift (6.5.15)
+  - ESTabBarController-swift (2.8.0)
+  - IQKeyboardManagerSwift (7.0.1)
   - MBProgressHUD (1.2.0)
-  - OCCreekSDK (0.1.0):
-    - OCCreekSDK/Protos (= 0.1.0)
-    - Protobuf (~> 3.24.4)
-  - OCCreekSDK/Protos (0.1.0):
-    - Protobuf (~> 3.24.4)
-  - Protobuf (3.24.4)
-  - SnapKit (5.6.0)
-  - Toast-Swift (5.0.1)
+  - OCCreekSDK (0.1.1):
+    - OCCreekSDK/Protos (= 0.1.1)
+  - OCCreekSDK/Protos (0.1.1):
+    - Protobuf (~> 3.11)
+  - Protobuf (3.25.3)
+  - SnapKit (5.7.1)
+  - Toast-Swift (5.1.0)
+  - ZIPFoundation (0.9.18)
 
 DEPENDENCIES:
+  - ESTabBarController-swift
   - IQKeyboardManagerSwift
   - MBProgressHUD
   - OCCreekSDK (from `../`)
   - SnapKit
   - Toast-Swift
+  - ZIPFoundation
 
 SPEC REPOS:
   trunk:
+    - ESTabBarController-swift
     - IQKeyboardManagerSwift
     - MBProgressHUD
     - Protobuf
     - SnapKit
     - Toast-Swift
+    - ZIPFoundation
 
 EXTERNAL SOURCES:
   OCCreekSDK:
     :path: "../"
 
 SPEC CHECKSUMS:
-  IQKeyboardManagerSwift: 79fab21f451441935788dc5d80ded21c32685904
+  ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
+  IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OCCreekSDK: 110d4304350089bd538df15181722c93fc5fbe3b
-  Protobuf: 351e9022fe13a6e2af00e9aefc22077cb88520f8
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  OCCreekSDK: 4ba74c604ea007f95a7a078fc0fdcb9ab46fc4e6
+  Protobuf: 8e9074797a13c484a79959fdb819ef4ae6da7dbe
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
+  ZIPFoundation: fa9ae5af13b7cf168245f24d1c672a4fb972e37f
 
-PODFILE CHECKSUM: 5e71de7e53f4a91dc32d45ffcb286338c0784ee4
+PODFILE CHECKSUM: 4a7360fcbed9ecf5ce751b50e0407e52f8689855
 
 COCOAPODS: 1.12.1

@@ -75,6 +75,10 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString*,HrvsClosure> *hrvsClosureDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,EphemerisData> *ephemerisClosureDic;
 
+@property (nonatomic, strong) NSMutableDictionary<NSString*,ParseDialBase> *parseDialClosureDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,PreviewImageBase> *previewImageClosureDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,DialDataBase> *dialDataClosureDic;
+
 
 
 @property (nonatomic, copy) ConnectBack connectBlock;
@@ -171,6 +175,9 @@ static CreekInterFace * instance =nil;
     self.sportClosureDic = [NSMutableDictionary dictionary];
     self.hrvsClosureDic = [NSMutableDictionary dictionary];
     self.ephemerisClosureDic = [NSMutableDictionary dictionary];
+    self.parseDialClosureDic = [NSMutableDictionary dictionary];
+    self.previewImageClosureDic = [NSMutableDictionary dictionary];
+    self.dialDataClosureDic = [NSMutableDictionary dictionary];
 }
 
 -(void) setupInit{
@@ -212,6 +219,13 @@ static CreekInterFace * instance =nil;
         NSString * json = (NSString*)[call arguments];
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
         ScanDeviceModel *model = [ScanDeviceModel fromJSONDictionary:dict];
+        DeviceBack block = [self.deviceBackDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.deviceBackDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
         
         
     }else if ([@"connect" isEqualToString:[call method]]){
@@ -739,7 +753,6 @@ static CreekInterFace * instance =nil;
         }
         
     }else if ([[call method] containsString:@"delSportRecord"]){
-        NSString * json = (NSString*)[call arguments];
         SuccessBase block = [self.successDic objectForKey:[call method]];
         if(block){
             block();
@@ -981,6 +994,72 @@ static CreekInterFace * instance =nil;
         if(block){
             block(json);
             [self.SNFirmwareDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"parseDial"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parseDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"setCurrentColor"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parseDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"setCurrentBackgroundImagePath"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parseDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"setCurrentFunction"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parseDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"getPreviewImage"]){
+        FlutterStandardTypedData *data = [call arguments];
+       
+        PreviewImageBase block = [self.previewImageClosureDic objectForKey:[call method]];
+        if(block){
+            block(data.data);
+            [self.previewImageClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"encodeDial"]){
+        FlutterStandardTypedData *data = [call arguments];
+       
+        DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
+        if(block){
+            block(data.data);
+            [self.previewImageClosureDic removeObjectForKey:[call method]];
         }else{
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
@@ -2116,6 +2195,58 @@ static CreekInterFace * instance =nil;
 
 - (void)checkLogFile {
     [self.methodChannel invokeMethod:@"checkLogFile" arguments:@""];
+}
+
+- (void)parseDialWithPath:(NSString *)path
+                    width:(NSInteger)width
+                   height:(NSInteger)height
+                   radius:(NSInteger)radius
+             platformType:(Platform)platformType
+                    model:(ParseDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"parseDial%ld", (long)self.requestId];
+    [self.parseDialClosureDic setObject:model forKey:requestIdString];
+    
+    [self.methodChannel invokeMethod:requestIdString arguments:@[path,[NSNumber numberWithInteger:width],[NSNumber numberWithInteger:height],[NSNumber numberWithInteger:radius],[NSNumber numberWithInteger:platformType]]];
+
+}
+
+- (void)getPreviewImageWithModel:(PreviewImageBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"getPreviewImage%ld", (long)self.requestId];
+    [self.previewImageClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:@""];
+}
+
+- (void)setCurrentColorWithSelectIndex:(NSInteger)selectIndex
+                                 model:(ParseDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"setCurrentColor%ld", (long)self.requestId];
+    [self.parseDialClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:[NSNumber numberWithInteger:selectIndex]];
+}
+
+- (void)setCurrentBackgroundImagePathWithSelectIndex:(NSInteger)selectIndex
+                                                model:(ParseDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"setCurrentBackgroundImagePath%ld", (long)self.requestId];
+    [self.parseDialClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:[NSNumber numberWithInteger:selectIndex]];
+}
+
+- (void)setCurrentFunctionWithSelectIndex:(NSArray<NSNumber *> *)selectIndex
+                                    model:(ParseDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"setCurrentFunction%ld", (long)self.requestId];
+    [self.parseDialClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:selectIndex];
+}
+
+- (void)encodeDialWithModel:(DialDataBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"encodeDial%ld", (long)self.requestId];
+    [self.dialDataClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:@""];
 }
 
 

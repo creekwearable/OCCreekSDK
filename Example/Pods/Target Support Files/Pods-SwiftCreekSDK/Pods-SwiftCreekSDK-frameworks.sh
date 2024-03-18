@@ -176,6 +176,7 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${PODS_ROOT}/../../Creek/sbc.framework"
@@ -187,13 +188,19 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_ROOT}/../../Creek/Protobuf.framework"
   install_framework "${PODS_ROOT}/../../Creek/shared_preferences_foundation.framework"
   install_framework "${PODS_ROOT}/../../Creek/FMDB.framework"
+  install_framework "${PODS_ROOT}/../../Creek/actres.framework"
+  install_framework "${PODS_ROOT}/../../Creek/image_clipper.framework"
+  install_framework "${PODS_ROOT}/../../Creek/lz4.framework"
+  install_framework "${PODS_ROOT}/../../Creek/ActResSdk.framework"
   install_framework "${PODS_ROOT}/../../Creek/path_provider_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OCCreekSDK/OCCreekSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework"
   install_framework "${PODS_ROOT}/../../Creek/sbc.framework"
@@ -205,11 +212,16 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/../../Creek/Protobuf.framework"
   install_framework "${PODS_ROOT}/../../Creek/shared_preferences_foundation.framework"
   install_framework "${PODS_ROOT}/../../Creek/FMDB.framework"
+  install_framework "${PODS_ROOT}/../../Creek/actres.framework"
+  install_framework "${PODS_ROOT}/../../Creek/image_clipper.framework"
+  install_framework "${PODS_ROOT}/../../Creek/lz4.framework"
+  install_framework "${PODS_ROOT}/../../Creek/ActResSdk.framework"
   install_framework "${PODS_ROOT}/../../Creek/path_provider_foundation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/OCCreekSDK/OCCreekSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

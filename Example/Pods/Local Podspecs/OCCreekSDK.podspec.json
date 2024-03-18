@@ -1,6 +1,6 @@
 {
   "name": "OCCreekSDK",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "summary": "A short description of OCCreekSDK.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/bean/OCCreekSDK",
@@ -13,10 +13,10 @@
   },
   "source": {
     "git": "https://github.com/bean/OCCreekSDK.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "12.0"
   },
   "vendored_frameworks": [
     "Creek/sbc.framework",
@@ -30,15 +30,14 @@
     "Creek/shared_preferences_foundation.framework",
     "Creek/FMDB.framework",
     "Creek/FlutterPluginRegistrant.framework",
+    "Creek/actres.framework",
+    "Creek/image_clipper.framework",
+    "Creek/lz4.framework",
+    "Creek/ActResSdk.framework",
     "Creek/path_provider_foundation.framework"
   ],
   "source_files": "OCCreekSDK/Classes/extension/*",
   "public_header_files": "OCCreekSDK/Classes/extension/*.h",
-  "dependencies": {
-    "Protobuf": [
-      "~> 3.24.4"
-    ]
-  },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",
     "GCC_PREPROCESSOR_DEFINITIONS": "$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1"
@@ -48,7 +47,12 @@
       "name": "Protos",
       "source_files": "OCCreekSDK/Classes/gen/*.pbobjc.{h,m}",
       "header_mappings_dir": "OCCreekSDK/Classes/gen",
-      "requires_arc": false
+      "requires_arc": false,
+      "dependencies": {
+        "Protobuf": [
+          "~> 3.11"
+        ]
+      }
     }
   ]
 }

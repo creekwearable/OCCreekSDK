@@ -61,6 +61,7 @@
 #import "HrvModel.h"
 #import "EphemerisModel.h"
 #import "PhoneModel.h"
+#import "DialParseModel.h"
 
 
 
@@ -116,7 +117,6 @@ typedef void (^MenstrualBase)(protocol_menstruation_inquire_reply* model);
 typedef void (^FocusBase)(protocol_focus_mode_inquire_reply* model);
 typedef void (^TableBase)(protocol_function_table* model);
 typedef void (^BluetoothStatusBase)(protocol_connect_status_inquire_reply* model);
-
 typedef void(^ActivitysClosure)(NSArray<ActivityModel *>* activitys);
 typedef void(^HeartRatesClosure)(NSArray<HeartRateModel *>* heartRates);
 typedef void(^StresssClosure)(NSArray<StressModel *>* stresss);
@@ -126,6 +126,9 @@ typedef void(^SleepsClosure)(NSArray<SleepModel *>* sleeps);
 typedef void(^SportsClosure)(NSArray<SportModel *>* sports);
 typedef void(^HrvsClosure)(NSArray<HrvModel *>* hrvs);
 typedef void(^SportClosure)(SportModel* sportModel);
+typedef void (^ParseDialBase)(DialParseModel *model);
+typedef void (^PreviewImageBase)(NSData *model);
+typedef void (^DialDataBase)(NSData *model);
 
 
 
@@ -815,6 +818,26 @@ typedef void(^SportClosure)(SportModel* sportModel);
                               failure:(FailureArgument)failure ;
 
 - (void)checkLogFile ;
+
+- (void)parseDialWithPath:(NSString *)path
+                    width:(NSInteger)width
+                   height:(NSInteger)height
+                   radius:(NSInteger)radius
+             platformType:(Platform)platformType
+                    model:(ParseDialBase)model;
+
+- (void)getPreviewImageWithModel:(PreviewImageBase)model ;
+
+- (void)setCurrentColorWithSelectIndex:(NSInteger)selectIndex
+                                 model:(ParseDialBase)model ;
+
+- (void)setCurrentBackgroundImagePathWithSelectIndex:(NSInteger)selectIndex
+                                               model:(ParseDialBase)model ;
+
+- (void)setCurrentFunctionWithSelectIndex:(NSArray<NSNumber *> *)selectIndex
+                                    model:(ParseDialBase)model ;
+
+- (void)encodeDialWithModel:(DialDataBase)model ;
 
 
 @end
