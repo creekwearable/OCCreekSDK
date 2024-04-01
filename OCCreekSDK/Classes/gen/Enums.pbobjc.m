@@ -485,7 +485,7 @@ GPBEnumDescriptor *quick_card_type_EnumDescriptor(void) {
         "teps\000CardTypeSpo2\000CardTypeMenstruation\000C"
         "ardTypeMeasurement\000CardTypeRecentWorkout"
         "\000CardTypeHrv\000CardTypeUv\000CardTypeAstronom"
-        "y\000CardTypeWorldClock\000";
+        "y\000CardTypeWorldClock\000CardTypeAlexa\000";
     static const int32_t values[] = {
         quick_card_type_CardTypeExercise,
         quick_card_type_CardTypeWeather,
@@ -503,6 +503,7 @@ GPBEnumDescriptor *quick_card_type_EnumDescriptor(void) {
         quick_card_type_CardTypeUv,
         quick_card_type_CardTypeAstronomy,
         quick_card_type_CardTypeWorldClock,
+        quick_card_type_CardTypeAlexa,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(quick_card_type)
@@ -536,6 +537,7 @@ BOOL quick_card_type_IsValidValue(int32_t value__) {
     case quick_card_type_CardTypeUv:
     case quick_card_type_CardTypeAstronomy:
     case quick_card_type_CardTypeWorldClock:
+    case quick_card_type_CardTypeAlexa:
       return YES;
     default:
       return NO;
@@ -643,7 +645,7 @@ GPBEnumDescriptor *language_EnumDescriptor(void) {
     static const char *valueNames =
         "LangInvalid\000Chinese\000English\000German\000Spani"
         "sh\000Italian\000Japanese\000Russian\000Portuguese\000F"
-        "rench\000";
+        "rench\000Korean\000Polish\000";
     static const int32_t values[] = {
         language_LangInvalid,
         language_Chinese,
@@ -655,6 +657,8 @@ GPBEnumDescriptor *language_EnumDescriptor(void) {
         language_Russian,
         language_Portuguese,
         language_French,
+        language_Korean,
+        language_Polish,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(language)
@@ -682,6 +686,8 @@ BOOL language_IsValidValue(int32_t value__) {
     case language_Russian:
     case language_Portuguese:
     case language_French:
+    case language_Korean:
+    case language_Polish:
       return YES;
     default:
       return NO;
@@ -1765,7 +1771,7 @@ GPBEnumDescriptor *message_remind_type_EnumDescriptor(void) {
         "Qq\000WhatsAppBusiness\000Youtube\000Uber\000UberEat"
         "s\000DoorDashMissing\000BancoGeneral\000BacBank\000G"
         "oogleMaps\000AmazonShopping\000Spotify\000Discord"
-        "\000RemindTypeMax\000";
+        "\000Ohter\000";
     static const int32_t values[] = {
         message_remind_type_Null,
         message_remind_type_Sms,
@@ -1801,9 +1807,9 @@ GPBEnumDescriptor *message_remind_type_EnumDescriptor(void) {
         message_remind_type_AmazonShopping,
         message_remind_type_Spotify,
         message_remind_type_Discord,
-        message_remind_type_RemindTypeMax,
+        message_remind_type_Ohter,
     };
-    static const char *extraTextFormatInfo = " \002\005\000\003\010\000\004\006\204\000\005\010\000\006\007\000\007\t\000\010\010\000\t\010\000\n\004\000\013\006\000\014\005\000\r\006\000\016\010\000\017\t\205\000\020\010\211\000\021\t\000\022\010\000\023\005\000\024\t\207\000\025\006\204\000\027\010\210\000\030\007\000\031\004\000\032\004\244\000\033\004\204\247\000\034\005\207\000\035c\204\000\036\006\204\000\037\006\250\000 \007\000!\007\000\"&\244\243\000";
+    static const char *extraTextFormatInfo = "\037\002\005\000\003\010\000\004\006\204\000\005\010\000\006\007\000\007\t\000\010\010\000\t\010\000\n\004\000\013\006\000\014\005\000\r\006\000\016\010\000\017\t\205\000\020\010\211\000\021\t\000\022\010\000\023\005\000\024\t\207\000\025\006\204\000\027\010\210\000\030\007\000\031\004\000\032\004\244\000\033\004\204\247\000\034\005\207\000\035c\204\000\036\006\204\000\037\006\250\000 \007\000!\007\000";
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(message_remind_type)
                                        valueNames:valueNames
@@ -1855,7 +1861,7 @@ BOOL message_remind_type_IsValidValue(int32_t value__) {
     case message_remind_type_AmazonShopping:
     case message_remind_type_Spotify:
     case message_remind_type_Discord:
-    case message_remind_type_RemindTypeMax:
+    case message_remind_type_Ohter:
       return YES;
     default:
       return NO;
@@ -1984,11 +1990,12 @@ GPBEnumDescriptor *long_2s_press_type_EnumDescriptor(void) {
   if (!descriptor) {
     static const char *valueNames =
         "PressTypeNull\000PressTypeSos\000PressTypeWork"
-        "out\000";
+        "out\000PressTypeAlexa\000";
     static const int32_t values[] = {
         long_2s_press_type_PressTypeNull,
         long_2s_press_type_PressTypeSos,
         long_2s_press_type_PressTypeWorkout,
+        long_2s_press_type_PressTypeAlexa,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(long_2s_press_type)
@@ -2009,6 +2016,83 @@ BOOL long_2s_press_type_IsValidValue(int32_t value__) {
     case long_2s_press_type_PressTypeNull:
     case long_2s_press_type_PressTypeSos:
     case long_2s_press_type_PressTypeWorkout:
+    case long_2s_press_type_PressTypeAlexa:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
+#pragma mark - Enum app_list
+
+GPBEnumDescriptor *app_list_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "AppListActivity\000AppListWorkout\000AppListSt"
+        "eps\000AppListHeartrate\000AppListSleep\000AppLis"
+        "tStress\000AppListMenstruation\000AppListBreat"
+        "he\000AppListAlarms\000AppListPhone\000AppListTim"
+        "ers\000AppListStopwatch\000AppListSpo2\000AppList"
+        "Weather\000AppListCameraRemote\000AppListMusic"
+        "\000AppListFindPhone\000AppListWorldClock\000AppL"
+        "istSettings\000";
+    static const int32_t values[] = {
+        app_list_AppListActivity,
+        app_list_AppListWorkout,
+        app_list_AppListSteps,
+        app_list_AppListHeartrate,
+        app_list_AppListSleep,
+        app_list_AppListStress,
+        app_list_AppListMenstruation,
+        app_list_AppListBreathe,
+        app_list_AppListAlarms,
+        app_list_AppListPhone,
+        app_list_AppListTimers,
+        app_list_AppListStopwatch,
+        app_list_AppListSpo2,
+        app_list_AppListWeather,
+        app_list_AppListCameraRemote,
+        app_list_AppListMusic,
+        app_list_AppListFindPhone,
+        app_list_AppListWorldClock,
+        app_list_AppListSettings,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(app_list)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:app_list_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL app_list_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case app_list_AppListActivity:
+    case app_list_AppListWorkout:
+    case app_list_AppListSteps:
+    case app_list_AppListHeartrate:
+    case app_list_AppListSleep:
+    case app_list_AppListStress:
+    case app_list_AppListMenstruation:
+    case app_list_AppListBreathe:
+    case app_list_AppListAlarms:
+    case app_list_AppListPhone:
+    case app_list_AppListTimers:
+    case app_list_AppListStopwatch:
+    case app_list_AppListSpo2:
+    case app_list_AppListWeather:
+    case app_list_AppListCameraRemote:
+    case app_list_AppListMusic:
+    case app_list_AppListFindPhone:
+    case app_list_AppListWorldClock:
+    case app_list_AppListSettings:
       return YES;
     default:
       return NO;

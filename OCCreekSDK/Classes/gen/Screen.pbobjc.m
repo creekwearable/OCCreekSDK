@@ -394,6 +394,7 @@ void Setprotocol_screen_brightness_operate_Operate_RawValue(protocol_screen_brig
 @dynamic aodSwitchFlag;
 @dynamic raiseWristSwitchFlag;
 @dynamic hasAodTimeSetting, aodTimeSetting;
+@dynamic showIntervalOptionsArray, showIntervalOptionsArray_Count;
 
 typedef struct protocol_screen_brightness_inquire_reply__storage_ {
   uint32_t _has_storage_[1];
@@ -403,6 +404,7 @@ typedef struct protocol_screen_brightness_inquire_reply__storage_ {
   uint32_t showInterval;
   protocol_screen_night_auto_adjust *nightAutoAdjust;
   protocol_screen_aod_time_setting *aodTimeSetting;
+  GPBUInt32Array *showIntervalOptionsArray;
 } protocol_screen_brightness_inquire_reply__storage_;
 
 // This method is threadsafe because it is initially called
@@ -482,6 +484,15 @@ typedef struct protocol_screen_brightness_inquire_reply__storage_ {
         .offset = (uint32_t)offsetof(protocol_screen_brightness_inquire_reply__storage_, aodTimeSetting),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "showIntervalOptionsArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_screen_brightness_inquire_reply_FieldNumber_ShowIntervalOptionsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(protocol_screen_brightness_inquire_reply__storage_, showIntervalOptionsArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
       },
     };
     GPBDescriptor *localDescriptor =

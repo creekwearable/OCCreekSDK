@@ -881,6 +881,197 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             }
             
             break
+        case "Get card":
+            
+            CreekInterFace.instance().getCardWithModel { model in
+                self.view.hideRemark()
+                let str =  model.description
+                dispatch_main_sync_safe {
+                    self.textView.text = str
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            
+            break
+        case "Set card":
+            
+            CreekInterFace.instance().getCardWithModel { model in
+                var operate =  protocol_quick_card_operate()
+                var cardType:GPBEnumArray = GPBEnumArray.init()
+                
+      
+                model.cardTypeArray.addRawValue(quick_card_type.cardTypeActivity.rawValue)
+                
+                model.cardTypeArray.enumerateValues { value, idx, stop in
+                    var type = quick_card_type(rawValue: value)
+                   
+                    if type == .cardTypeDial {
+                        if  model.cardTypeDialSupport.isDelete ==  false{
+                            ///Removal is not supported and must be added
+                            cardType.addRawValue(type?.rawValue ?? 0)
+                        }
+                        
+                    }else{
+                        ///All other changes can be removed
+                        if type == .cardTypeActivity{
+                            ///Remove
+                        }else{
+                           /// Add
+                            cardType.addRawValue(type?.rawValue ?? 0)
+                        }
+                    }
+                }
+                
+                operate.cardTypeArray =  cardType
+                CreekInterFace.instance().setCardWithModel(operate) {
+                    self.view.hideRemark()
+                    self.textView.text = "success"
+                } failure: { code, message in
+                    self.view.hideRemark()
+                    self.textView.text = message
+                }
+
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            
+            
+        case "getStand":
+            
+            CreekInterFace.instance().getStanding { model in
+                self.view.hideRemark()
+                let str =  model.description
+                dispatch_main_sync_safe {
+                    self.textView.text = str
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+
+            
+            break
+        case "setStand":
+            
+            var  operate =  protocol_standing_remind_operate()
+            var standing =  protocol_standing_remind_set()
+            standing.switchFlag = true
+            operate.standingRemind = standing
+            CreekInterFace.instance().setStanding(operate) {
+                self.view.hideRemark()
+                self.textView.text = "success"
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+
+        case "getWater":
+           
+            CreekInterFace.instance().getWater { model in
+                self.view.hideRemark()
+                let str =  model.description
+                dispatch_main_sync_safe {
+                    self.textView.text = str
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            
+            break
+        case "setWater":
+             var  operate =  protocol_drink_water_operate()
+            ///Only these 5 attributes need to be set, other attribute settings are invalid
+            operate.switchFlag = true
+            operate.startHour = 8
+            operate.startMinute = 0
+            operate.endHour = 18
+            operate.endMinute = 0
+            CreekInterFace.instance().setWater(operate) {
+                self.view.hideRemark()
+                self.textView.text = "success"
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            
+        case "getFocus":
+           
+           
+            CreekInterFace.instance().getFocusSleep { model in
+                self.view.hideRemark()
+                let str =  model.description
+                dispatch_main_sync_safe {
+                    self.textView.text = str
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            
+            break
+        case "setFocus":
+             var  operate =  protocol_focus_mode_operate()
+             var mode = protocol_focus_sleep_mode()
+            mode.switchFlag = true
+            mode.startHour = 22
+            mode.endHour = 8
+            mode.startMinute = 0
+            mode.endMinute = 0
+            operate.sleepMode = mode
+            CreekInterFace.instance().setFocusSleep(operate) {
+                self.view.hideRemark()
+                self.textView.text = "success"
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+
+            break
+        case "getAppList":
+            CreekInterFace.instance().getAppList { model in
+                self.view.hideRemark()
+                let str =  model.description
+                dispatch_main_sync_safe {
+                    self.textView.text = str
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            break
+        case "setAppList":
+            CreekInterFace.instance().getAppList { model in
+                var operate = protocol_app_list_operate()
+                operate.listArray = model.listArray
+                CreekInterFace.instance().setAppList(operate) {
+                    self.view.hideRemark()
+                    self.textView.text = "success"
+                } failure: { code, message in
+                    self.view.hideRemark()
+                    self.textView.text = message
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            
+            break
+        case "functionTable":
+            CreekInterFace.instance().getTableWithModel{ model in
+                self.view.hideRemark()
+                let str =  model.description
+                dispatch_main_sync_safe {
+                    self.textView.text = str
+                }
+            } failure: { code, message in
+                self.view.hideRemark()
+                self.textView.text = message
+            }
+            break
         default:
             break
             

@@ -38,6 +38,10 @@
 /* Begin PBXFileReference section */
 		05B13C4B580A306CB72485A1 /* Pods_SwiftCreekSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftCreekSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		06DF2A070963078F7AFFDC08 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		0702F1B12BBAAB5100712684 /* EventTracking.pbobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventTracking.pbobjc.h; sourceTree = "<group>"; };
+		0702F1B22BBAAB5100712684 /* AppList.pbobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppList.pbobjc.h; sourceTree = "<group>"; };
+		0702F1B32BBAAB5100712684 /* AppList.pbobjc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppList.pbobjc.m; sourceTree = "<group>"; };
+		0702F1B42BBAAB5100712684 /* EventTracking.pbobjc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventTracking.pbobjc.m; sourceTree = "<group>"; };
 		078B61802B85B1CA00BCEFC3 /* ReplaceMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplaceMe.m; sourceTree = "<group>"; };
 		078B61822B85B1CA00BCEFC3 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		078B61872B85B1DB00BCEFC3 /* Userinfo.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Userinfo.pbobjc.h; sourceTree = "<group>"; };
@@ -228,6 +232,10 @@
 		078B61862B85B1DB00BCEFC3 /* gen */ = {
 			isa = PBXGroup;
 			children = (
+				0702F1B22BBAAB5100712684 /* AppList.pbobjc.h */,
+				0702F1B32BBAAB5100712684 /* AppList.pbobjc.m */,
+				0702F1B12BBAAB5100712684 /* EventTracking.pbobjc.h */,
+				0702F1B42BBAAB5100712684 /* EventTracking.pbobjc.m */,
 				078B61872B85B1DB00BCEFC3 /* Userinfo.pbobjc.h */,
 				078B61882B85B1DB00BCEFC3 /* Disturb.pbobjc.m */,
 				078B61892B85B1DB00BCEFC3 /* Menstrual.pbobjc.h */,

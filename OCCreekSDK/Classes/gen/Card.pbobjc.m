@@ -197,6 +197,7 @@ void Setprotocol_quick_card_operate_Operate_RawValue(protocol_quick_card_operate
 @dynamic hasCardTypeUvSupport, cardTypeUvSupport;
 @dynamic hasCardTypeAstronomySupport, cardTypeAstronomySupport;
 @dynamic hasCardTypeWorldClockSupport, cardTypeWorldClockSupport;
+@dynamic hasCardTypeAlexaSupport, cardTypeAlexaSupport;
 
 typedef struct protocol_quick_card_inquire_reply__storage_ {
   uint32_t _has_storage_[1];
@@ -221,6 +222,7 @@ typedef struct protocol_quick_card_inquire_reply__storage_ {
   quick_card_func *cardTypeUvSupport;
   quick_card_func *cardTypeAstronomySupport;
   quick_card_func *cardTypeWorldClockSupport;
+  quick_card_func *cardTypeAlexaSupport;
 } protocol_quick_card_inquire_reply__storage_;
 
 // This method is threadsafe because it is initially called
@@ -415,6 +417,15 @@ typedef struct protocol_quick_card_inquire_reply__storage_ {
         .number = protocol_quick_card_inquire_reply_FieldNumber_CardTypeWorldClockSupport,
         .hasIndex = 19,
         .offset = (uint32_t)offsetof(protocol_quick_card_inquire_reply__storage_, cardTypeWorldClockSupport),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "cardTypeAlexaSupport",
+        .dataTypeSpecific.clazz = GPBObjCClass(quick_card_func),
+        .number = protocol_quick_card_inquire_reply_FieldNumber_CardTypeAlexaSupport,
+        .hasIndex = 20,
+        .offset = (uint32_t)offsetof(protocol_quick_card_inquire_reply__storage_, cardTypeAlexaSupport),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

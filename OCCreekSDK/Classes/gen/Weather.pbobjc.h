@@ -287,17 +287,17 @@ GPB_FINAL @interface protocol_weather_detail_data_item : GPBMessage
 /** Air pressure, unit Pa value * 100 */
 @property(nonatomic, readwrite) uint32_t atmosHpa;
 
-/** max:24 实时紫外线强度 24小时 */
+/** max:24 Real-time UV intensity 24 hours */
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *uvItemsArray;
 /** The number of items in @c uvItemsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger uvItemsArray_Count;
 
-/** max：3 月出月落时间item 3天 */
+/** max：3 Moonrise and moonset time item 3 days */
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<protocol_weather_moon_item*> *moonItemArray;
 /** The number of items in @c moonItemArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger moonItemArray_Count;
 
-/** max：3 日出日落时间item 3天 */
+/** max：3 Sunrise and sunset time item 3 days */
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<protocol_weather_sunrise_item*> *sunriseItemsArray;
 /** The number of items in @c sunriseItemsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger sunriseItemsArray_Count;

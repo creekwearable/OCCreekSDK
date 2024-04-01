@@ -186,6 +186,7 @@ typedef GPB_ENUM(protocol_screen_brightness_inquire_reply_FieldNumber) {
   protocol_screen_brightness_inquire_reply_FieldNumber_AodSwitchFlag = 6,
   protocol_screen_brightness_inquire_reply_FieldNumber_RaiseWristSwitchFlag = 7,
   protocol_screen_brightness_inquire_reply_FieldNumber_AodTimeSetting = 8,
+  protocol_screen_brightness_inquire_reply_FieldNumber_ShowIntervalOptionsArray = 9,
 };
 
 GPB_FINAL @interface protocol_screen_brightness_inquire_reply : GPBMessage
@@ -217,6 +218,11 @@ GPB_FINAL @interface protocol_screen_brightness_inquire_reply : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) protocol_screen_aod_time_setting *aodTimeSetting;
 /** Test to see if @c aodTimeSetting has been set. */
 @property(nonatomic, readwrite) BOOL hasAodTimeSetting;
+
+/** Display options for the duration of the screen on. Unit: seconds */
+@property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *showIntervalOptionsArray;
+/** The number of items in @c showIntervalOptionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger showIntervalOptionsArray_Count;
 
 @end
 

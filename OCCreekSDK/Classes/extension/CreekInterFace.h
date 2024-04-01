@@ -62,6 +62,8 @@
 #import "EphemerisModel.h"
 #import "PhoneModel.h"
 #import "DialParseModel.h"
+#import "AppList.pbobjc.h"
+#import "EventTracking.pbobjc.h"
 
 
 
@@ -117,6 +119,8 @@ typedef void (^MenstrualBase)(protocol_menstruation_inquire_reply* model);
 typedef void (^FocusBase)(protocol_focus_mode_inquire_reply* model);
 typedef void (^TableBase)(protocol_function_table* model);
 typedef void (^BluetoothStatusBase)(protocol_connect_status_inquire_reply* model);
+typedef void (^AppListBase)(protocol_app_list_inquire_reply *model);
+typedef void (^EventTrackingBase)(protocol_event_tracking_inquire_reply *model);
 typedef void(^ActivitysClosure)(NSArray<ActivityModel *>* activitys);
 typedef void(^HeartRatesClosure)(NSArray<HeartRateModel *>* heartRates);
 typedef void(^StresssClosure)(NSArray<StressModel *>* stresss);
@@ -838,6 +842,63 @@ typedef void (^DialDataBase)(NSData *model);
                                     model:(ParseDialBase)model ;
 
 - (void)encodeDialWithModel:(DialDataBase)model ;
+
+
+/**
+ * Get focus mode
+ *
+
+ */
+- (void)getFocusSleep:(FocusBase)modelBlock failure:(FailureArgument)failureBlock;
+
+/**
+ * Set focus mode
+ *
+ */
+- (void)setFocusSleep:(protocol_focus_mode_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock ;
+
+/**
+ * Get app List
+ *
+ */
+- (void)getAppList:(AppListBase)modelBlock failure:(FailureArgument)failureBlock ;
+
+/**
+ * Set app List
+ *
+ */
+- (void)setAppList:(protocol_app_list_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock;
+
+/**
+ * Event Tracking
+ *
+ */
+- (void)getEventTracking:(EventTrackingBase)modelBlock failure:(FailureArgument)failureBlock;
+
+/**
+ * Drink Water Reminder
+ *
+
+ */
+- (void)getWater:(WaterBase)modelBlock failure:(FailureArgument)failureBlock ;
+
+/**
+ * Drink Water Settings
+ *
+ */
+- (void)setWater:(protocol_drink_water_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock;
+
+/**
+ * Get Standing
+ *
+ */
+- (void)getStanding:(StandingBase)modelBlock failure:(FailureArgument)failureBlock;
+
+/**
+ * Set Standing
+ *
+ */
+- (void)setStanding:(protocol_standing_remind_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock;
 
 
 @end

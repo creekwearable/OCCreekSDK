@@ -129,6 +129,10 @@ typedef struct function_table__storage_ {
 @dynamic hasButtonCrown, buttonCrown;
 @dynamic hasFocusMode, focusMode;
 @dynamic hasFindWatch, findWatch;
+@dynamic hasAlexa, alexa;
+@dynamic hasAppList, appList;
+@dynamic hasEventTracking, eventTracking;
+@dynamic hasStravaApp, stravaApp;
 
 typedef struct protocol_function_table__storage_ {
   uint32_t _has_storage_[1];
@@ -153,6 +157,10 @@ typedef struct protocol_function_table__storage_ {
   function_table *buttonCrown;
   function_table *focusMode;
   function_table *findWatch;
+  function_table *alexa;
+  function_table *appList;
+  function_table *eventTracking;
+  function_table *stravaApp;
 } protocol_function_table__storage_;
 
 // This method is threadsafe because it is initially called
@@ -347,6 +355,42 @@ typedef struct protocol_function_table__storage_ {
         .number = protocol_function_table_FieldNumber_FindWatch,
         .hasIndex = 20,
         .offset = (uint32_t)offsetof(protocol_function_table__storage_, findWatch),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "alexa",
+        .dataTypeSpecific.clazz = GPBObjCClass(function_table),
+        .number = protocol_function_table_FieldNumber_Alexa,
+        .hasIndex = 21,
+        .offset = (uint32_t)offsetof(protocol_function_table__storage_, alexa),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "appList",
+        .dataTypeSpecific.clazz = GPBObjCClass(function_table),
+        .number = protocol_function_table_FieldNumber_AppList,
+        .hasIndex = 22,
+        .offset = (uint32_t)offsetof(protocol_function_table__storage_, appList),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "eventTracking",
+        .dataTypeSpecific.clazz = GPBObjCClass(function_table),
+        .number = protocol_function_table_FieldNumber_EventTracking,
+        .hasIndex = 23,
+        .offset = (uint32_t)offsetof(protocol_function_table__storage_, eventTracking),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "stravaApp",
+        .dataTypeSpecific.clazz = GPBObjCClass(function_table),
+        .number = protocol_function_table_FieldNumber_StravaApp,
+        .hasIndex = 24,
+        .offset = (uint32_t)offsetof(protocol_function_table__storage_, stravaApp),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

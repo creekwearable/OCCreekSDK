@@ -79,6 +79,9 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString*,PreviewImageBase> *previewImageClosureDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,DialDataBase> *dialDataClosureDic;
 
+@property (nonatomic, strong) NSMutableDictionary<NSString*,AppListBase> *appListDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,EventTrackingBase> *eventTrackingDic;
+
 
 
 @property (nonatomic, copy) ConnectBack connectBlock;
@@ -178,6 +181,8 @@ static CreekInterFace * instance =nil;
     self.parseDialClosureDic = [NSMutableDictionary dictionary];
     self.previewImageClosureDic = [NSMutableDictionary dictionary];
     self.dialDataClosureDic = [NSMutableDictionary dictionary];
+    self.appListDic = [NSMutableDictionary dictionary];
+    self.eventTrackingDic = [NSMutableDictionary dictionary];
 }
 
 -(void) setupInit{
@@ -844,6 +849,30 @@ static CreekInterFace * instance =nil;
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
         
+    }else if ([[call method] containsString:@"getAppList"]){
+        FlutterStandardTypedData *data = [call arguments];
+        NSError *error = nil;
+        protocol_app_list_inquire_reply* model = [[protocol_app_list_inquire_reply alloc] initWithData:[data data] error:&error];
+        AppListBase block = [self.appListDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.appListDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"getEventTracking"]){
+        FlutterStandardTypedData *data = [call arguments];
+        NSError *error = nil;
+        protocol_event_tracking_inquire_reply* model = [[protocol_event_tracking_inquire_reply alloc] initWithData:[data data] error:&error];
+        EventTrackingBase block = [self.eventTrackingDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.eventTrackingDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
     }else if ([@"noticeUpdate" isEqualToString:[call method]]){
         NSString * json = (NSString*)[call arguments];
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
@@ -1383,6 +1412,144 @@ static CreekInterFace * instance =nil;
     }
 }
 
+/**
+ * Get focus mode
+ *
+
+ */
+- (void)getFocusSleep:(FocusBase)modelBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getFocus%ld", (long)self.requestId];
+    [self.focusDic setObject:modelBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    [self.methodChannel invokeMethod:requestKey arguments:@""];
+  
+}
+
+/**
+ * Set focus mode
+ *
+ */
+- (void)setFocusSleep:(protocol_focus_mode_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getFocus%ld", (long)self.requestId];
+    [self.successDic setObject:successBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    @try {
+        NSData *data = [model data];
+        [self.methodChannel invokeMethod:requestKey arguments:data];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+}
+
+/**
+ * Get app List
+ *
+ */
+- (void)getAppList:(AppListBase)modelBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getAppList%ld", (long)self.requestId];
+    [self.appListDic setObject:modelBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    [self.methodChannel invokeMethod:requestKey arguments:@""];
+}
+
+/**
+ * Set app List
+ *
+ */
+- (void)setAppList:(protocol_app_list_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"setAppList%ld", (long)self.requestId];
+    [self.successDic setObject:successBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    @try {
+        NSData *data = [model data];
+        [self.methodChannel invokeMethod:requestKey arguments:data];
+    } @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+}
+
+/**
+ * Event Tracking
+ *
+ */
+- (void)getEventTracking:(EventTrackingBase)modelBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getEventTracking%ld", (long)self.requestId];
+    [self.eventTrackingDic setObject:modelBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    [self.methodChannel invokeMethod:requestKey arguments:@""];
+}
+
+/**
+ * Drink Water Reminder
+ *
+
+ */
+- (void)getWater:(WaterBase)modelBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getWater%ld", (long)self.requestId];
+    [self.waterDic setObject:modelBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    [self.methodChannel invokeMethod:requestKey arguments:@""];
+}
+
+/**
+ * Drink Water Settings
+ *
+ */
+- (void)setWater:(protocol_drink_water_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"setWater%ld", (long)self.requestId];
+    [self.successDic setObject:successBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    @try {
+        NSData *data = [model data];
+        [self.methodChannel invokeMethod:requestKey arguments:data];
+    } @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+}
+
+/**
+ * Get Standing
+ *
+ */
+- (void)getStanding:(StandingBase)modelBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getStanding%ld", (long)self.requestId];
+    [self.standingDic setObject:modelBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    [self.methodChannel invokeMethod:requestKey arguments:@""];
+}
+
+/**
+ * Set Standing
+ *
+ */
+- (void)setStanding:(protocol_standing_remind_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"setStanding%ld", (long)self.requestId];
+    [self.successDic setObject:successBlock forKey:requestKey];
+    [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
+    @try {
+        NSData *data = [model data];
+        [self.methodChannel invokeMethod:requestKey arguments:data];
+    } @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+}
+
+
+
+
+
+
+
 
 - (void)getScreenWithModel:(ScreenBase)modelBlock
                     failure:(FailureArgument)failureBlock {
@@ -1473,7 +1640,7 @@ static CreekInterFace * instance =nil;
     }
 }
 
-/// 获取寻找手机功能状态
+
 - (void)getFindPhoneWatchWithModel:(FindPhoneWatchBase)modelBlock
                            failure:(FailureArgument)failureBlock {
     self.requestId++;
@@ -1483,7 +1650,7 @@ static CreekInterFace * instance =nil;
     [self.methodChannel invokeMethod:requestKey arguments:@""];
 }
 
-/// 设置寻找手机功能状态
+
 - (void)setFindPhoneWatchWithModel:(protocol_find_phone_watch_operate *)model
                             success:(SuccessBase)successBlock
                             failure:(FailureArgument)failureBlock {

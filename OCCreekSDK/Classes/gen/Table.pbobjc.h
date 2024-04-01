@@ -86,6 +86,10 @@ typedef GPB_ENUM(protocol_function_table_FieldNumber) {
   protocol_function_table_FieldNumber_ButtonCrown = 19,
   protocol_function_table_FieldNumber_FocusMode = 20,
   protocol_function_table_FieldNumber_FindWatch = 21,
+  protocol_function_table_FieldNumber_Alexa = 22,
+  protocol_function_table_FieldNumber_AppList = 23,
+  protocol_function_table_FieldNumber_EventTracking = 24,
+  protocol_function_table_FieldNumber_StravaApp = 25,
 };
 
 GPB_FINAL @interface protocol_function_table : GPBMessage
@@ -194,6 +198,26 @@ GPB_FINAL @interface protocol_function_table : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) function_table *findWatch;
 /** Test to see if @c findWatch has been set. */
 @property(nonatomic, readwrite) BOOL hasFindWatch;
+
+/** alexa */
+@property(nonatomic, readwrite, strong, null_resettable) function_table *alexa;
+/** Test to see if @c alexa has been set. */
+@property(nonatomic, readwrite) BOOL hasAlexa;
+
+/** Application list */
+@property(nonatomic, readwrite, strong, null_resettable) function_table *appList;
+/** Test to see if @c appList has been set. */
+@property(nonatomic, readwrite) BOOL hasAppList;
+
+/** Data burying point */
+@property(nonatomic, readwrite, strong, null_resettable) function_table *eventTracking;
+/** Test to see if @c eventTracking has been set. */
+@property(nonatomic, readwrite) BOOL hasEventTracking;
+
+/** Strava support, upload data to third-party platform */
+@property(nonatomic, readwrite, strong, null_resettable) function_table *stravaApp;
+/** Test to see if @c stravaApp has been set. */
+@property(nonatomic, readwrite) BOOL hasStravaApp;
 
 @end
 

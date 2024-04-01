@@ -119,6 +119,7 @@ typedef GPB_ENUM(protocol_quick_card_inquire_reply_FieldNumber) {
   protocol_quick_card_inquire_reply_FieldNumber_CardTypeUvSupport = 19,
   protocol_quick_card_inquire_reply_FieldNumber_CardTypeAstronomySupport = 20,
   protocol_quick_card_inquire_reply_FieldNumber_CardTypeWorldClockSupport = 21,
+  protocol_quick_card_inquire_reply_FieldNumber_CardTypeAlexaSupport = 22,
 };
 
 GPB_FINAL @interface protocol_quick_card_inquire_reply : GPBMessage
@@ -203,6 +204,10 @@ GPB_FINAL @interface protocol_quick_card_inquire_reply : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) quick_card_func *cardTypeWorldClockSupport;
 /** Test to see if @c cardTypeWorldClockSupport has been set. */
 @property(nonatomic, readwrite) BOOL hasCardTypeWorldClockSupport;
+
+@property(nonatomic, readwrite, strong, null_resettable) quick_card_func *cardTypeAlexaSupport;
+/** Test to see if @c cardTypeAlexaSupport has been set. */
+@property(nonatomic, readwrite) BOOL hasCardTypeAlexaSupport;
 
 @end
 

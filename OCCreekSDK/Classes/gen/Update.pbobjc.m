@@ -49,11 +49,13 @@ static GPBFileDescriptor *UpdateRoot_FileDescriptor(void) {
 
 @dynamic eventId;
 @dynamic eventKey;
+@dynamic eventValue;
 
 typedef struct protocol_notice_update_operate__storage_ {
   uint32_t _has_storage_[1];
   event_id eventId;
   uint32_t eventKey;
+  uint32_t eventValue;
 } protocol_notice_update_operate__storage_;
 
 // This method is threadsafe because it is initially called
@@ -77,6 +79,15 @@ typedef struct protocol_notice_update_operate__storage_ {
         .number = protocol_notice_update_operate_FieldNumber_EventKey,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(protocol_notice_update_operate__storage_, eventKey),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "eventValue",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_notice_update_operate_FieldNumber_EventValue,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(protocol_notice_update_operate__storage_, eventValue),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeUInt32,
       },

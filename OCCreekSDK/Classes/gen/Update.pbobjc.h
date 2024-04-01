@@ -51,6 +51,7 @@ GPB_FINAL @interface UpdateRoot : GPBRootObject
 typedef GPB_ENUM(protocol_notice_update_operate_FieldNumber) {
   protocol_notice_update_operate_FieldNumber_EventId = 1,
   protocol_notice_update_operate_FieldNumber_EventKey = 2,
+  protocol_notice_update_operate_FieldNumber_EventValue = 3,
 };
 
 GPB_FINAL @interface protocol_notice_update_operate : GPBMessage
@@ -60,6 +61,9 @@ GPB_FINAL @interface protocol_notice_update_operate : GPBMessage
 
 /** 1bytes specific event key value */
 @property(nonatomic, readwrite) uint32_t eventKey;
+
+/** specific event value */
+@property(nonatomic, readwrite) uint32_t eventValue;
 
 @end
 

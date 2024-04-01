@@ -73,21 +73,7 @@ typedef GPB_ENUM(protocol_device_batt_info_FieldNumber) {
 
 GPB_FINAL @interface protocol_device_batt_info : GPBMessage
 
-/**
- *    enum Batt_mode
- *    {
- *        INVALID_MODE = 0; // invalid
- *        NORMAL_MODE = 1;//normal mode (not power saving mode)
- *        ECO_MODE = 2; //power saving mode
- *    }
- *    enum Batt_status
- *    {
- *        NORMAL = 0; // not charging
- *        CHARING = 1;//charging
- *        FULL = 2; //full charge
- *        LOW = 3; //low battery
- *    }
- **/
+/** 2bytes */
 @property(nonatomic, readwrite) uint32_t voltage;
 
 /** 1bytes battery status */

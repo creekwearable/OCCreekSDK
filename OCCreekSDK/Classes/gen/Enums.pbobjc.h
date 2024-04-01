@@ -374,6 +374,9 @@ typedef GPB_ENUM(quick_card_type) {
 
   /** World clock */
   quick_card_type_CardTypeWorldClock = 15,
+
+  /** alexa */
+  quick_card_type_CardTypeAlexa = 16,
 };
 
 GPBEnumDescriptor *quick_card_type_EnumDescriptor(void);
@@ -497,6 +500,12 @@ typedef GPB_ENUM(language) {
 
   /** French */
   language_French = 9,
+
+  /** Korean */
+  language_Korean = 10,
+
+  /** Polish */
+  language_Polish = 11,
 };
 
 GPBEnumDescriptor *language_EnumDescriptor(void);
@@ -1561,7 +1570,7 @@ typedef GPB_ENUM(message_remind_type) {
   message_remind_type_AmazonShopping = 31,
   message_remind_type_Spotify = 32,
   message_remind_type_Discord = 33,
-  message_remind_type_RemindTypeMax = 34,
+  message_remind_type_Ohter = 34,
 };
 
 GPBEnumDescriptor *message_remind_type_EnumDescriptor(void);
@@ -1662,6 +1671,7 @@ typedef GPB_ENUM(long_2s_press_type) {
   long_2s_press_type_PressTypeNull = 0,
   long_2s_press_type_PressTypeSos = 1,
   long_2s_press_type_PressTypeWorkout = 2,
+  long_2s_press_type_PressTypeAlexa = 3,
 };
 
 GPBEnumDescriptor *long_2s_press_type_EnumDescriptor(void);
@@ -1671,6 +1681,81 @@ GPBEnumDescriptor *long_2s_press_type_EnumDescriptor(void);
  * the time this source was generated.
  **/
 BOOL long_2s_press_type_IsValidValue(int32_t value);
+
+#pragma mark - Enum app_list
+
+typedef GPB_ENUM(app_list) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  app_list_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  /** Activity */
+  app_list_AppListActivity = 0,
+
+  /** Sports */
+  app_list_AppListWorkout = 1,
+
+  /** Step counting */
+  app_list_AppListSteps = 2,
+
+  /** Heart rate */
+  app_list_AppListHeartrate = 3,
+
+  /** Sleep */
+  app_list_AppListSleep = 4,
+
+  /** Pressure */
+  app_list_AppListStress = 5,
+
+  /** Women’s Health */
+  app_list_AppListMenstruation = 6,
+
+  /** breathing training */
+  app_list_AppListBreathe = 7,
+
+  /** Alarm clock */
+  app_list_AppListAlarms = 8,
+
+  /** Phone */
+  app_list_AppListPhone = 9,
+
+  /** Countdown */
+  app_list_AppListTimers = 10,
+
+  /** Stopwatch */
+  app_list_AppListStopwatch = 11,
+
+  /** blood oxygen */
+  app_list_AppListSpo2 = 12,
+
+  /** Weather */
+  app_list_AppListWeather = 13,
+
+  /** Camera control */
+  app_list_AppListCameraRemote = 14,
+
+  /** Music control */
+  app_list_AppListMusic = 15,
+
+  /** Find mobile phone */
+  app_list_AppListFindPhone = 16,
+
+  /** World clock */
+  app_list_AppListWorldClock = 17,
+
+  /** Settings */
+  app_list_AppListSettings = 18,
+};
+
+GPBEnumDescriptor *app_list_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL app_list_IsValidValue(int32_t value);
 
 #pragma mark - EnumsRoot
 
