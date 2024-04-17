@@ -18,6 +18,10 @@
 		078B62302B86F7D500BCEFC3 /* ScanDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B622E2B86F7D500BCEFC3 /* ScanDeviceViewController.swift */; };
 		078B62312B86F7D500BCEFC3 /* CommandReplyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B622F2B86F7D500BCEFC3 /* CommandReplyViewController.swift */; };
 		078D40D32B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota in Resources */ = {isa = PBXBuildFile; fileRef = 078D40D22B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota */; };
+		07941D302BCE6A6100CBFB62 /* circlePhoto.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07941D2F2BCE6A6100CBFB62 /* circlePhoto.zip */; };
+		07941D322BCE6D8C00CBFB62 /* CameraPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07941D312BCE6D8C00CBFB62 /* CameraPopView.swift */; };
+		07941D342BCE6DD100CBFB62 /* DialPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07941D332BCE6DD100CBFB62 /* DialPhotoViewController.swift */; };
+		07941D382BCFB35F00CBFB62 /* squarePhoto.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07941D372BCFB35F00CBFB62 /* squarePhoto.zip */; };
 		0798DAB82B8F236000500B53 /* ephemeris.gnss in Resources */ = {isa = PBXBuildFile; fileRef = 0798DAB62B8F236000500B53 /* ephemeris.gnss */; };
 		0798DAB92B8F236000500B53 /* offlineEphemeris.agnss in Resources */ = {isa = PBXBuildFile; fileRef = 0798DAB72B8F236000500B53 /* offlineEphemeris.agnss */; };
 		07A00DF62BA54E6F00AFC4B4 /* CASIO01_01.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A00DF02BA54E6E00AFC4B4 /* CASIO01_01.zip */; };
@@ -140,6 +144,12 @@
 		078B622F2B86F7D500BCEFC3 /* CommandReplyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandReplyViewController.swift; sourceTree = "<group>"; };
 		078B62322B8733A500BCEFC3 /* EnumValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumValue.h; sourceTree = "<group>"; };
 		078D40D22B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = lw10_v1.0.42_24020401.ota; sourceTree = "<group>"; };
+		07941D2D2BCE621500CBFB62 /* DialPhotoParseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialPhotoParseModel.h; sourceTree = "<group>"; };
+		07941D2E2BCE621500CBFB62 /* DialPhotoParseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialPhotoParseModel.m; sourceTree = "<group>"; };
+		07941D2F2BCE6A6100CBFB62 /* circlePhoto.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = circlePhoto.zip; sourceTree = "<group>"; };
+		07941D312BCE6D8C00CBFB62 /* CameraPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPopView.swift; sourceTree = "<group>"; };
+		07941D332BCE6DD100CBFB62 /* DialPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialPhotoViewController.swift; sourceTree = "<group>"; };
+		07941D372BCFB35F00CBFB62 /* squarePhoto.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = squarePhoto.zip; sourceTree = "<group>"; };
 		0798DAB62B8F236000500B53 /* ephemeris.gnss */ = {isa = PBXFileReference; lastKnownFileType = file; path = ephemeris.gnss; sourceTree = "<group>"; };
 		0798DAB72B8F236000500B53 /* offlineEphemeris.agnss */ = {isa = PBXFileReference; lastKnownFileType = file; path = offlineEphemeris.agnss; sourceTree = "<group>"; };
 		07A00DEE2BA5402100AFC4B4 /* DialParseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialParseModel.h; sourceTree = "<group>"; };
@@ -352,6 +362,8 @@
 				07E89D7F2B887CC5004DFEED /* NoticeUpdateModel.m */,
 				07A00DEE2BA5402100AFC4B4 /* DialParseModel.h */,
 				07A00DEF2BA5402100AFC4B4 /* DialParseModel.m */,
+				07941D2D2BCE621500CBFB62 /* DialPhotoParseModel.h */,
+				07941D2E2BCE621500CBFB62 /* DialPhotoParseModel.m */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -359,6 +371,8 @@
 		078B62142B86F69000BCEFC3 /* SwiftCreekSDK */ = {
 			isa = PBXGroup;
 			children = (
+				07941D372BCFB35F00CBFB62 /* squarePhoto.zip */,
+				07941D2F2BCE6A6100CBFB62 /* circlePhoto.zip */,
 				07A00DF22BA54E6F00AFC4B4 /* Act06_1201_03.zip */,
 				07A00DF32BA54E6F00AFC4B4 /* acti06_2.zip */,
 				07A00DF02BA54E6E00AFC4B4 /* CASIO01_01.zip */,
@@ -373,6 +387,7 @@
 				078B62192B86F69000BCEFC3 /* ViewController.swift */,
 				07A00E002BA54EE400AFC4B4 /* DialViewController.swift */,
 				07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */,
+				07941D332BCE6DD100CBFB62 /* DialPhotoViewController.swift */,
 				078B622F2B86F7D500BCEFC3 /* CommandReplyViewController.swift */,
 				078B622E2B86F7D500BCEFC3 /* ScanDeviceViewController.swift */,
 				07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */,
@@ -393,6 +408,7 @@
 				078B62282B86F78F00BCEFC3 /* GlobalDefine.swift */,
 				078B62292B86F78F00BCEFC3 /* PonyAlert.swift */,
 				078B622A2B86F78F00BCEFC3 /* PonyBaseViewController.swift */,
+				07941D312BCE6D8C00CBFB62 /* CameraPopView.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -516,7 +532,9 @@
 				0798DAB82B8F236000500B53 /* ephemeris.gnss in Resources */,
 				07A00DF82BA54E6F00AFC4B4 /* Act06_1201_03.zip in Resources */,
 				078B621F2B86F69100BCEFC3 /* Assets.xcassets in Resources */,
+				07941D382BCFB35F00CBFB62 /* squarePhoto.zip in Resources */,
 				07A00DFA2BA54E6F00AFC4B4 /* Fun_061211_05_2.zip in Resources */,
+				07941D302BCE6A6100CBFB62 /* circlePhoto.zip in Resources */,
 				07A00DFB2BA54E6F00AFC4B4 /* func6_pink.zip in Resources */,
 				07A00DF62BA54E6F00AFC4B4 /* CASIO01_01.zip in Resources */,
 				07A00DF72BA54E6F00AFC4B4 /* Fun061101_03.zip in Resources */,
@@ -558,6 +576,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SwiftCreekSDK/Pods-SwiftCreekSDK-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/ESTabBarController-swift/ESTabBarController_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -578,11 +597,13 @@
 				"${BUILT_PRODUCTS_DIR}/OCCreekSDK/OCCreekSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/ZIPFoundation/ZIPFoundation.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ESTabBarController_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -602,6 +623,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/path_provider_foundation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCCreekSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZIPFoundation.framework",
 			);
@@ -627,9 +649,11 @@
 				078B62162B86F69000BCEFC3 /* AppDelegate.swift in Sources */,
 				078B622C2B86F78F00BCEFC3 /* PonyAlert.swift in Sources */,
 				07A00DFD2BA54EA300AFC4B4 /* BaseSheetView.swift in Sources */,
+				07941D342BCE6DD100CBFB62 /* DialPhotoViewController.swift in Sources */,
 				078B622D2B86F78F00BCEFC3 /* PonyBaseViewController.swift in Sources */,
 				07A00E032BA54EF800AFC4B4 /* DialDetailsViewController.swift in Sources */,
 				078B62302B86F7D500BCEFC3 /* ScanDeviceViewController.swift in Sources */,
+				07941D322BCE6D8C00CBFB62 /* CameraPopView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,6 +715,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftCreekSDK/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "\\\"xxxxx\\\" needs to access your Bluetooth to connect external devices for communication";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\\\"xxxxx\\\" needs to access your";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\\\"xxxxx\\\" needs to access your";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -753,6 +779,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftCreekSDK/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "\\\"xxxxx\\\" needs to access your Bluetooth to connect external devices for communication";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\\\"xxxxx\\\" needs to access your";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\\\"xxxxx\\\" needs to access your";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

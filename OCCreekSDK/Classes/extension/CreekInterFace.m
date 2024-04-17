@@ -76,6 +76,7 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString*,EphemerisData> *ephemerisClosureDic;
 
 @property (nonatomic, strong) NSMutableDictionary<NSString*,ParseDialBase> *parseDialClosureDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,ParsePhotoDialBase> *parsePhotoDialClosureDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,PreviewImageBase> *previewImageClosureDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,DialDataBase> *dialDataClosureDic;
 
@@ -183,6 +184,7 @@ static CreekInterFace * instance =nil;
     self.dialDataClosureDic = [NSMutableDictionary dictionary];
     self.appListDic = [NSMutableDictionary dictionary];
     self.eventTrackingDic = [NSMutableDictionary dictionary];
+    self.parsePhotoDialClosureDic = [NSMutableDictionary dictionary];
 }
 
 -(void) setupInit{
@@ -1038,6 +1040,17 @@ static CreekInterFace * instance =nil;
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
         
+    }else if ([[call method] containsString:@"parsePhotoDial"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
     }else if ([[call method] containsString:@"setCurrentColor"]){
         NSDictionary * dic = (NSDictionary*)[call arguments];
         DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
@@ -1049,6 +1062,17 @@ static CreekInterFace * instance =nil;
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
         
+    }else if ([[call method] containsString:@"setCurrentPhotoColor"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
     }else if ([[call method] containsString:@"setCurrentBackgroundImagePath"]){
         NSDictionary * dic = (NSDictionary*)[call arguments];
         DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
@@ -1056,6 +1080,28 @@ static CreekInterFace * instance =nil;
         if(block){
             block(model);
             [self.parseDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"setCurrentClockPosition"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"setCurrentPhotoBackgroundImagePath"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
         }else{
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
@@ -1083,6 +1129,17 @@ static CreekInterFace * instance =nil;
         }
         
     }else if ([[call method] containsString:@"encodeDial"]){
+        FlutterStandardTypedData *data = [call arguments];
+       
+        DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
+        if(block){
+            block(data.data);
+            [self.previewImageClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"encodePhotoDial"]){
         FlutterStandardTypedData *data = [call arguments];
        
         DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
@@ -2378,6 +2435,19 @@ static CreekInterFace * instance =nil;
 
 }
 
+- (void)parsePhotoDialWithPath:(NSString *)path
+                         width:(NSInteger)width
+                        height:(NSInteger)height
+                        radius:(NSInteger)radius
+                   platformType:(Platform)platformType
+                          model:(ParsePhotoDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"parsePhotoDial%ld", (long)self.requestId];
+    [self.parsePhotoDialClosureDic setObject:model forKey:requestIdString];
+    NSArray *arguments = @[path, @(width), @(height), @(radius), @(platformType)];
+    [self.methodChannel invokeMethod:requestIdString arguments:arguments];
+}
+
 - (void)getPreviewImageWithModel:(PreviewImageBase)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"getPreviewImage%ld", (long)self.requestId];
@@ -2393,12 +2463,45 @@ static CreekInterFace * instance =nil;
     [self.methodChannel invokeMethod:requestIdString arguments:[NSNumber numberWithInteger:selectIndex]];
 }
 
+- (void)setCurrentPhotoColorWithPhotoSelectIndex:(NSInteger)photoSelectIndex
+                                     selectIndex:(NSInteger)selectIndex
+                                           model:(ParsePhotoDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"setCurrentPhotoColor%ld", (long)self.requestId];
+    [self.parsePhotoDialClosureDic setObject:model forKey:requestIdString];
+    NSArray *arguments = @[@(photoSelectIndex), @(selectIndex)];
+    [self.methodChannel invokeMethod:requestIdString arguments:arguments];
+}
+
 - (void)setCurrentBackgroundImagePathWithSelectIndex:(NSInteger)selectIndex
                                                 model:(ParseDialBase)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"setCurrentBackgroundImagePath%ld", (long)self.requestId];
     [self.parseDialClosureDic setObject:model forKey:requestIdString];
     [self.methodChannel invokeMethod:requestIdString arguments:[NSNumber numberWithInteger:selectIndex]];
+}
+
+- (void)setCurrentClockPositionWithPhotoSelectIndex:(NSInteger)photoSelectIndex
+                                        selectIndex:(NSInteger)selectIndex
+                                              model:(ParsePhotoDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"setCurrentClockPosition%ld", (long)self.requestId];
+    [self.parsePhotoDialClosureDic setObject:model forKey:requestIdString];
+    NSArray *arguments = @[@(photoSelectIndex), @(selectIndex)];
+    [self.methodChannel invokeMethod:requestIdString arguments:arguments];
+}
+
+- (void)setCurrentPhotoBackgroundImagePathWithPhotoImagePaths:(NSArray<NSString *> *)photoImagePaths
+                                                 selectIndex:(NSInteger)selectIndex
+                                                       model:(ParsePhotoDialBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"setCurrentPhotoBackgroundImagePath%ld", (long)self.requestId];
+    [self.parsePhotoDialClosureDic setObject:model forKey:requestIdString];
+    NSDictionary *arguments = @{
+        @"photoImagePaths": photoImagePaths,
+        @"photoSelectIndex": @(selectIndex)
+    };
+    [self.methodChannel invokeMethod:requestIdString arguments:arguments];
 }
 
 - (void)setCurrentFunctionWithSelectIndex:(NSArray<NSNumber *> *)selectIndex
@@ -2416,28 +2519,12 @@ static CreekInterFace * instance =nil;
     [self.methodChannel invokeMethod:requestIdString arguments:@""];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- (void)encodePhotoDialWithModel:(DialDataBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"encodePhotoDial%ld", (long)self.requestId];
+    [self.dialDataClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:@""];
+}
 
 
 @end

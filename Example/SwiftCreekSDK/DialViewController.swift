@@ -63,6 +63,7 @@ class DialViewController: CreekBaseViewController,UITableViewDelegate,UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setRight()
         self.title = "dial"
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
@@ -71,6 +72,23 @@ class DialViewController: CreekBaseViewController,UITableViewDelegate,UITableVie
             $0.bottom.equalTo(self.view).offset(-SAFEAREAINSETS.bottom)
         }
 
+    }
+    
+    func setRight(){
+        let but = UIButton(type: .custom)
+        but.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        but.setTitleColor(.black, for: .normal)
+        but.setTitle("photo", for: .normal)
+        but.addTarget(self, action: #selector(tapClick), for: .touchUpInside)
+        let itemmeunbut = UIBarButtonItem.init(customView: but)
+        self.navigationItem.rightBarButtonItem = itemmeunbut
+    }
+    
+    
+
+    @objc func tapClick()  {
+        let vc = DialPhotoViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -102,11 +120,11 @@ class DialCell:UITableViewCell{
         self.backgroundColor = .clear
         layoutUI()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func layoutUI(){
         contentView.addSubview(slideBackgroundView)
         slideBackgroundView.callback = {(index) in
@@ -119,10 +137,8 @@ class DialCell:UITableViewCell{
             $0.height.equalTo(FBScale(600))
             $0.bottom.equalTo(self.contentView.snp.bottom)
         }
-
     }
 
-    
     func setData(data:[String:Any],type:Int) {
         modelJson = data
         if(type == 0){
@@ -136,11 +152,10 @@ class DialCell:UITableViewCell{
             slideBackgroundView.height = FBScale(446)
             slideBackgroundView.cornerRadius = FBScale(223)
         }
-        
         if let arr = data["images"] as? [String]{
             slideBackgroundView.itemsTitle = arr
         }
-       
-        
     }
+    
+    
 }

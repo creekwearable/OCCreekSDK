@@ -64,6 +64,7 @@
 #import "DialParseModel.h"
 #import "AppList.pbobjc.h"
 #import "EventTracking.pbobjc.h"
+#import "DialPhotoParseModel.h"
 
 
 
@@ -131,6 +132,7 @@ typedef void(^SportsClosure)(NSArray<SportModel *>* sports);
 typedef void(^HrvsClosure)(NSArray<HrvModel *>* hrvs);
 typedef void(^SportClosure)(SportModel* sportModel);
 typedef void (^ParseDialBase)(DialParseModel *model);
+typedef void (^ParsePhotoDialBase)(DialPhotoParseModel *model);
 typedef void (^PreviewImageBase)(NSData *model);
 typedef void (^DialDataBase)(NSData *model);
 
@@ -844,10 +846,33 @@ typedef void (^DialDataBase)(NSData *model);
 - (void)encodeDialWithModel:(DialDataBase)model ;
 
 
+
+- (void)encodePhotoDialWithModel:(DialDataBase)model;
+
+- (void)setCurrentPhotoBackgroundImagePathWithPhotoImagePaths:(NSArray<NSString *> *)photoImagePaths
+                                                  selectIndex:(NSInteger)selectIndex
+                                                        model:(ParsePhotoDialBase)model;
+
+- (void)setCurrentClockPositionWithPhotoSelectIndex:(NSInteger)photoSelectIndex
+                                        selectIndex:(NSInteger)selectIndex
+                                              model:(ParsePhotoDialBase)model;
+
+- (void)setCurrentPhotoColorWithPhotoSelectIndex:(NSInteger)photoSelectIndex
+                                     selectIndex:(NSInteger)selectIndex
+                                           model:(ParsePhotoDialBase)model;
+
+- (void)parsePhotoDialWithPath:(NSString *)path
+                         width:(NSInteger)width
+                        height:(NSInteger)height
+                        radius:(NSInteger)radius
+                   platformType:(Platform)platformType
+                         model:(ParsePhotoDialBase)model;
+
+
 /**
  * Get focus mode
  *
-
+ 
  */
 - (void)getFocusSleep:(FocusBase)modelBlock failure:(FailureArgument)failureBlock;
 
@@ -878,7 +903,7 @@ typedef void (^DialDataBase)(NSData *model);
 /**
  * Drink Water Reminder
  *
-
+ 
  */
 - (void)getWater:(WaterBase)modelBlock failure:(FailureArgument)failureBlock ;
 
