@@ -15,6 +15,7 @@
 #import "DialParseModel.h"
 #import "DialPhotoParseModel.h"
 #import "EnumValue.h"
+#import "EphemerisGPSModel.h"
 #import "EphemerisModel.h"
 #import "EventReportModel.h"
 #import "HeartRateModel.h"

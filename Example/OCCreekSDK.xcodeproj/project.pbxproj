@@ -166,6 +166,8 @@
 		07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialDetailsViewController.swift; sourceTree = "<group>"; };
 		07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZBSlideBar.swift; sourceTree = "<group>"; };
 		07A00E062BA54FA300AFC4B4 /* CustomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSheetView.swift; sourceTree = "<group>"; };
+		07C8FBAF2BD818BA0047D112 /* EphemerisGPSModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EphemerisGPSModel.h; sourceTree = "<group>"; };
+		07C8FBB02BD818BA0047D112 /* EphemerisGPSModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EphemerisGPSModel.m; sourceTree = "<group>"; };
 		07E89D5D2B8850E4004DFEED /* NoiseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoiseModel.h; sourceTree = "<group>"; };
 		07E89D5E2B8850E4004DFEED /* NoiseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoiseModel.m; sourceTree = "<group>"; };
 		07E89D602B886E5D004DFEED /* StressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StressModel.h; sourceTree = "<group>"; };
@@ -358,6 +360,8 @@
 				07E89D792B887BBF004DFEED /* HrvModel.m */,
 				07E89D7B2B887C49004DFEED /* EphemerisModel.h */,
 				07E89D7C2B887C49004DFEED /* EphemerisModel.m */,
+				07C8FBAF2BD818BA0047D112 /* EphemerisGPSModel.h */,
+				07C8FBB02BD818BA0047D112 /* EphemerisGPSModel.m */,
 				07E89D7E2B887CC5004DFEED /* NoticeUpdateModel.h */,
 				07E89D7F2B887CC5004DFEED /* NoticeUpdateModel.m */,
 				07A00DEE2BA5402100AFC4B4 /* DialParseModel.h */,

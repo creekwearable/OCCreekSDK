@@ -65,6 +65,7 @@
 #import "AppList.pbobjc.h"
 #import "EventTracking.pbobjc.h"
 #import "DialPhotoParseModel.h"
+#import "EphemerisGPSModel.h"
 
 
 
@@ -135,6 +136,7 @@ typedef void (^ParseDialBase)(DialParseModel *model);
 typedef void (^ParsePhotoDialBase)(DialPhotoParseModel *model);
 typedef void (^PreviewImageBase)(NSData *model);
 typedef void (^DialDataBase)(NSData *model);
+typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 
 
 
@@ -924,6 +926,11 @@ typedef void (^DialDataBase)(NSData *model);
  *
  */
 - (void)setStanding:(protocol_standing_remind_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock;
+
+- (void)ephemerisInitWithKeyId:(NSString *)keyId publicKey:(NSString *)publicKey model:(gpsBase)model;
+
+- (void)ephemerisInitGPSWithEphemerisGPSModel:(EphemerisGPSModel *)ephemerisGPSModel;
+
 
 
 @end

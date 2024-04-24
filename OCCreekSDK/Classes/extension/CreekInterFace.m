@@ -92,6 +92,7 @@
 @property (nonatomic, copy) EventReportListen eventReportListen;
 @property (nonatomic, copy) ExceptionListen exceptionListen;
 @property (nonatomic, copy) LogPathClosure logPathClosure;
+@property (nonatomic, copy) gpsBase gpsClosure;
 
 
 @end
@@ -1149,6 +1150,15 @@ static CreekInterFace * instance =nil;
         }else{
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
+        
+    }else if ([[call method] containsString:@"ephemerisInit"]){
+        if (_gpsClosure) {
+            EphemerisGPSModel *result = _gpsClosure();
+            [self ephemerisInitGPSWithEphemerisGPSModel:result];
+        }
+        
+    }else if ([[call method] containsString:@"ephemerisGPS"]){
+
         
     }else {
 
@@ -2526,5 +2536,26 @@ static CreekInterFace * instance =nil;
     [self.methodChannel invokeMethod:requestIdString arguments:@""];
 }
 
+
+- (void)ephemerisInitWithKeyId:(NSString *)keyId publicKey:(NSString *)publicKey model:(gpsBase)model {
+    self.requestId += 1;
+    _gpsClosure = model;
+    NSString *requestIdString = [NSString stringWithFormat:@"ephemerisInit%ld", (long)self.requestId];
+    [self.methodChannel invokeMethod:requestIdString arguments:@[keyId, publicKey]];
+}
+
+- (void)ephemerisInitGPSWithEphemerisGPSModel:(EphemerisGPSModel *)ephemerisGPSModel{
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"ephemerisGPS%ld", (long)self.requestId];
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[ephemerisGPSModel toDictionary] options:NSJSONWritingPrettyPrinted error:&error];
+    if (jsonData) {
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        [self.methodChannel invokeMethod:requestIdString arguments:jsonString];
+    } else {
+        NSLog(@"Failed to serialize EphemerisModel to JSON: %@", error);
+    }
+}
 
 @end
