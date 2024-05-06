@@ -82,6 +82,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary<NSString*,AppListBase> *appListDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,EventTrackingBase> *eventTrackingDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,BoolBase> *boolClosureDic;
 
 
 
@@ -186,6 +187,7 @@ static CreekInterFace * instance =nil;
     self.appListDic = [NSMutableDictionary dictionary];
     self.eventTrackingDic = [NSMutableDictionary dictionary];
     self.parsePhotoDialClosureDic = [NSMutableDictionary dictionary];
+    self.boolClosureDic = [NSMutableDictionary dictionary];
 }
 
 -(void) setupInit{
@@ -1159,6 +1161,27 @@ static CreekInterFace * instance =nil;
         
     }else if ([[call method] containsString:@"ephemerisGPS"]){
 
+        
+    }else if ([[call method] containsString:@"checkPhoneBookPermissions"]){
+        NSLog(@"checkPhoneBookPermissions %@ ", [call arguments]);
+        int isBool = [[call arguments] intValue];
+        BoolBase block = [self.boolClosureDic objectForKey:[call method]];
+        if (block) {
+            block(isBool == 0 ? NO : YES);
+            [self.boolClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"requestPhoneBookPermissions"]){
+        int isBool = [[call arguments] intValue];
+        BoolBase block = [self.boolClosureDic objectForKey:[call method]];
+        if (block) {
+            block(isBool == 0 ? NO : YES);
+            [self.boolClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
         
     }else {
 
@@ -2556,6 +2579,29 @@ static CreekInterFace * instance =nil;
     } else {
         NSLog(@"Failed to serialize EphemerisModel to JSON: %@", error);
     }
+}
+
+- (void)phoneBookInit {
+    [self.methodChannel invokeMethod:@"phoneBookInit" arguments:@""];
+}
+
+- (void)monitorPhone {
+    [self.methodChannel invokeMethod:@"monitorPhone" arguments:@""];
+}
+
+- (void)checkPhoneBookPermissions:(BoolBase)model {
+    self.requestId += 1;
+    
+    NSString *requestIdString = [NSString stringWithFormat:@"checkPhoneBookPermissions%ld", (long)self.requestId];
+    [self.boolClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:@""];
+}
+
+- (void)requestPhoneBookPermissions:(BoolBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"requestPhoneBookPermissions%ld", (long)self.requestId];
+    [self.boolClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:@""];
 }
 
 @end

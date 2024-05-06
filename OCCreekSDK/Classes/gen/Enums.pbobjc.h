@@ -471,7 +471,7 @@ typedef GPB_ENUM(language) {
    * of the field.
    **/
   language_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  /** invalid */
+  /** Invalid */
   language_LangInvalid = 0,
 
   /** Chinese */
@@ -506,6 +506,51 @@ typedef GPB_ENUM(language) {
 
   /** Polish */
   language_Polish = 11,
+
+  /** Czech language */
+  language_Czech = 12,
+
+  /** Slovak */
+  language_Slovak = 13,
+
+  /** Hungarian */
+  language_Hungarian = 14,
+
+  /** Greek */
+  language_Greek = 15,
+
+  /** Lithuanian */
+  language_Lithuanian = 16,
+
+  /** Latvian */
+  language_Latvian = 17,
+
+  /** Estonian */
+  language_Estonian = 18,
+
+  /** Bulgarian */
+  language_Bulgarian = 19,
+
+  /** Malay language */
+  language_Malay = 20,
+
+  /** Indonesian */
+  language_Indonesian = 21,
+
+  /** Thailand */
+  language_Thailand = 22,
+
+  /** Vietnamese */
+  language_Vietnamese = 23,
+
+  /** Hebrew */
+  language_Hebrew = 24,
+
+  /** Devagna */
+  language_Devanagari = 25,
+
+  /** Turkish */
+  language_Turkey = 26,
 };
 
 GPBEnumDescriptor *language_EnumDescriptor(void);

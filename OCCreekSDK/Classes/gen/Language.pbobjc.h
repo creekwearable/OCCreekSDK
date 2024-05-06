@@ -98,15 +98,32 @@ typedef GPB_ENUM(protocol_language_inquire_reply_FieldNumber) {
   protocol_language_inquire_reply_FieldNumber_GermanSupport = 5,
   protocol_language_inquire_reply_FieldNumber_SpanishSupport = 6,
   protocol_language_inquire_reply_FieldNumber_ItalianSupport = 7,
-  protocol_language_inquire_reply_FieldNumber_JapaneseSupport = 8,
+  protocol_language_inquire_reply_FieldNumber_JanpaneseSupport = 8,
   protocol_language_inquire_reply_FieldNumber_RussianSupport = 9,
   protocol_language_inquire_reply_FieldNumber_PortugueseSupport = 10,
   protocol_language_inquire_reply_FieldNumber_FrenchSupport = 11,
+  protocol_language_inquire_reply_FieldNumber_KoreanSupport = 12,
+  protocol_language_inquire_reply_FieldNumber_PolishSupport = 13,
+  protocol_language_inquire_reply_FieldNumber_CzechSupport = 14,
+  protocol_language_inquire_reply_FieldNumber_SlovakSupport = 15,
+  protocol_language_inquire_reply_FieldNumber_HungarianSupport = 16,
+  protocol_language_inquire_reply_FieldNumber_GreekSupport = 17,
+  protocol_language_inquire_reply_FieldNumber_LithuanianSupport = 18,
+  protocol_language_inquire_reply_FieldNumber_LatvianSupport = 19,
+  protocol_language_inquire_reply_FieldNumber_EstonianSupport = 20,
+  protocol_language_inquire_reply_FieldNumber_BulgarianSupport = 21,
+  protocol_language_inquire_reply_FieldNumber_MalaySupport = 22,
+  protocol_language_inquire_reply_FieldNumber_IndonesianSupport = 23,
+  protocol_language_inquire_reply_FieldNumber_ThaiSupport = 24,
+  protocol_language_inquire_reply_FieldNumber_VietnameseSupport = 25,
+  protocol_language_inquire_reply_FieldNumber_HebrewSupport = 26,
+  protocol_language_inquire_reply_FieldNumber_DevanagariSupport = 27,
+  protocol_language_inquire_reply_FieldNumber_TurkeySupport = 28,
 };
 
 GPB_FINAL @interface protocol_language_inquire_reply : GPBMessage
 
-/** 1bytes operation type 0: invalid operation 1: query 2: set */
+/** 1bytes operation type 0: invalid operation 1: query 2: setting */
 @property(nonatomic, readwrite) enum operate_type operate;
 
 @property(nonatomic, readwrite) enum language curLanguage;
@@ -127,7 +144,7 @@ GPB_FINAL @interface protocol_language_inquire_reply : GPBMessage
 @property(nonatomic, readwrite) BOOL italianSupport;
 
 /** 1bytes Japanese */
-@property(nonatomic, readwrite) BOOL japaneseSupport;
+@property(nonatomic, readwrite) BOOL janpaneseSupport;
 
 /** 1bytes Russian */
 @property(nonatomic, readwrite) BOOL russianSupport;
@@ -137,6 +154,57 @@ GPB_FINAL @interface protocol_language_inquire_reply : GPBMessage
 
 /** 1bytes French */
 @property(nonatomic, readwrite) BOOL frenchSupport;
+
+/** 1bytes Korean */
+@property(nonatomic, readwrite) BOOL koreanSupport;
+
+/** 1bytes Polish */
+@property(nonatomic, readwrite) BOOL polishSupport;
+
+/** 1bytes Czech */
+@property(nonatomic, readwrite) BOOL czechSupport;
+
+/** 1bytes Slovak */
+@property(nonatomic, readwrite) BOOL slovakSupport;
+
+/** 1bytes Hungarian */
+@property(nonatomic, readwrite) BOOL hungarianSupport;
+
+/** 1bytes Greek */
+@property(nonatomic, readwrite) BOOL greekSupport;
+
+/** 1bytes Lithuanian */
+@property(nonatomic, readwrite) BOOL lithuanianSupport;
+
+/** 1bytes Latvian */
+@property(nonatomic, readwrite) BOOL latvianSupport;
+
+/** 1bytes Estonian */
+@property(nonatomic, readwrite) BOOL estonianSupport;
+
+/** 1bytes Bulgarian */
+@property(nonatomic, readwrite) BOOL bulgarianSupport;
+
+/** 1bytes Malay */
+@property(nonatomic, readwrite) BOOL malaySupport;
+
+/** 1bytes Indonesian */
+@property(nonatomic, readwrite) BOOL indonesianSupport;
+
+/** 1bytes Thai */
+@property(nonatomic, readwrite) BOOL thaiSupport;
+
+/** 1bytes Vietnamese */
+@property(nonatomic, readwrite) BOOL vietnameseSupport;
+
+/** 1bytes Hebrew */
+@property(nonatomic, readwrite) BOOL hebrewSupport;
+
+/** 1bytes Devanagari */
+@property(nonatomic, readwrite) BOOL devanagariSupport;
+
+/** 1bytes Turkish */
+@property(nonatomic, readwrite) BOOL turkeySupport;
 
 @end
 

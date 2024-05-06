@@ -7,6 +7,7 @@
 
 import UIKit
 import OCCreekSDK
+import Contacts
 
 class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -101,10 +102,56 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             }
             break
             
+        case "requst contacts permission":
+      
+//           CreekInterFace.instance().checkPhoneBookPermissions { model in
+//              if !model{
+//                  CreekInterFace.instance().requestPhoneBookPermissions { model in
+//                     if model {
+//                        print("Permissions  Success")
+//                     }else{
+//                        print("Permissions  Failure")
+//                     }
+//                  }
+//              }
+//           }
+            
+            CreekInterFace.instance().requestPhoneBookPermissions { model in
+               if model {
+                  print("Permissions  Success")
+               }else{
+                  print("Permissions  Failure")
+               }
+            }
+            
+    
+            break
             
         default:
             self.navigationController?.pushViewController(vc, animated: true)
             break
+        }
+    }
+    
+    func checkContactPermission() {
+        let contactStore = CNContactStore()
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+            case .authorized:
+                // 已经授权，你可以获取和使用联系人数据
+                break
+
+            case .denied, .notDetermined:
+                // 用户还未决定或者已经拒绝，你需要请求权限
+                contactStore.requestAccess(for: .contacts) { granted, error in
+                    if granted {
+                        // 用户授权成功，你可以获取和使用联系人数据
+                    } else {
+                        // 用户拒绝授权，你不能获取和使用联系人数据
+                    }
+                }
+            default:
+                // 其他情况，例如权限被系统限制
+                break
         }
     }
     
@@ -140,7 +187,7 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
         return tab
     }()
     
-    var listCmd:[String] = ["Binding", "Get Device Information", "Sync", "Upload", "Get Device Bluetooth Status","connect Bluetooth Status", "Get Language", "Set Language", "Sync Time", "Get Time", "Get User Information", "Set User Information", "Get Alarm Clock", "Set Alarm Clock", "Get Do Not Disturb", "Set Do Not Disturb", "Get Screen Brightness", "Set Screen Brightness", "Get Health Monitoring", "Health monitoring setting", "Sleep monitoring acquisition", "Sleep monitoring setting","Get card", "Set card","World clock acquisition", "World clock setting", "Message switch query", "Message switch setting", "Set weather", "Incoming call configuration query","Incoming call configuration settings", "Contacts query", "Contacts settings", "Exercise self-identification query", "Exercise self-identification settings", "Exercise sub-item data query", "Exercise sub-item data setting","Inquiry about the arrangement order of device exercise","Setting the arrangement order of device exercise","Get the type of exercise supported by the device","Setting the heart rate interval","Delete the dial","Query the dial","Set the dial","System operation","Query activity data", "Query sleep data", "Query heart rate data", "Query pressure data", "Query noise data", "Query blood oxygen data", "Exercise record list", "Query exercise details" ,"Range query exercise record","Delete exercise record","Get bound device","setDBUserID","rawQueryDB","Off-line ephemeris","ephemeris","phone book","getLogPath","getFirmwareLogPath","getStand","setStand","getWater","setWater","getAppList","setAppList","getFocus","setFocus","functionTable"]
+    var listCmd:[String] = ["requst contacts permission","Binding", "Get Device Information", "Sync", "Upload", "Get Device Bluetooth Status","connect Bluetooth Status", "Get Language", "Set Language", "Sync Time", "Get Time", "Get User Information", "Set User Information", "Get Alarm Clock", "Set Alarm Clock", "Get Do Not Disturb", "Set Do Not Disturb", "Get Screen Brightness", "Set Screen Brightness", "Get Health Monitoring", "Health monitoring setting", "Sleep monitoring acquisition", "Sleep monitoring setting","Get card", "Set card","World clock acquisition", "World clock setting", "Message switch query", "Message switch setting", "Set weather", "Incoming call configuration query","Incoming call configuration settings", "Contacts query", "Contacts settings", "Exercise self-identification query", "Exercise self-identification settings", "Exercise sub-item data query", "Exercise sub-item data setting","Inquiry about the arrangement order of device exercise","Setting the arrangement order of device exercise","Get the type of exercise supported by the device","Setting the heart rate interval","Delete the dial","Query the dial","Set the dial","System operation","Query activity data", "Query sleep data", "Query heart rate data", "Query pressure data", "Query noise data", "Query blood oxygen data", "Exercise record list", "Query exercise details" ,"Range query exercise record","Delete exercise record","Get bound device","setDBUserID","rawQueryDB","Off-line ephemeris","ephemeris","phone book","getLogPath","getFirmwareLogPath","getStand","setStand","getWater","setWater","getAppList","setAppList","getFocus","setFocus","functionTable"]
     
     var deviceModel:ScanDeviceModel?
     
@@ -179,7 +226,18 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             print("\(status) \(deviceName)")
         }
         
+        CreekInterFace.instance().phoneBookInit()
         
+        let keyId = "******"
+        let publicKey = "**********"
+        CreekInterFace.instance().ephemerisInit(withKeyId: keyId, publicKey: publicKey) {
+            let model = EphemerisGPSModel()
+            model.altitude = 10
+            model.latitude = Int(22.312653 * 1000000)
+            model.longitude = Int(114.027986 * 1000000)
+            model.isVaild = true
+            return model
+        }
 
         CreekInterFace.instance().noticeUpdateListen { model in
             print("noticeUpdateListen \(model.toDictionary())")

@@ -259,6 +259,7 @@ void Setprotocol_menstrual_record_Log_RawValue(protocol_menstrual_record *messag
 @dynamic hasPeriodSet, periodSet;
 @dynamic recordArray, recordArray_Count;
 @dynamic setUtcTime;
+@dynamic reminderSwitch;
 
 typedef struct protocol_menstruation_operate__storage_ {
   uint32_t _has_storage_[1];
@@ -310,6 +311,15 @@ typedef struct protocol_menstruation_operate__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeUInt32,
       },
+      {
+        .name = "reminderSwitch",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_menstruation_operate_FieldNumber_ReminderSwitch,
+        .hasIndex = 3,
+        .offset = 4,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[protocol_menstruation_operate class]
@@ -350,6 +360,7 @@ void Setprotocol_menstruation_operate_Operate_RawValue(protocol_menstruation_ope
 @dynamic hasMenstrualPeriodSet, menstrualPeriodSet;
 @dynamic recordArray, recordArray_Count;
 @dynamic setUtcTime;
+@dynamic reminderSwitch;
 
 typedef struct protocol_menstruation_inquire_reply__storage_ {
   uint32_t _has_storage_[1];
@@ -410,6 +421,15 @@ typedef struct protocol_menstruation_inquire_reply__storage_ {
         .offset = (uint32_t)offsetof(protocol_menstruation_inquire_reply__storage_, setUtcTime),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "reminderSwitch",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_menstruation_inquire_reply_FieldNumber_ReminderSwitch,
+        .hasIndex = 4,
+        .offset = 5,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =

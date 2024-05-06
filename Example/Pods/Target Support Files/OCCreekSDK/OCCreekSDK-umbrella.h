@@ -24,6 +24,7 @@
 #import "NoticeUpdateModel.h"
 #import "OxygenModel.h"
 #import "PhoneModel.h"
+#import "ProtoExtension.h"
 #import "ScanDeviceModel.h"
 #import "SleepModel.h"
 #import "SportModel.h"

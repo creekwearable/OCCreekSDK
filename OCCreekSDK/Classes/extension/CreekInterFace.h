@@ -136,6 +136,7 @@ typedef void (^ParseDialBase)(DialParseModel *model);
 typedef void (^ParsePhotoDialBase)(DialPhotoParseModel *model);
 typedef void (^PreviewImageBase)(NSData *model);
 typedef void (^DialDataBase)(NSData *model);
+typedef void (^BoolBase)(BOOL model);
 typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 
 
@@ -930,6 +931,10 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 - (void)ephemerisInitWithKeyId:(NSString *)keyId publicKey:(NSString *)publicKey model:(gpsBase)model;
 
 - (void)ephemerisInitGPSWithEphemerisGPSModel:(EphemerisGPSModel *)ephemerisGPSModel;
+- (void)phoneBookInit;
+- (void)monitorPhone ;
+- (void)checkPhoneBookPermissions:(BoolBase)model;
+- (void)requestPhoneBookPermissions:(BoolBase)model;
 
 
 

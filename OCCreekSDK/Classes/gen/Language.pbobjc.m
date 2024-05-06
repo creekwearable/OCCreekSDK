@@ -134,13 +134,30 @@ void Setprotocol_language_operate_CurLanguage_RawValue(protocol_language_operate
 @dynamic germanSupport;
 @dynamic spanishSupport;
 @dynamic italianSupport;
-@dynamic japaneseSupport;
+@dynamic janpaneseSupport;
 @dynamic russianSupport;
 @dynamic portugueseSupport;
 @dynamic frenchSupport;
+@dynamic koreanSupport;
+@dynamic polishSupport;
+@dynamic czechSupport;
+@dynamic slovakSupport;
+@dynamic hungarianSupport;
+@dynamic greekSupport;
+@dynamic lithuanianSupport;
+@dynamic latvianSupport;
+@dynamic estonianSupport;
+@dynamic bulgarianSupport;
+@dynamic malaySupport;
+@dynamic indonesianSupport;
+@dynamic thaiSupport;
+@dynamic vietnameseSupport;
+@dynamic hebrewSupport;
+@dynamic devanagariSupport;
+@dynamic turkeySupport;
 
 typedef struct protocol_language_inquire_reply__storage_ {
-  uint32_t _has_storage_[1];
+  uint32_t _has_storage_[2];
   operate_type operate;
   language curLanguage;
 } protocol_language_inquire_reply__storage_;
@@ -215,9 +232,9 @@ typedef struct protocol_language_inquire_reply__storage_ {
         .dataType = GPBDataTypeBool,
       },
       {
-        .name = "japaneseSupport",
+        .name = "janpaneseSupport",
         .dataTypeSpecific.clazz = Nil,
-        .number = protocol_language_inquire_reply_FieldNumber_JapaneseSupport,
+        .number = protocol_language_inquire_reply_FieldNumber_JanpaneseSupport,
         .hasIndex = 12,
         .offset = 13,  // Stored in _has_storage_ to save space.
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
@@ -250,6 +267,159 @@ typedef struct protocol_language_inquire_reply__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeBool,
       },
+      {
+        .name = "koreanSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_KoreanSupport,
+        .hasIndex = 20,
+        .offset = 21,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "polishSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_PolishSupport,
+        .hasIndex = 22,
+        .offset = 23,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "czechSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_CzechSupport,
+        .hasIndex = 24,
+        .offset = 25,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "slovakSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_SlovakSupport,
+        .hasIndex = 26,
+        .offset = 27,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "hungarianSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_HungarianSupport,
+        .hasIndex = 28,
+        .offset = 29,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "greekSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_GreekSupport,
+        .hasIndex = 30,
+        .offset = 31,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "lithuanianSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_LithuanianSupport,
+        .hasIndex = 32,
+        .offset = 33,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "latvianSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_LatvianSupport,
+        .hasIndex = 34,
+        .offset = 35,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "estonianSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_EstonianSupport,
+        .hasIndex = 36,
+        .offset = 37,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "bulgarianSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_BulgarianSupport,
+        .hasIndex = 38,
+        .offset = 39,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "malaySupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_MalaySupport,
+        .hasIndex = 40,
+        .offset = 41,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "indonesianSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_IndonesianSupport,
+        .hasIndex = 42,
+        .offset = 43,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "thaiSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_ThaiSupport,
+        .hasIndex = 44,
+        .offset = 45,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "vietnameseSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_VietnameseSupport,
+        .hasIndex = 46,
+        .offset = 47,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "hebrewSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_HebrewSupport,
+        .hasIndex = 48,
+        .offset = 49,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "devanagariSupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_DevanagariSupport,
+        .hasIndex = 50,
+        .offset = 51,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "turkeySupport",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_language_inquire_reply_FieldNumber_TurkeySupport,
+        .hasIndex = 52,
+        .offset = 53,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[protocol_language_inquire_reply class]
@@ -259,6 +429,11 @@ typedef struct protocol_language_inquire_reply__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(protocol_language_inquire_reply__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\020I\247\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
       NSAssert(descriptor == nil, @"Startup recursed!");
     #endif  // DEBUG

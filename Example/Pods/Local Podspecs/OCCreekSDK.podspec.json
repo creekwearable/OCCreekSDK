@@ -1,6 +1,6 @@
 {
   "name": "OCCreekSDK",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "summary": "A short description of OCCreekSDK.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/bean/OCCreekSDK",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/bean/OCCreekSDK.git",
-    "tag": "0.1.4"
+    "tag": "0.1.6"
   },
   "platforms": {
     "ios": "12.0"
@@ -34,6 +34,7 @@
     "Creek/image_clipper.framework",
     "Creek/lz4.framework",
     "Creek/ActResSdk.framework",
+    "Creek/flutter_contacts.framework",
     "Creek/path_provider_foundation.framework"
   ],
   "source_files": "OCCreekSDK/Classes/extension/*",
@@ -41,6 +42,11 @@
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES",
     "GCC_PREPROCESSOR_DEFINITIONS": "$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1"
+  },
+  "resource_bundles": {
+    "permission_handler_apple_privacy": [
+      "Resources/PrivacyInfo.xcprivacy"
+    ]
   },
   "subspecs": [
     {

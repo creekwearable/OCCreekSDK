@@ -125,6 +125,7 @@ typedef GPB_ENUM(protocol_menstruation_operate_FieldNumber) {
   protocol_menstruation_operate_FieldNumber_PeriodSet = 2,
   protocol_menstruation_operate_FieldNumber_RecordArray = 3,
   protocol_menstruation_operate_FieldNumber_SetUtcTime = 4,
+  protocol_menstruation_operate_FieldNumber_ReminderSwitch = 5,
 };
 
 GPB_FINAL @interface protocol_menstruation_operate : GPBMessage
@@ -144,6 +145,9 @@ GPB_FINAL @interface protocol_menstruation_operate : GPBMessage
 
 /** Set the recorded utc time, record time */
 @property(nonatomic, readwrite) uint32_t setUtcTime;
+
+/** 1bytes menstrual cycle reminder (ovulation reminder, predicted menstrual period reminder) switch */
+@property(nonatomic, readwrite) BOOL reminderSwitch;
 
 @end
 
@@ -167,6 +171,7 @@ typedef GPB_ENUM(protocol_menstruation_inquire_reply_FieldNumber) {
   protocol_menstruation_inquire_reply_FieldNumber_MenstrualPeriodSet = 3,
   protocol_menstruation_inquire_reply_FieldNumber_RecordArray = 4,
   protocol_menstruation_inquire_reply_FieldNumber_SetUtcTime = 5,
+  protocol_menstruation_inquire_reply_FieldNumber_ReminderSwitch = 6,
 };
 
 GPB_FINAL @interface protocol_menstruation_inquire_reply : GPBMessage
@@ -189,6 +194,9 @@ GPB_FINAL @interface protocol_menstruation_inquire_reply : GPBMessage
 
 /** Set the recorded utc time, record time */
 @property(nonatomic, readwrite) uint32_t setUtcTime;
+
+/** 1bytes menstrual cycle reminder (ovulation reminder, predicted menstrual period reminder) switch */
+@property(nonatomic, readwrite) BOOL reminderSwitch;
 
 @end
 

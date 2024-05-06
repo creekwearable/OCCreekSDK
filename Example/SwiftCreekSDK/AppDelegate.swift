@@ -19,17 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = ExampleProvider.systemStyle()
         window?.makeKeyAndVisible()
         CreekInterFace.instance().setupInit()
-        let keyId = "******"
-        let publicKey = "**********"
-        CreekInterFace.instance().ephemerisInit(withKeyId: keyId, publicKey: publicKey) {
-            let model = EphemerisGPSModel()
-            model.altitude = 10
-            model.latitude = Int(22.312653 * 1000000)
-            model.longitude = Int(114.027986 * 1000000)
-            model.isVaild = true
-            return model
-        }
         return true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+       print("Cut to background")
+       CreekInterFace.instance().monitorPhone()
     }
 
 }

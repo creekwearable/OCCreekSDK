@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'OCCreekSDK'
-  s.version          = '0.1.5'
+  s.version          = '0.1.6'
   s.summary          = 'A short description of OCCreekSDK.'
 
 # This description is used to generate tags and improve search results.
@@ -46,6 +46,7 @@ TODO: Add long description of the pod here.
   'Creek/image_clipper.framework',
   'Creek/lz4.framework',
   'Creek/ActResSdk.framework',
+  'Creek/flutter_contacts.framework',
   'Creek/path_provider_foundation.framework']
   
 #  s.dependency 'Flutter'
@@ -63,6 +64,7 @@ TODO: Add long description of the pod here.
 #  s.requires_arc = false
 #  s.dependency "Protobuf", '~> 3.24.4'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GPB_USE_PROTOBUF_FRAMEWORK_IMPORTS=1', }
+  s.resource_bundles = {'permission_handler_apple_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
   
   
 end

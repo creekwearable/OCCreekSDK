@@ -645,7 +645,10 @@ GPBEnumDescriptor *language_EnumDescriptor(void) {
     static const char *valueNames =
         "LangInvalid\000Chinese\000English\000German\000Spani"
         "sh\000Italian\000Japanese\000Russian\000Portuguese\000F"
-        "rench\000Korean\000Polish\000";
+        "rench\000Korean\000Polish\000Czech\000Slovak\000Hungari"
+        "an\000Greek\000Lithuanian\000Latvian\000Estonian\000Bul"
+        "garian\000Malay\000Indonesian\000Thailand\000Vietnam"
+        "ese\000Hebrew\000Devanagari\000Turkey\000";
     static const int32_t values[] = {
         language_LangInvalid,
         language_Chinese,
@@ -659,6 +662,21 @@ GPBEnumDescriptor *language_EnumDescriptor(void) {
         language_French,
         language_Korean,
         language_Polish,
+        language_Czech,
+        language_Slovak,
+        language_Hungarian,
+        language_Greek,
+        language_Lithuanian,
+        language_Latvian,
+        language_Estonian,
+        language_Bulgarian,
+        language_Malay,
+        language_Indonesian,
+        language_Thailand,
+        language_Vietnamese,
+        language_Hebrew,
+        language_Devanagari,
+        language_Turkey,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(language)
@@ -688,6 +706,21 @@ BOOL language_IsValidValue(int32_t value__) {
     case language_French:
     case language_Korean:
     case language_Polish:
+    case language_Czech:
+    case language_Slovak:
+    case language_Hungarian:
+    case language_Greek:
+    case language_Lithuanian:
+    case language_Latvian:
+    case language_Estonian:
+    case language_Bulgarian:
+    case language_Malay:
+    case language_Indonesian:
+    case language_Thailand:
+    case language_Vietnamese:
+    case language_Hebrew:
+    case language_Devanagari:
+    case language_Turkey:
       return YES;
     default:
       return NO;

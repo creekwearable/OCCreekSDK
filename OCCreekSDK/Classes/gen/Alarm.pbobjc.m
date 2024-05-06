@@ -244,12 +244,14 @@ void Setprotocol_set_alarm_item_Type_RawValue(protocol_set_alarm_item *message, 
 @dynamic operate;
 @dynamic num;
 @dynamic alarmItemArray, alarmItemArray_Count;
+@dynamic customNameListArray, customNameListArray_Count;
 
 typedef struct protocol_alarm_operate__storage_ {
   uint32_t _has_storage_[1];
   operate_type operate;
   uint32_t num;
   NSMutableArray *alarmItemArray;
+  NSMutableArray *customNameListArray;
 } protocol_alarm_operate__storage_;
 
 // This method is threadsafe because it is initially called
@@ -284,6 +286,15 @@ typedef struct protocol_alarm_operate__storage_ {
         .offset = (uint32_t)offsetof(protocol_alarm_operate__storage_, alarmItemArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "customNameListArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_alarm_operate_FieldNumber_CustomNameListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(protocol_alarm_operate__storage_, customNameListArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -325,6 +336,7 @@ void Setprotocol_alarm_operate_Operate_RawValue(protocol_alarm_operate *message,
 @dynamic operate;
 @dynamic num;
 @dynamic alarmItemArray, alarmItemArray_Count;
+@dynamic customNameListArray, customNameListArray_Count;
 
 typedef struct protocol_alarm_inquire_reply__storage_ {
   uint32_t _has_storage_[1];
@@ -333,6 +345,7 @@ typedef struct protocol_alarm_inquire_reply__storage_ {
   operate_type operate;
   uint32_t num;
   NSMutableArray *alarmItemArray;
+  NSMutableArray *customNameListArray;
 } protocol_alarm_inquire_reply__storage_;
 
 // This method is threadsafe because it is initially called
@@ -385,6 +398,15 @@ typedef struct protocol_alarm_inquire_reply__storage_ {
         .offset = (uint32_t)offsetof(protocol_alarm_inquire_reply__storage_, alarmItemArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "customNameListArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_alarm_inquire_reply_FieldNumber_CustomNameListArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(protocol_alarm_inquire_reply__storage_, customNameListArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =

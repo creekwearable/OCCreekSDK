@@ -140,6 +140,7 @@ typedef GPB_ENUM(protocol_alarm_operate_FieldNumber) {
   protocol_alarm_operate_FieldNumber_Operate = 1,
   protocol_alarm_operate_FieldNumber_Num = 2,
   protocol_alarm_operate_FieldNumber_AlarmItemArray = 3,
+  protocol_alarm_operate_FieldNumber_CustomNameListArray = 4,
 };
 
 GPB_FINAL @interface protocol_alarm_operate : GPBMessage
@@ -154,6 +155,11 @@ GPB_FINAL @interface protocol_alarm_operate : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<protocol_set_alarm_item*> *alarmItemArray;
 /** The number of items in @c alarmItemArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger alarmItemArray_Count;
+
+/** Alarm clock customization option names max:10 */
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSData*> *customNameListArray;
+/** The number of items in @c customNameListArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger customNameListArray_Count;
 
 @end
 
@@ -177,6 +183,7 @@ typedef GPB_ENUM(protocol_alarm_inquire_reply_FieldNumber) {
   protocol_alarm_inquire_reply_FieldNumber_Operate = 3,
   protocol_alarm_inquire_reply_FieldNumber_Num = 4,
   protocol_alarm_inquire_reply_FieldNumber_AlarmItemArray = 5,
+  protocol_alarm_inquire_reply_FieldNumber_CustomNameListArray = 6,
 };
 
 GPB_FINAL @interface protocol_alarm_inquire_reply : GPBMessage
@@ -197,6 +204,11 @@ GPB_FINAL @interface protocol_alarm_inquire_reply : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<protocol_set_alarm_item*> *alarmItemArray;
 /** The number of items in @c alarmItemArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger alarmItemArray_Count;
+
+/** Alarm clock customization option names max:10 */
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSData*> *customNameListArray;
+/** The number of items in @c customNameListArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger customNameListArray_Count;
 
 @end
 
