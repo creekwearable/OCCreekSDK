@@ -21,6 +21,10 @@
 
 @end
 
+@implementation UserInfoTable
+
+@end
+
 
 @implementation protocol_screen_brightness_inquire_reply (Table)
 
@@ -78,6 +82,31 @@
         }
     }
     return alarmTable;
+}
+
+@end
+
+@implementation protocol_user_info_inquire_reply (Table)
+
+- (UserInfoTable *)fromTable {
+    UserInfoTable *userInfoTable = [[UserInfoTable alloc] init];
+    userInfoTable.wind_speed_unit  = NO;
+    userInfoTable.visibility_unit = NO;
+    NSString *str = [[NSNumber numberWithInt:self.funcTable] decimalToBinary];
+    if (str.length > 0) {
+        unichar firstChar = [str characterAtIndex:0];
+        if (firstChar == '1') {
+            userInfoTable.wind_speed_unit  = YES;
+        }
+    }
+    
+    if (str.length > 1) {
+        unichar firstChar = [str characterAtIndex:1];
+        if (firstChar == '1') {
+            userInfoTable.visibility_unit  = YES;
+        }
+    }
+    return userInfoTable;
 }
 
 @end

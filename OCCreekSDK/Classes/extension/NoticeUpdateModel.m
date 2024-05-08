@@ -15,6 +15,7 @@
     if (self) {
         _eventId = [dictionary[@"eventId"] intValue];
         _eventKey = [dictionary[@"eventKey"] intValue];
+        _eventValue = [dictionary[@"eventValue"] intValue];
     }
     return self;
 }
@@ -23,6 +24,7 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     dictionary[@"eventId"] = @(self.eventId);
     dictionary[@"eventKey"] = @(self.eventKey);
+    dictionary[@"eventValue"] = @(self.eventValue);
     return [dictionary copy];
 }
 

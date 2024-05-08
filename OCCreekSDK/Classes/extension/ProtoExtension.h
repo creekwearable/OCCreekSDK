@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Screen.pbobjc.h"
 #import "Alarm.pbobjc.h"
+#import "Userinfo.pbobjc.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,6 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface UserInfoTable : NSObject
+
+@property (nonatomic, assign) BOOL wind_speed_unit;
+@property (nonatomic, assign) BOOL visibility_unit;
+
+@end
+
 
 @interface protocol_screen_brightness_inquire_reply (Table)
 
@@ -42,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface protocol_alarm_inquire_reply (Table)
 
 - (AlarmTable *)fromTable;
+
+@end
+
+@interface protocol_user_info_inquire_reply (Table)
+
+- (UserInfoTable *)fromTable;
 
 @end
 

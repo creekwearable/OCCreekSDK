@@ -181,6 +181,8 @@ void Setprotocol_personal_info_Gender_RawValue(protocol_personal_info *message, 
 @dynamic strideUnit;
 @dynamic heightUnit;
 @dynamic altitudeUnit;
+@dynamic windSpeedUnit;
+@dynamic visibilityUnit;
 
 typedef struct protocol_perferences__storage_ {
   uint32_t _has_storage_[1];
@@ -197,6 +199,8 @@ typedef struct protocol_perferences__storage_ {
   uint32_t strideUnit;
   uint32_t heightUnit;
   uint32_t altitudeUnit;
+  uint32_t windSpeedUnit;
+  uint32_t visibilityUnit;
 } protocol_perferences__storage_;
 
 // This method is threadsafe because it is initially called
@@ -319,6 +323,24 @@ typedef struct protocol_perferences__storage_ {
         .number = protocol_perferences_FieldNumber_AltitudeUnit,
         .hasIndex = 12,
         .offset = (uint32_t)offsetof(protocol_perferences__storage_, altitudeUnit),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "windSpeedUnit",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_perferences_FieldNumber_WindSpeedUnit,
+        .hasIndex = 13,
+        .offset = (uint32_t)offsetof(protocol_perferences__storage_, windSpeedUnit),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "visibilityUnit",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_perferences_FieldNumber_VisibilityUnit,
+        .hasIndex = 14,
+        .offset = (uint32_t)offsetof(protocol_perferences__storage_, visibilityUnit),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeUInt32,
       },

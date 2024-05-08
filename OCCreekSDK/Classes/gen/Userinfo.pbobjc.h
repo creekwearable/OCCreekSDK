@@ -112,6 +112,8 @@ typedef GPB_ENUM(protocol_perferences_FieldNumber) {
   protocol_perferences_FieldNumber_StrideUnit = 11,
   protocol_perferences_FieldNumber_HeightUnit = 12,
   protocol_perferences_FieldNumber_AltitudeUnit = 13,
+  protocol_perferences_FieldNumber_WindSpeedUnit = 14,
+  protocol_perferences_FieldNumber_VisibilityUnit = 15,
 };
 
 GPB_FINAL @interface protocol_perferences : GPBMessage
@@ -154,6 +156,12 @@ GPB_FINAL @interface protocol_perferences : GPBMessage
 
 /** 1bytes altitude unit 0x00: invalid 0x01, meter m 0x02, feet ft */
 @property(nonatomic, readwrite) uint32_t altitudeUnit;
+
+/** 1bytes wind speed unit 0x00: invalid 0x01, meter/second (m/s) 0x02, kilometers/hour (km/h) */
+@property(nonatomic, readwrite) uint32_t windSpeedUnit;
+
+/** 1bytes visibility unit 0x00: invalid 0x01, meter (m) 0x02, kilometers (km) 0x03, miles (mi) */
+@property(nonatomic, readwrite) uint32_t visibilityUnit;
 
 @end
 

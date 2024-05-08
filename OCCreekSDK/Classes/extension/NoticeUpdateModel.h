@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) EventIdType eventId;
 @property (nonatomic, assign) int eventKey;
+@property (nonatomic, assign) int eventValue;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

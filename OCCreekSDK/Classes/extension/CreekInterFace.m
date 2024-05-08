@@ -1421,6 +1421,33 @@ static CreekInterFace * instance =nil;
         NSLog(@"Exception: %@", exception);
     }
 }
+
+- (void)bindingDeviceWithBindType:(BindType)bindType
+                         idString:(NSString * _Nullable)idString
+                            code:(NSString * _Nullable)code
+                         saveDate:(BOOL)saveDate
+                         success:(SuccessBase)successBlock
+                         failure:(FailureBase)failureBlock {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"bindDevice%ld", (long)self.requestId];
+    self.successDic[requestKey] = successBlock;
+    self.failureDic[requestKey] = failureBlock;
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"bindType"] = @(bindType);
+    dic[@"address"] = idString;
+    dic[@"pairCode"] = code;
+    dic[@"saveDate"] = @(saveDate ? 1 : 0);
+    @try {
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        [self.methodChannel invokeMethod:requestKey arguments:jsonString];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception: %@", exception);
+    }
+}
+
 - (void)getUserInfoWithModel:(UserBase)modelBlock
                      failure:(FailureArgument)failureBlock {
     self.requestId++;

@@ -212,6 +212,9 @@ typedef GPB_ENUM(protocol_weather_detail_data_item_FieldNumber) {
   protocol_weather_detail_data_item_FieldNumber_UvItemsArray = 23,
   protocol_weather_detail_data_item_FieldNumber_MoonItemArray = 24,
   protocol_weather_detail_data_item_FieldNumber_SunriseItemsArray = 25,
+  protocol_weather_detail_data_item_FieldNumber_AtmosHpaItemsArray = 26,
+  protocol_weather_detail_data_item_FieldNumber_Visibility = 27,
+  protocol_weather_detail_data_item_FieldNumber_VisibilityLevel = 28,
 };
 
 GPB_FINAL @interface protocol_weather_detail_data_item : GPBMessage
@@ -301,6 +304,17 @@ GPB_FINAL @interface protocol_weather_detail_data_item : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<protocol_weather_sunrise_item*> *sunriseItemsArray;
 /** The number of items in @c sunriseItemsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger sunriseItemsArray_Count;
+
+/** max:48 future sea level atmospheric pressure value * 100 */
+@property(nonatomic, readwrite, strong, null_resettable) GPBUInt32Array *atmosHpaItemsArray;
+/** The number of items in @c atmosHpaItemsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger atmosHpaItemsArray_Count;
+
+/** 4bytes visibility unit: meters */
+@property(nonatomic, readwrite) uint32_t visibility;
+
+/** 1bytes visibility level */
+@property(nonatomic, readwrite) uint32_t visibilityLevel;
 
 @end
 

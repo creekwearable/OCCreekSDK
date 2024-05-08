@@ -409,6 +409,9 @@ void Setprotocol_weather_moon_item_Phase_RawValue(protocol_weather_moon_item *me
 @dynamic uvItemsArray, uvItemsArray_Count;
 @dynamic moonItemArray, moonItemArray_Count;
 @dynamic sunriseItemsArray, sunriseItemsArray_Count;
+@dynamic atmosHpaItemsArray, atmosHpaItemsArray_Count;
+@dynamic visibility;
+@dynamic visibilityLevel;
 
 typedef struct protocol_weather_detail_data_item__storage_ {
   uint32_t _has_storage_[1];
@@ -429,6 +432,8 @@ typedef struct protocol_weather_detail_data_item__storage_ {
   uint32_t windLevel;
   wind_direction_type windDirection;
   uint32_t atmosHpa;
+  uint32_t visibility;
+  uint32_t visibilityLevel;
   NSData *cityName;
   NSMutableArray *hoursWeatherItemsArray;
   NSMutableArray *futureItemsArray;
@@ -436,6 +441,7 @@ typedef struct protocol_weather_detail_data_item__storage_ {
   GPBUInt32Array *uvItemsArray;
   NSMutableArray *moonItemArray;
   NSMutableArray *sunriseItemsArray;
+  GPBUInt32Array *atmosHpaItemsArray;
 } protocol_weather_detail_data_item__storage_;
 
 // This method is threadsafe because it is initially called
@@ -668,6 +674,33 @@ typedef struct protocol_weather_detail_data_item__storage_ {
         .offset = (uint32_t)offsetof(protocol_weather_detail_data_item__storage_, sunriseItemsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "atmosHpaItemsArray",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_weather_detail_data_item_FieldNumber_AtmosHpaItemsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(protocol_weather_detail_data_item__storage_, atmosHpaItemsArray),
+        .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "visibility",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_weather_detail_data_item_FieldNumber_Visibility,
+        .hasIndex = 21,
+        .offset = (uint32_t)offsetof(protocol_weather_detail_data_item__storage_, visibility),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "visibilityLevel",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_weather_detail_data_item_FieldNumber_VisibilityLevel,
+        .hasIndex = 22,
+        .offset = (uint32_t)offsetof(protocol_weather_detail_data_item__storage_, visibilityLevel),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeUInt32,
       },
     };
     GPBDescriptor *localDescriptor =
