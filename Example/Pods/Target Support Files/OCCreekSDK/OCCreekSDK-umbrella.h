@@ -29,6 +29,7 @@
 #import "SleepModel.h"
 #import "SportModel.h"
 #import "StressModel.h"
+#import "UpgradeModel.h"
 #import "Alarm.pbobjc.h"
 #import "AppList.pbobjc.h"
 #import "Binding.pbobjc.h"

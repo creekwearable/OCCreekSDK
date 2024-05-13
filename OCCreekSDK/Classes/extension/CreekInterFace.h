@@ -66,6 +66,7 @@
 #import "EventTracking.pbobjc.h"
 #import "DialPhotoParseModel.h"
 #import "EphemerisGPSModel.h"
+#import "UpgradeModel.h"
 
 
 
@@ -138,6 +139,8 @@ typedef void (^PreviewImageBase)(NSData *model);
 typedef void (^DialDataBase)(NSData *model);
 typedef void (^BoolBase)(BOOL model);
 typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
+typedef void (^ValueBase)(NSNumber* model);
+typedef void (^UpgradeStateBase)(UpgradeModel *model);
 
 
 
@@ -193,8 +196,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - connect :   call back connect state   true false
 /// - Returns:
 - (void)scanConnectWithId:(NSString *)deviceID
-                   device:(DeviceBack)deviceBlock
-                  failure:(FailureArgument)failureBlock;
+device:(DeviceBack)deviceBlock
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK : connect
@@ -203,11 +206,11 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - connect :   call back connect state   true false
 /// - Returns:
 - (void)inTransitionDeviceWithId:(NSString *)deviceID
-              inTransitionDevice:(InTransitionDeviceBack)inTransitionDeviceBlock;
+inTransitionDevice:(InTransitionDeviceBack)inTransitionDeviceBlock;
 
 ///MARK : disconnect
 - (void)disconnectWithSuccess:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock;
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK : Stop scanning
@@ -220,7 +223,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - failure: (code: error code message: content)
 /// - Returns:
 - (void)getFirmwareWithModel:(FirmwareBase)modelBlock
-                     failure:(FailureArgument)failureBlock;
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK :Sync health data
@@ -228,8 +231,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - syncProgress: sync progress
 /// - Returns:
 - (void)syncWithProgress:(ProgressBase)progressBlock
-             syncSuccess:(SuccessBase)successBlock
-             syncFailure:(FailureBase)failureBlock;
+syncSuccess:(SuccessBase)successBlock
+syncFailure:(FailureBase)failureBlock;
 
 
 ///MARK :upload
@@ -248,10 +251,10 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///
 /// - Returns
 - (void)uploadWithFileName:(NSString *)fileName
-                  fileData:(NSData *)fileData
-            uploadProgress:(ProgressBase)uploadProgress
-             uploadSuccess:(SuccessBase)uploadSuccess
-             uploadFailure:(FailureArgument)uploadFailure;
+fileData:(NSData *)fileData
+uploadProgress:(ProgressBase)uploadProgress
+uploadSuccess:(SuccessBase)uploadSuccess
+uploadFailure:(FailureArgument)uploadFailure;
 
 
 ///MARK :backstageUpload
@@ -270,10 +273,10 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///
 /// - Returns:
 - (void)backstageUploadWithFileName:(NSString *)fileName
-                           fileData:(NSData *)fileData
-                     uploadProgress:(ProgressBase)uploadProgress
-                      uploadSuccess:(SuccessBase)uploadSuccess
-                      uploadFailure:(FailureArgument)uploadFailure;
+fileData:(NSData *)fileData
+uploadProgress:(ProgressBase)uploadProgress
+uploadSuccess:(SuccessBase)uploadSuccess
+uploadFailure:(FailureArgument)uploadFailure;
 
 
 
@@ -282,42 +285,42 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model: call back protocol_connect_status_inquire_reply
 /// - Returns:
 - (void)bluetoothStatusWithModel:(BluetoothStatusBase)modelBlock
-                         failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :retrigger bt connect
 /// - Parameter :
 ///      - reconnect ： true false
 /// - Returns:
 - (void)firmwareReconnectWithReconnect:(BOOL)reconnect
-                               success:(SuccessBase)successBlock
-                               failure:(FailureArgument)failureBlock;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK :Synchronize phone time to firmware
 - (void)syncTimeWithSuccess:(SuccessBase)successBlock
-                    failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Get firmware time
 /// - Parameter :
 ///      - model：call back protocol_device_time_inquire_reply
 /// - Returns:
 - (void)getTimeWithModel:(ATimeBase)modelBlock
-                 failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :get Language
 /// - Parameter :
 ///      - model：call back protocol_language_inquire_reply
 /// - Returns:
 - (void)getLanguageWithModel:(LanguageBase)modelBlock
-                     failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK : set Language
 /// - Parameter :
 ///      - type：language
 /// - Returns:
 - (void)setLanguageWithType:(language)type
-                    success:(SuccessBase)successBlock
-                    failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK : bind device
 /// - Parameter :
@@ -332,17 +335,17 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:LanguageModel
 
 - (void)bindingDeviceWithBindType:(BindType)bindType
-                         idString:(NSString * _Nullable)idString
-                             code:(NSString * _Nullable)code
-                          success:(SuccessBase)successBlock
-                          failure:(FailureBase)failureBlock;
+idString:(NSString * _Nullable)idString
+code:(NSString * _Nullable)code
+success:(SuccessBase)successBlock
+failure:(FailureBase)failureBlock;
 
 ///MARK :Get firmware user information and preferences
 /// - Parameter :
 ///      - model：call back protocol_user_info_operate
 /// - Returns:
 - (void)getUserInfoWithModel:(UserBase)modelBlock
-                     failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Set firmware user information and preferences
@@ -350,8 +353,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model: protocol_user_info_operate
 /// - Returns:
 - (void)setUserInfoWithModel:(protocol_user_info_operate *)model
-                     success:(SuccessBase)successBlock
-                     failure:(FailureArgument)failureBlock;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK :Get an alarm clock
@@ -359,7 +362,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model：call back protocol_alarm_inquire_reply
 /// - Returns:
 - (void)getAlarmWithModel:(AlarmBase)modelBlock
-                  failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :set an alarm
@@ -367,8 +370,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model ：protocol_alarm_operate
 /// - Returns:
 - (void)setAlarmWithModel:(protocol_alarm_operate *)model
-                  success:(SuccessBase)successBlock
-                  failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Get do not disturb
@@ -376,7 +379,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model：call back protocol_disturb_inquire_reply
 /// - Returns:protocol_alarm_inquire_reply
 - (void)getDisturbWithModel:(DisturbBase)modelBlock
-                    failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Set do not disturb
@@ -384,8 +387,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model: protocol_disturb_operate
 /// - Returns:
 - (void)setDisturbWithModel:(protocol_disturb_operate *)model
-                    success:(SuccessBase)successBlock
-                    failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Get screen brightness
@@ -393,7 +396,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model:call back protocol_screen_brightness_inquire_reply
 /// - Returns:
 - (void)getScreenWithModel:(ScreenBase)modelBlock
-                   failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Screen Brightness Settings
@@ -401,8 +404,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model: protocol_screen_brightness_operate
 /// - Returns:
 - (void)setScreenWithModel:(protocol_screen_brightness_operate *)model
-                   success:(SuccessBase)successBlock
-                   failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Health Monitoring Acquisition
@@ -411,8 +414,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model : call back protocol_health_monitor_inquire_reply
 /// - Returns:
 - (void)getMonitorWithOperate:(protocol_health_monitor_operate *)operate
-                        model:(MonitorBase)modelBlock
-                      failure:(FailureArgument)failureBlock ;
+model:(MonitorBase)modelBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Health Monitoring Settings
@@ -420,8 +423,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model :protocol_health_monitor_operate
 /// - Returns:
 - (void)setMonitorWithModel:(protocol_health_monitor_operate *)model
-                    success:(SuccessBase)successBlock
-                    failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Sleep Monitoring Acquisition
@@ -429,7 +432,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model: protocol_sleep_monitor_inquire_reply
 /// - Returns:
 - (void)getSleepMonitorWithModel:(SleepMonitorBase)modelBlock
-                         failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Sleep Monitoring Settings
@@ -437,16 +440,16 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model：protocol_sleep_monitor_operate
 /// - Returns:
 - (void)setSleepMonitorWithModel:(protocol_sleep_monitor_operate *)model
-                         success:(SuccessBase)successBlock
-                         failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 - (void)getFindPhoneWatchWithModel:(FindPhoneWatchBase)modelBlock
-                           failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 - (void)setFindPhoneWatchWithModel:(protocol_find_phone_watch_operate *)model
-                           success:(SuccessBase)successBlock
-                           failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :World Clock Fetch
 /// - Parameter :
@@ -454,7 +457,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getWorldTimeWithModel:(WorldTimeBase)modelBlock
-                      failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :world clock setting
@@ -462,8 +465,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model ：protocol_world_time_operate
 /// - Returns:
 - (void)setWorldTimeWithModel:(protocol_world_time_operate *)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Get message switch
@@ -471,46 +474,46 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model: protocol_message_notify_switch_inquire_reply
 /// - Returns:
 - (void)getMessageOnOffWithModel:(MessageOnOffBase)modelBlock
-                         failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :message switch settings
 /// - Parameter :
 ///      - model ：protocol_message_notify_switch
 /// - Returns:
 - (void)setMessageOnOffWithModel:(protocol_message_notify_switch *)model
-                         success:(SuccessBase)successBlock
-                         failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :music control
 /// - Parameter :
 ///      - model ：protocol_music_control_operate
 /// - Returns:
 - (void)setMusicWithModel:(protocol_music_control_operate *)model
-                  success:(SuccessBase)successBlock
-                  failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :set weather
 /// - Parameter :
 ///      - model: protocol_weather_operate
 /// - Returns:
 - (void)setWeatherWithModel:(protocol_weather_operate *)model
-                    success:(SuccessBase)successBlock
-                    failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Incoming call configuration query
 /// - Parameter :
 ///      - model : call back protocol_call_switch_inquire_reply
 /// - Returns:protocol_alarm_inquire_reply
 - (void)getCallWithModel:(CallBase)modelBlock
-                 failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :caller configuration settings
 /// - Parameter :
 ///      - model : protocol_call_switch
 /// - Returns:
 - (void)setCallWithModel:(protocol_call_switch *)model
-                 success:(SuccessBase)successBlock
-                 failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 
@@ -519,52 +522,52 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model ：protocol_frequent_contacts_inquire_reply
 /// - Returns:
 - (void)getContactsWithModel:(ContactsBase)modelBlock
-                     failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :contact settings
 /// - Parameter :
 ///      - model ：protocol_frequent_contacts_operate
 /// - Returns:
 - (void)setContactsWithModel:(protocol_frequent_contacts_operate *)model
-                     success:(SuccessBase)successBlock
-                     failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Set up quick cards
 /// - Parameter :
 ///           -model : protocol_quick_card_operate
 /// - Returns:
 - (void)getCardWithModel:(CardBase)modelBlock
-                 failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 ///MARK :Set up quick cards
 /// - Parameter :
 ///           -model : protocol_quick_card_operate
 /// - Returns:
 - (void)setCardWithModel:(protocol_quick_card_operate *)model
-                 success:(SuccessBase)successBlock
-                 failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Set heart rate interval
 /// - Parameter :
 ///      - protocol_exercise_heart_rate_zone
 /// - Returns:
 - (void)setSportHeartRateWithModel:(protocol_exercise_heart_rate_zone *)model
-                           success:(SuccessBase)successBlock
-                           failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Obtain the type of movement supported by the device
 /// - Parameter :
 ///      - model ：protocol_exercise_sporting_param_sort_inquire_reply
 /// - Returns:
 - (void)getSportTypeWithModel:(SportTypeBase)modelBlock
-                      failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Equipment motion arrangement order setting
 /// - Parameter :
 ///      - model ：protocol_exercise_sport_mode_sort
 /// - Returns:
 - (void)setSportSortWithModel:(protocol_exercise_sport_mode_sort *)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Query the sequence of equipment movement
@@ -572,15 +575,15 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model ： call back protocol_exercise_sport_mode_sort_inquire_reply
 /// - Returns:protocol_exercise_sport_mode_sort_inquire_reply
 - (void)getSportSortWithModel:(SportSortBase)modelBlock
-                      failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Child item data setting in sports
 /// - Parameter :
 ///      - model: protocol_exercise_sporting_param_sort
 /// - Returns:
 - (void)setSportSubWithModel:(protocol_exercise_sporting_param_sort *)model
-                     success:(SuccessBase)successBlock
-                     failure:(FailureArgument)failureBlock;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK :Data acquisition of children in sports
@@ -588,15 +591,15 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model：call back protocol_exercise_sporting_param_sort_inquire_reply
 /// - Returns:protocol_exercise_sporting_param_sort_inquire_reply
 - (void)getSportSubWithModel:(SportSubBase)modelBlock
-                     failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Sports self-recognition settings
 /// - Parameter :
 ///      - model : protocol_exercise_intelligent_recognition
 /// - Returns:
 - (void)setSportIdentificationWithModel:(protocol_exercise_intelligent_recognition *)model
-                                success:(SuccessBase)successBlock
-                                failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :Sports self-identification query
@@ -604,7 +607,7 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model : call back protocol_exercise_intelligent_recognition_inquire_reply
 /// - Returns:
 - (void)getSportIdentificationWithModel:(SportIdentificationBase)modelBlock
-                                failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 
 ///MARK :set dial
@@ -612,23 +615,23 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - model : protocol_watch_dial_plate_operate
 /// - Returns:
 - (void)setWatchDialWithModel:(protocol_watch_dial_plate_operate *)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock;
 
 ///MARK :Remove dial
 /// - Parameter :
 ///      - model : protocol_watch_dial_plate_operate
 /// - Returns:
 - (void)delWatchDialWithModel:(protocol_watch_dial_plate_operate *)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 ///MARK :Query dial
 /// - Parameter :
 ///      - model : call back protocol_watch_dial_plate_operate
 /// - Returns:
 - (void)getWatchDialWithModel:(WatchDialBase)modelBlock
-                      failure:(FailureArgument)failureBlock;
+failure:(FailureArgument)failureBlock;
 
 
 ///MARK :Firmware Settings
@@ -636,33 +639,33 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - type ：1 Restart operation 2 Shut down operation
 /// - Returns:
 - (void)setSystemWithType:(NSInteger)type
-                  success:(SuccessBase)successBlock
-                  failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 
 - (void)getHotKey:(HotKeyBase)modelBlock
-          failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 - (void)setHotKey:(protocol_button_crown_operate*)model
-          success:(SuccessBase)successBlock
-          failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 - (void)getTableWithModel:(TableBase)modelBlock
-                  failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 - (void)getContactsSOSWithModel:(SosContactsBase)modelBlock
-                        failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 - (void)setContactsSOSWithModel:(protocol_emergency_contacts_operate*)model
-                        success:(SuccessBase)successBlock
-                        failure:(FailureArgument)failureBlock;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock;
 
 
 - (void)getMenstrualWithModel:(MenstrualBase)modelBlock
-                      failure:(FailureArgument)failureBlock ;
+failure:(FailureArgument)failureBlock ;
 
 - (void)setMenstrualWithModel:(protocol_menstruation_operate*)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock ;
+success:(SuccessBase)successBlock
+failure:(FailureArgument)failureBlock ;
 
 - (void)getBindDeviceWithModel:(DevicesBack)modelBlock;
 
@@ -683,8 +686,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getActivityNewTimeDataWithStartTime:(NSString *)startTime
-                                    endTime:(NSString *)endTime
-                                      model:(ActivitysClosure)model ;
+endTime:(NSString *)endTime
+model:(ActivitysClosure)model ;
 
 
 ///MARK :Get Sleep Health Data
@@ -694,8 +697,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getSleepNewTimeDataWithStartTime:(NSString *)startTime
-                                 endTime:(NSString *)endTime
-                                   model:(SleepsClosure)model ;
+endTime:(NSString *)endTime
+model:(SleepsClosure)model ;
 
 ///MARK :Get Heart Rate Health Data
 /// - Parameter :
@@ -704,8 +707,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getHeartRateNewTimeDataWithStartTime:(NSString *)startTime
-                                     endTime:(NSString *)endTime
-                                       model:(HeartRatesClosure)model ;
+endTime:(NSString *)endTime
+model:(HeartRatesClosure)model ;
 
 ///MARK :Get Stress Health Data
 /// - Parameter :
@@ -714,8 +717,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getStressNewTimeDataWithStartTime:(NSString *)startTime
-                                  endTime:(NSString *)endTime
-                                    model:(StresssClosure)model ;
+endTime:(NSString *)endTime
+model:(StresssClosure)model ;
 
 ///MARK :Get Noise Health Data
 /// - Parameter :
@@ -724,8 +727,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getNoiseNewTimeDataWithStartTime:(NSString *)startTime
-                                 endTime:(NSString *)endTime
-                                   model:(NoisesClosure)model ;
+endTime:(NSString *)endTime
+model:(NoisesClosure)model ;
 
 ///MARK :Obtain blood oxygen health data
 /// - Parameter :
@@ -733,8 +736,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - endTime    2023-08-03
 /// - Returns:
 - (void)getSpoNewTimeDataWithStartTime:(NSString *)startTime
-                               endTime:(NSString *)endTime
-                                 model:(OxygensClosure)model ;
+endTime:(NSString *)endTime
+model:(OxygensClosure)model ;
 
 
 ///MARK :Get all motion data by type
@@ -743,14 +746,14 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getSportRecordWithType:(nullable NSNumber *)type
-                         model:(SportsClosure)model ;
+model:(SportsClosure)model ;
 
 ///MARK :Get sport details
 /// - Parameter :
 ///         -sportId：
 /// - Returns:
 - (void)getSportDetailsWithId:(NSInteger)sportId
-                        model:(SportClosure)model ;
+model:(SportClosure)model ;
 
 
 ///MARK :Query sports data by time range and type
@@ -760,16 +763,16 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 ///      - type : nil query all type
 /// - Returns:
 - (void)getSportTimeDataWithStartTime:(NSString *)startTime
-                              endTime:(NSString *)endTime
-                                 type:(nullable NSNumber *)type
-                                model:(SportsClosure)model;
+endTime:(NSString *)endTime
+type:(nullable NSNumber *)type
+model:(SportsClosure)model;
 
 ///MARK:  Delete a piece of exercise data
 /// - Parameter :
 ///    sportId
 /// - Returns:
 - (void)delSportRecordWithId:(NSInteger)sportId
-                       model:(SuccessBase)model;
+model:(SuccessBase)model;
 
 ///MARK :Get HRV Health Data
 /// - Parameter :
@@ -778,8 +781,8 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 /// - Returns:
 
 - (void)getHrvNewTimeDataWithStartTime:(NSString *)startTime
-                               endTime:(NSString *)endTime
-                                 model:(HrvsClosure)model ;
+endTime:(NSString *)endTime
+model:(HrvsClosure)model ;
 
 
 ///*******************************
@@ -814,37 +817,37 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 
 //Online ephemeris
 - (void)encodeOnlineFileWithEphemerisModel:(EphemerisModel *)ephemerisModel
-                                     model:(EphemerisData)model
-                                   failure:(FailureArgument)failure ;
+model:(EphemerisData)model
+failure:(FailureArgument)failure ;
 
 //Off-line ephemeris
 - (void)encodeOfflineFileWithEphemerisModel:(EphemerisModel *)ephemerisModel
-                                      model:(EphemerisData)model
-                                    failure:(FailureArgument)failure ;
+model:(EphemerisData)model
+failure:(FailureArgument)failure ;
 
 - (void)encodePhoneFileWithPhoneModel:(NSArray<PhoneModel *> *)phoneModel
-                                model:(EphemerisData)model
-                              failure:(FailureArgument)failure ;
+model:(EphemerisData)model
+failure:(FailureArgument)failure ;
 
 - (void)checkLogFile ;
 
 - (void)parseDialWithPath:(NSString *)path
-                    width:(NSInteger)width
-                   height:(NSInteger)height
-                   radius:(NSInteger)radius
-             platformType:(Platform)platformType
-                    model:(ParseDialBase)model;
+width:(NSInteger)width
+height:(NSInteger)height
+radius:(NSInteger)radius
+platformType:(Platform)platformType
+model:(ParseDialBase)model;
 
 - (void)getPreviewImageWithModel:(PreviewImageBase)model ;
 
 - (void)setCurrentColorWithSelectIndex:(NSInteger)selectIndex
-                                 model:(ParseDialBase)model ;
+model:(ParseDialBase)model ;
 
 - (void)setCurrentBackgroundImagePathWithSelectIndex:(NSInteger)selectIndex
-                                               model:(ParseDialBase)model ;
+model:(ParseDialBase)model ;
 
 - (void)setCurrentFunctionWithSelectIndex:(NSArray<NSNumber *> *)selectIndex
-                                    model:(ParseDialBase)model ;
+model:(ParseDialBase)model ;
 
 - (void)encodeDialWithModel:(DialDataBase)model ;
 
@@ -853,23 +856,23 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 - (void)encodePhotoDialWithModel:(DialDataBase)model;
 
 - (void)setCurrentPhotoBackgroundImagePathWithPhotoImagePaths:(NSArray<NSString *> *)photoImagePaths
-                                                  selectIndex:(NSInteger)selectIndex
-                                                        model:(ParsePhotoDialBase)model;
+selectIndex:(NSInteger)selectIndex
+model:(ParsePhotoDialBase)model;
 
 - (void)setCurrentClockPositionWithPhotoSelectIndex:(NSInteger)photoSelectIndex
-                                        selectIndex:(NSInteger)selectIndex
-                                              model:(ParsePhotoDialBase)model;
+selectIndex:(NSInteger)selectIndex
+model:(ParsePhotoDialBase)model;
 
 - (void)setCurrentPhotoColorWithPhotoSelectIndex:(NSInteger)photoSelectIndex
-                                     selectIndex:(NSInteger)selectIndex
-                                           model:(ParsePhotoDialBase)model;
+selectIndex:(NSInteger)selectIndex
+model:(ParsePhotoDialBase)model;
 
 - (void)parsePhotoDialWithPath:(NSString *)path
-                         width:(NSInteger)width
-                        height:(NSInteger)height
-                        radius:(NSInteger)radius
-                   platformType:(Platform)platformType
-                         model:(ParsePhotoDialBase)model;
+width:(NSInteger)width
+height:(NSInteger)height
+radius:(NSInteger)radius
+platformType:(Platform)platformType
+model:(ParsePhotoDialBase)model;
 
 
 /**
@@ -935,6 +938,12 @@ typedef EphemerisGPSModel *_Nonnull(^gpsBase)(void);
 - (void)monitorPhone ;
 - (void)checkPhoneBookPermissions:(BoolBase)model;
 - (void)requestPhoneBookPermissions:(BoolBase)model;
+- (void)getOTAUpgradeVersion:(ValueBase)model;
+
+- (void)getOTAUpgradeStateWithFileName:(NSString *)fileName
+                              fileData:(NSData *)fileData
+                                 model:(UpgradeStateBase)upgradeStateBase
+                         uploadFailure:(FailureArgument)uploadFailure;
 
 
 

@@ -36,6 +36,7 @@
 		07A00E032BA54EF800AFC4B4 /* DialDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */; };
 		07A00E052BA54F9400AFC4B4 /* ZBSlideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */; };
 		07A00E072BA54FA300AFC4B4 /* CustomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A00E062BA54FA300AFC4B4 /* CustomSheetView.swift */; };
+		07A73BB62BF22DE6007EFFB3 /* titan.zip in Resources */ = {isa = PBXBuildFile; fileRef = 07A73BB52BF22DE6007EFFB3 /* titan.zip */; };
 		07AEC4C62BE7CEDB00D49A1B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 07AEC4C42BE7CEDB00D49A1B /* PrivacyInfo.xcprivacy */; };
 		ED2CC2E576E45E03B0131B12 /* Pods_SwiftCreekSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B13C4B580A306CB72485A1 /* Pods_SwiftCreekSDK.framework */; };
 /* End PBXBuildFile section */
@@ -167,6 +168,9 @@
 		07A00E022BA54EF800AFC4B4 /* DialDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialDetailsViewController.swift; sourceTree = "<group>"; };
 		07A00E042BA54F9400AFC4B4 /* ZBSlideBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZBSlideBar.swift; sourceTree = "<group>"; };
 		07A00E062BA54FA300AFC4B4 /* CustomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSheetView.swift; sourceTree = "<group>"; };
+		07A73BB52BF22DE6007EFFB3 /* titan.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = titan.zip; sourceTree = "<group>"; };
+		07A73BB72BF22E58007EFFB3 /* UpgradeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpgradeModel.h; sourceTree = "<group>"; };
+		07A73BB82BF22E58007EFFB3 /* UpgradeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpgradeModel.m; sourceTree = "<group>"; };
 		07AEC4C22BE7C40100D49A1B /* ProtoExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtoExtension.h; sourceTree = "<group>"; };
 		07AEC4C32BE7C40100D49A1B /* ProtoExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProtoExtension.m; sourceTree = "<group>"; };
 		07AEC4C42BE7CEDB00D49A1B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 				07941D2E2BCE621500CBFB62 /* DialPhotoParseModel.m */,
 				07AEC4C22BE7C40100D49A1B /* ProtoExtension.h */,
 				07AEC4C32BE7C40100D49A1B /* ProtoExtension.m */,
+				07A73BB72BF22E58007EFFB3 /* UpgradeModel.h */,
+				07A73BB82BF22E58007EFFB3 /* UpgradeModel.m */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 		078B62142B86F69000BCEFC3 /* SwiftCreekSDK */ = {
 			isa = PBXGroup;
 			children = (
+				07A73BB52BF22DE6007EFFB3 /* titan.zip */,
 				07941D372BCFB35F00CBFB62 /* squarePhoto.zip */,
 				07941D2F2BCE6A6100CBFB62 /* circlePhoto.zip */,
 				07A00DF22BA54E6F00AFC4B4 /* Act06_1201_03.zip */,
@@ -556,6 +563,7 @@
 				07A00DFA2BA54E6F00AFC4B4 /* Fun_061211_05_2.zip in Resources */,
 				07941D302BCE6A6100CBFB62 /* circlePhoto.zip in Resources */,
 				07A00DFB2BA54E6F00AFC4B4 /* func6_pink.zip in Resources */,
+				07A73BB62BF22DE6007EFFB3 /* titan.zip in Resources */,
 				07A00DF62BA54E6F00AFC4B4 /* CASIO01_01.zip in Resources */,
 				07A00DF72BA54E6F00AFC4B4 /* Fun061101_03.zip in Resources */,
 				07A00DF92BA54E6F00AFC4B4 /* acti06_2.zip in Resources */,
@@ -749,7 +757,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
@@ -818,7 +826,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;

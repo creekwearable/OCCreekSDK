@@ -25,11 +25,11 @@ class CreekBaseViewController: UIViewController,UIGestureRecognizerDelegate {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+//        let appearance = UINavigationBarAppearance()
+//        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+//        appearance.backgroundColor = .white
+//        navigationController?.navigationBar.standardAppearance = appearance
+//        navigationController?.navigationBar.scrollEdgeAppearance = appearance
 
     }
     override func viewWillDisappear(_ animated: Bool) {

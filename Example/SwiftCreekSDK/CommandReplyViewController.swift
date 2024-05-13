@@ -274,7 +274,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             
             let data =  protocol_health_monitor_operate()
             data.healthType = health_type.heartRate
-            data.measurementInterval = 5
+            data.measurementInterval = 600
             CreekInterFace.instance().setMonitorWithModel(data) {
                 self.view.hideRemark()
                 self.textView.text = "success"

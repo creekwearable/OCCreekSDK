@@ -83,6 +83,8 @@
 @property (nonatomic, strong) NSMutableDictionary<NSString*,AppListBase> *appListDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,EventTrackingBase> *eventTrackingDic;
 @property (nonatomic, strong) NSMutableDictionary<NSString*,BoolBase> *boolClosureDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,ValueBase> *valueClosureDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString*,UpgradeStateBase> *upgradeStateClosureDic;
 
 
 
@@ -188,17 +190,19 @@ static CreekInterFace * instance =nil;
     self.eventTrackingDic = [NSMutableDictionary dictionary];
     self.parsePhotoDialClosureDic = [NSMutableDictionary dictionary];
     self.boolClosureDic = [NSMutableDictionary dictionary];
+    self.valueClosureDic = [NSMutableDictionary dictionary];
+    self.upgradeStateClosureDic = [NSMutableDictionary dictionary];
 }
 
 -(void) setupInit{
-   
+    
     _flutterEngine = [[FlutterEngine alloc] initWithName:@"io.flutter"];
     [_flutterEngine run];
     [GeneratedPluginRegistrant registerWithRegistry:_flutterEngine];
     _methodChannel = [FlutterMethodChannel methodChannelWithName:@"com.watchic.app/sdk" binaryMessenger: [_flutterEngine binaryMessenger]];
     __unsafe_unretained typeof(self) weakSelf = self;
     [_methodChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
-       
+        
         [weakSelf handleMethodCall:call result:result];
     }];
     [self initSDK];
@@ -257,7 +261,7 @@ static CreekInterFace * instance =nil;
     }else if ([[call method] containsString:@"getFirmware"]){
         FlutterStandardTypedData *data = [call arguments];
         NSError *error = nil;
-    
+        
         protocol_device_info* model = [[protocol_device_info alloc] initWithData:data.data error:&error];
         FirmwareBase block = [self.firmwareDic objectForKey:[call method]];
         if(block){
@@ -1122,7 +1126,7 @@ static CreekInterFace * instance =nil;
         
     }else if ([[call method] containsString:@"getPreviewImage"]){
         FlutterStandardTypedData *data = [call arguments];
-       
+        
         PreviewImageBase block = [self.previewImageClosureDic objectForKey:[call method]];
         if(block){
             block(data.data);
@@ -1133,7 +1137,7 @@ static CreekInterFace * instance =nil;
         
     }else if ([[call method] containsString:@"encodeDial"]){
         FlutterStandardTypedData *data = [call arguments];
-       
+        
         DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
         if(block){
             block(data.data);
@@ -1144,7 +1148,7 @@ static CreekInterFace * instance =nil;
         
     }else if ([[call method] containsString:@"encodePhotoDial"]){
         FlutterStandardTypedData *data = [call arguments];
-       
+        
         DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
         if(block){
             block(data.data);
@@ -1160,7 +1164,7 @@ static CreekInterFace * instance =nil;
         }
         
     }else if ([[call method] containsString:@"ephemerisGPS"]){
-
+        
         
     }else if ([[call method] containsString:@"checkPhoneBookPermissions"]){
         NSLog(@"checkPhoneBookPermissions %@ ", [call arguments]);
@@ -1183,11 +1187,33 @@ static CreekInterFace * instance =nil;
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
         
+    }else if ([[call method] containsString:@"getOTAUpgradeVersion"]){
+        int value = [[call arguments] intValue];
+        
+        ValueBase block = [self.valueClosureDic objectForKey:[call method]];
+        if(block){
+            block(@(value));
+            [self.valueClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"getOTAUpgradeState"]){
+        NSDictionary * dic = (NSDictionary*)[call arguments];
+        UpgradeModel* model =  [[UpgradeModel alloc] initWithDictionary:dic];
+        UpgradeStateBase block = [self.upgradeStateClosureDic objectForKey:[call method]];
+        if(block){
+            block(model);
+            [self.upgradeStateClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
     }else {
-
+        
         result(FlutterMethodNotImplemented);
     }
-   
+    
 }
 
 -(void)initSDK{
@@ -1399,9 +1425,9 @@ static CreekInterFace * instance =nil;
 }
 - (void)bindingDeviceWithBindType:(BindType)bindType
                          idString:(NSString * _Nullable)idString
-                            code:(NSString * _Nullable)code
-                         success:(SuccessBase)successBlock
-                         failure:(FailureBase)failureBlock {
+                             code:(NSString * _Nullable)code
+                          success:(SuccessBase)successBlock
+                          failure:(FailureBase)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"bindDevice%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1424,10 +1450,10 @@ static CreekInterFace * instance =nil;
 
 - (void)bindingDeviceWithBindType:(BindType)bindType
                          idString:(NSString * _Nullable)idString
-                            code:(NSString * _Nullable)code
+                             code:(NSString * _Nullable)code
                          saveDate:(BOOL)saveDate
-                         success:(SuccessBase)successBlock
-                         failure:(FailureBase)failureBlock {
+                          success:(SuccessBase)successBlock
+                          failure:(FailureBase)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"bindDevice%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1532,7 +1558,7 @@ static CreekInterFace * instance =nil;
 /**
  * Get focus mode
  *
-
+ 
  */
 - (void)getFocusSleep:(FocusBase)modelBlock failure:(FailureArgument)failureBlock {
     self.requestId++;
@@ -1540,7 +1566,7 @@ static CreekInterFace * instance =nil;
     [self.focusDic setObject:modelBlock forKey:requestKey];
     [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
     [self.methodChannel invokeMethod:requestKey arguments:@""];
-  
+    
 }
 
 /**
@@ -1605,7 +1631,7 @@ static CreekInterFace * instance =nil;
 /**
  * Drink Water Reminder
  *
-
+ 
  */
 - (void)getWater:(WaterBase)modelBlock failure:(FailureArgument)failureBlock {
     self.requestId++;
@@ -1669,7 +1695,7 @@ static CreekInterFace * instance =nil;
 
 
 - (void)getScreenWithModel:(ScreenBase)modelBlock
-                    failure:(FailureArgument)failureBlock {
+                   failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"getScreen%ld", (long)self.requestId];
     self.screenDic[requestKey] = modelBlock;
@@ -1731,7 +1757,7 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)getSleepMonitorWithModel:(SleepMonitorBase)modelBlock
-                          failure:(FailureArgument)failureBlock {
+                         failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"getSleepMonitor%ld", (long)self.requestId];
     [self.sleepMonitorDic setObject:modelBlock forKey:requestKey];
@@ -1769,8 +1795,8 @@ static CreekInterFace * instance =nil;
 
 
 - (void)setFindPhoneWatchWithModel:(protocol_find_phone_watch_operate *)model
-                            success:(SuccessBase)successBlock
-                            failure:(FailureArgument)failureBlock {
+                           success:(SuccessBase)successBlock
+                           failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setFindPhoneWatch%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1786,7 +1812,7 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)getWorldTimeWithModel:(WorldTimeBase)modelBlock
-                       failure:(FailureArgument)failureBlock {
+                      failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"getWorldTime%ld", (long)self.requestId];
     self.worldTimeDic[requestKey] = modelBlock;
@@ -1814,7 +1840,7 @@ static CreekInterFace * instance =nil;
 
 
 - (void)getMessageOnOffWithModel:(MessageOnOffBase)modelBlock
-                          failure:(FailureArgument)failureBlock {
+                         failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"getMessageOnOff%ld", (long)self.requestId];
     self.messageOnOffDic[requestKey] = modelBlock;
@@ -1824,8 +1850,8 @@ static CreekInterFace * instance =nil;
 
 
 - (void)setMessageOnOffWithModel:(protocol_message_notify_switch *)model
-                          success:(SuccessBase)successBlock
-                          failure:(FailureArgument)failureBlock {
+                         success:(SuccessBase)successBlock
+                         failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setMessageOnOff%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1908,7 +1934,7 @@ static CreekInterFace * instance =nil;
 
 /// 获取联系人
 - (void)getContactsWithModel:(ContactsBase)modelBlock
-                      failure:(FailureArgument)failureBlock {
+                     failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"getContacts%ld", (long)self.requestId];
     self.contactsDic[requestKey] = modelBlock;
@@ -1918,8 +1944,8 @@ static CreekInterFace * instance =nil;
 
 /// 设置联系人
 - (void)setContactsWithModel:(protocol_frequent_contacts_operate *)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock {
+                     success:(SuccessBase)successBlock
+                     failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setContacts%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1946,8 +1972,8 @@ static CreekInterFace * instance =nil;
 
 /// 设置快捷卡片
 - (void)setCardWithModel:(protocol_quick_card_operate *)model
-                  success:(SuccessBase)successBlock
-                  failure:(FailureArgument)failureBlock {
+                 success:(SuccessBase)successBlock
+                 failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setCard%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1964,8 +1990,8 @@ static CreekInterFace * instance =nil;
 
 /// 设置运动心率
 - (void)setSportHeartRateWithModel:(protocol_exercise_heart_rate_zone *)model
-                            success:(SuccessBase)successBlock
-                            failure:(FailureArgument)failureBlock {
+                           success:(SuccessBase)successBlock
+                           failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setSportHeartRate%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -1992,8 +2018,8 @@ static CreekInterFace * instance =nil;
 
 /// 设置设备的运动排序
 - (void)setSportSortWithModel:(protocol_exercise_sport_mode_sort *)model
-                       success:(SuccessBase)successBlock
-                       failure:(FailureArgument)failureBlock {
+                      success:(SuccessBase)successBlock
+                      failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setSportSort%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -2020,8 +2046,8 @@ static CreekInterFace * instance =nil;
 
 /// 设置运动子项目数据
 - (void)setSportSubWithModel:(protocol_exercise_sporting_param_sort *)model
-                      success:(SuccessBase)successBlock
-                      failure:(FailureArgument)failureBlock {
+                     success:(SuccessBase)successBlock
+                     failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setSportSub%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -2048,8 +2074,8 @@ static CreekInterFace * instance =nil;
 
 /// 设置运动自我识别
 - (void)setSportIdentificationWithModel:(protocol_exercise_intelligent_recognition *)model
-                                 success:(SuccessBase)successBlock
-                                 failure:(FailureArgument)failureBlock {
+                                success:(SuccessBase)successBlock
+                                failure:(FailureArgument)failureBlock {
     self.requestId++;
     NSString *requestKey = [NSString stringWithFormat:@"setSportIdentification%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -2164,7 +2190,7 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)getContactsSOSWithModel:(SosContactsBase)modelBlock
-                         failure:(FailureArgument)failureBlock {
+                        failure:(FailureArgument)failureBlock {
     self.requestId += 1;
     NSString *requestKey = [NSString stringWithFormat:@"getSOSContacts%ld", (long)self.requestId];
     self.sosContactsDic[requestKey] = modelBlock;
@@ -2173,8 +2199,8 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)setContactsSOSWithModel:(protocol_emergency_contacts_operate*)model
-                         success:(SuccessBase)successBlock
-                         failure:(FailureArgument)failureBlock {
+                        success:(SuccessBase)successBlock
+                        failure:(FailureArgument)failureBlock {
     self.requestId += 1;
     NSString *requestKey = [NSString stringWithFormat:@"setSOSContacts%ld", (long)self.requestId];
     self.successDic[requestKey] = successBlock;
@@ -2242,8 +2268,8 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)getActivityNewTimeDataWithStartTime:(NSString *)startTime
-                                   endTime:(NSString *)endTime
-                                     model:(ActivitysClosure)model {
+                                    endTime:(NSString *)endTime
+                                      model:(ActivitysClosure)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"getActivityNewTimeData%ld", (long)self.requestId];
     [self.activitysClosureDic setObject:model forKey:requestIdString];
@@ -2313,9 +2339,9 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)getSportTimeDataWithStartTime:(NSString *)startTime
-                             endTime:(NSString *)endTime
-                                type:(nullable NSNumber *)type
-                               model:(SportsClosure)model {
+                              endTime:(NSString *)endTime
+                                 type:(nullable NSNumber *)type
+                                model:(SportsClosure)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"getSportTimeData%ld", (long)self.requestId];
     [self.sportsClosureDic setObject:model forKey:requestIdString];
@@ -2450,8 +2476,8 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)encodePhoneFileWithPhoneModel:(NSArray<PhoneModel *> *)phoneModel
-                                 model:(EphemerisData)model
-                               failure:(FailureArgument)failure {
+                                model:(EphemerisData)model
+                              failure:(FailureArgument)failure {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"encodePhoneFile%ld", (long)self.requestId];
     [self.ephemerisClosureDic setObject:model forKey:requestIdString];
@@ -2492,15 +2518,15 @@ static CreekInterFace * instance =nil;
     [self.parseDialClosureDic setObject:model forKey:requestIdString];
     
     [self.methodChannel invokeMethod:requestIdString arguments:@[path,[NSNumber numberWithInteger:width],[NSNumber numberWithInteger:height],[NSNumber numberWithInteger:radius],[NSNumber numberWithInteger:platformType]]];
-
+    
 }
 
 - (void)parsePhotoDialWithPath:(NSString *)path
                          width:(NSInteger)width
                         height:(NSInteger)height
                         radius:(NSInteger)radius
-                   platformType:(Platform)platformType
-                          model:(ParsePhotoDialBase)model {
+                  platformType:(Platform)platformType
+                         model:(ParsePhotoDialBase)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"parsePhotoDial%ld", (long)self.requestId];
     [self.parsePhotoDialClosureDic setObject:model forKey:requestIdString];
@@ -2534,7 +2560,7 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)setCurrentBackgroundImagePathWithSelectIndex:(NSInteger)selectIndex
-                                                model:(ParseDialBase)model {
+                                               model:(ParseDialBase)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"setCurrentBackgroundImagePath%ld", (long)self.requestId];
     [self.parseDialClosureDic setObject:model forKey:requestIdString];
@@ -2552,8 +2578,8 @@ static CreekInterFace * instance =nil;
 }
 
 - (void)setCurrentPhotoBackgroundImagePathWithPhotoImagePaths:(NSArray<NSString *> *)photoImagePaths
-                                                 selectIndex:(NSInteger)selectIndex
-                                                       model:(ParsePhotoDialBase)model {
+                                                  selectIndex:(NSInteger)selectIndex
+                                                        model:(ParsePhotoDialBase)model {
     self.requestId += 1;
     NSString *requestIdString = [NSString stringWithFormat:@"setCurrentPhotoBackgroundImagePath%ld", (long)self.requestId];
     [self.parsePhotoDialClosureDic setObject:model forKey:requestIdString];
@@ -2629,6 +2655,40 @@ static CreekInterFace * instance =nil;
     NSString *requestIdString = [NSString stringWithFormat:@"requestPhoneBookPermissions%ld", (long)self.requestId];
     [self.boolClosureDic setObject:model forKey:requestIdString];
     [self.methodChannel invokeMethod:requestIdString arguments:@""];
+}
+
+- (void)getOTAUpgradeVersion:(ValueBase)model {
+    self.requestId += 1;
+    NSString *requestIdString = [NSString stringWithFormat:@"getOTAUpgradeVersion%ld", (long)self.requestId];
+    [self.valueClosureDic setObject:model forKey:requestIdString];
+    [self.methodChannel invokeMethod:requestIdString arguments:@""];
+}
+
+- (void)getOTAUpgradeStateWithFileName:(NSString *)fileName
+                              fileData:(NSData *)fileData
+                                 model:(UpgradeStateBase)upgradeStateBase
+                         uploadFailure:(FailureArgument)uploadFailure {
+    self.requestId++;
+    NSString *requestKey = [NSString stringWithFormat:@"getOTAUpgradeState%ld", (long)self.requestId];
+
+    self.failureArgumentDic[requestKey] = uploadFailure;
+    self.upgradeStateClosureDic[requestKey] = upgradeStateBase;
+    
+    NSMutableArray *intArray = [[NSMutableArray alloc] initWithCapacity:fileData.length];
+    const uint8_t *bytes = (const uint8_t *)fileData.bytes;
+    for (NSUInteger i = 0; i < fileData.length; i++) {
+        [intArray addObject:@(bytes[i])];
+    }
+    
+    NSDictionary *dic = @{@"fileName": fileName, @"fileData": intArray};
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:&error];
+    if (!error) {
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        [self.methodChannel invokeMethod:requestKey arguments:jsonString];
+    } else {
+        NSLog(@"Error converting dictionary to JSON: %@", error.localizedDescription);
+    }
 }
 
 @end
