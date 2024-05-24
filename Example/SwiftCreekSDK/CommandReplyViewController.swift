@@ -608,7 +608,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             }
             break
         case "Query activity data":
-            CreekInterFace.instance().getActivityNewTimeData(withStartTime: "2024-04-16", endTime: "2024-04-16") { model in
+            CreekInterFace.instance().getActivityNewTimeData(withStartTime: "2024-05-24", endTime: "2024-05-24") { model in
                 self.view.hideRemark()
                 self.textView.text = "success"
                 let json = ActivityModel.initWithModelArray(model)

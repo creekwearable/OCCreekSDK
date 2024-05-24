@@ -3,9 +3,9 @@ PODS:
   - ESTabBarController-swift (2.8.0)
   - IQKeyboardManagerSwift (7.0.1)
   - MBProgressHUD (1.2.0)
-  - OCCreekSDK (0.1.9):
-    - OCCreekSDK/Protos (= 0.1.9)
-  - OCCreekSDK/Protos (0.1.9):
+  - OCCreekSDK (0.1.12):
+    - OCCreekSDK/Protos (= 0.1.12)
+  - OCCreekSDK/Protos (0.1.12):
     - Protobuf (~> 3.11)
   - Protobuf (3.25.3)
   - SnapKit (5.7.1)
@@ -49,7 +49,7 @@ SPEC CHECKSUMS:
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
   IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OCCreekSDK: 970de514109998cd6e5026a0de55368a3f9c1277
+  OCCreekSDK: d0774266cb8a75c04d4d0af91e3c49c83e595e7f
   Protobuf: 8e9074797a13c484a79959fdb819ef4ae6da7dbe
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2

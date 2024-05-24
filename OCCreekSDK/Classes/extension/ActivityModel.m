@@ -44,6 +44,7 @@
         _floors_climbed_support = [dictionary[@"floors_climbed_support"] intValue];
         _total_floors_climbed = [dictionary[@"total_floors_climbed"] intValue];
         _uploadStatus = [dictionary[@"uploadStatus"] intValue];
+        _stand_details= dictionary[@"stand_details"];
         
         NSMutableArray *datasArray = [NSMutableArray array];
         for (NSDictionary *dataDict in dictionary[@"datas"]) {
@@ -70,6 +71,7 @@
     dictionary[@"floors_climbed_support"] = @(self.floors_climbed_support);
     dictionary[@"total_floors_climbed"] = @(self.total_floors_climbed);
     dictionary[@"uploadStatus"] = @(self.uploadStatus);
+    dictionary[@"stand_details"] = self.stand_details;
     
     NSMutableArray *dataArray = [NSMutableArray array];
     for (ActivityDataModel *dataModel in self.datas) {

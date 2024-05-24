@@ -46,6 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) int uploadStatus;
 @property (nonatomic, strong) NSArray<ActivityDataModel *> *datas;
 
+//Standing details, the array length is 24, 0 and 1 represent whether
+@property (nonatomic, strong) NSArray<NSNumber *> *stand_details;
+
 
 + (NSMutableArray<ActivityModel*>*)initWithArray:(NSArray *)arr;
 + (NSMutableArray<NSDictionary*>*)initWithModelArray:(NSArray<ActivityModel*>*)arr;
