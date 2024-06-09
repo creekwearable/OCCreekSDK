@@ -142,6 +142,41 @@ BOOL Shape_IsValidValue(int32_t value__) {
   }
 }
 
+#pragma mark - Enum tran_direction_type
+
+GPBEnumDescriptor *tran_direction_type_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "WatchTran\000AppTran\000";
+    static const int32_t values[] = {
+        tran_direction_type_WatchTran,
+        tran_direction_type_AppTran,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(tran_direction_type)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:tran_direction_type_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL tran_direction_type_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case tran_direction_type_WatchTran:
+    case tran_direction_type_AppTran:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
 #pragma mark - Enum Dev_type
 
 GPBEnumDescriptor *Dev_type_EnumDescriptor(void) {
@@ -1804,7 +1839,13 @@ GPBEnumDescriptor *message_remind_type_EnumDescriptor(void) {
         "Qq\000WhatsAppBusiness\000Youtube\000Uber\000UberEat"
         "s\000DoorDashMissing\000BancoGeneral\000BacBank\000G"
         "oogleMaps\000AmazonShopping\000Spotify\000Discord"
-        "\000Ohter\000";
+        "\000Ohter\000Dailyhunt\000FastrackSmartWorld\000Insh"
+        "orts\000Ola\000Phonepe\000Swiggy\000Zomato\000Amazonpri"
+        "me\000AmazonBusiness\000AmazonMusic\000Dunzo\000Zept"
+        "o\000Flipkart\000Gaana\000GoogleDrive\000Gpay\000Hotsta"
+        "r\000Netflix\000JioCinema\000Rapido\000DigiLocker\000My"
+        "ntra\000UrbanCompany\000Paytm\000Wynk\000Yahoo\000Ytmus"
+        "ic\000TitanSmartWorld\000MakeMyTrip\000JioTv\000";
     static const int32_t values[] = {
         message_remind_type_Null,
         message_remind_type_Sms,
@@ -1841,8 +1882,38 @@ GPBEnumDescriptor *message_remind_type_EnumDescriptor(void) {
         message_remind_type_Spotify,
         message_remind_type_Discord,
         message_remind_type_Ohter,
+        message_remind_type_Dailyhunt,
+        message_remind_type_FastrackSmartWorld,
+        message_remind_type_Inshorts,
+        message_remind_type_Ola,
+        message_remind_type_Phonepe,
+        message_remind_type_Swiggy,
+        message_remind_type_Zomato,
+        message_remind_type_Amazonprime,
+        message_remind_type_AmazonBusiness,
+        message_remind_type_AmazonMusic,
+        message_remind_type_Dunzo,
+        message_remind_type_Zepto,
+        message_remind_type_Flipkart,
+        message_remind_type_Gaana,
+        message_remind_type_GoogleDrive,
+        message_remind_type_Gpay,
+        message_remind_type_Hotstar,
+        message_remind_type_Netflix,
+        message_remind_type_JioCinema,
+        message_remind_type_Rapido,
+        message_remind_type_DigiLocker,
+        message_remind_type_Myntra,
+        message_remind_type_UrbanCompany,
+        message_remind_type_Paytm,
+        message_remind_type_Wynk,
+        message_remind_type_Yahoo,
+        message_remind_type_Ytmusic,
+        message_remind_type_TitanSmartWorld,
+        message_remind_type_MakeMyTrip,
+        message_remind_type_JioTv,
     };
-    static const char *extraTextFormatInfo = "\037\002\005\000\003\010\000\004\006\204\000\005\010\000\006\007\000\007\t\000\010\010\000\t\010\000\n\004\000\013\006\000\014\005\000\r\006\000\016\010\000\017\t\205\000\020\010\211\000\021\t\000\022\010\000\023\005\000\024\t\207\000\025\006\204\000\027\010\210\000\030\007\000\031\004\000\032\004\244\000\033\004\204\247\000\034\005\207\000\035c\204\000\036\006\204\000\037\006\250\000 \007\000!\007\000";
+    static const char *extraTextFormatInfo = " \002\005\000\003\010\000\004\006\204\000\005\010\000\006\007\000\007\t\000\010\010\000\t\010\000\n\004\000\013\006\000\014\005\000\r\006\000\016\010\000\017\t\205\000\020\010\211\000\021\t\000\022\010\000\023\005\000\024\t\207\000\025\006\204\000\027\010\210\000\030\007\000\031\004\000\032\004\244\000\033\004\204\247\000\034\005\207\000\035c\204\000\036\006\204\000\037\006\250\000 \007\000!\007\000@\003\342\000";
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(message_remind_type)
                                        valueNames:valueNames
@@ -1895,6 +1966,36 @@ BOOL message_remind_type_IsValidValue(int32_t value__) {
     case message_remind_type_Spotify:
     case message_remind_type_Discord:
     case message_remind_type_Ohter:
+    case message_remind_type_Dailyhunt:
+    case message_remind_type_FastrackSmartWorld:
+    case message_remind_type_Inshorts:
+    case message_remind_type_Ola:
+    case message_remind_type_Phonepe:
+    case message_remind_type_Swiggy:
+    case message_remind_type_Zomato:
+    case message_remind_type_Amazonprime:
+    case message_remind_type_AmazonBusiness:
+    case message_remind_type_AmazonMusic:
+    case message_remind_type_Dunzo:
+    case message_remind_type_Zepto:
+    case message_remind_type_Flipkart:
+    case message_remind_type_Gaana:
+    case message_remind_type_GoogleDrive:
+    case message_remind_type_Gpay:
+    case message_remind_type_Hotstar:
+    case message_remind_type_Netflix:
+    case message_remind_type_JioCinema:
+    case message_remind_type_Rapido:
+    case message_remind_type_DigiLocker:
+    case message_remind_type_Myntra:
+    case message_remind_type_UrbanCompany:
+    case message_remind_type_Paytm:
+    case message_remind_type_Wynk:
+    case message_remind_type_Yahoo:
+    case message_remind_type_Ytmusic:
+    case message_remind_type_TitanSmartWorld:
+    case message_remind_type_MakeMyTrip:
+    case message_remind_type_JioTv:
       return YES;
     default:
       return NO;

@@ -1,21 +1,21 @@
 PODS:
-  - CropViewController (2.7.2)
+  - CropViewController (2.7.4)
   - ESTabBarController-swift (2.8.0)
-  - IQKeyboardManagerSwift (7.0.1)
+  - IQKeyboardManagerSwift (6.5.16)
   - MBProgressHUD (1.2.0)
-  - OCCreekSDK (0.1.12):
-    - OCCreekSDK/Protos (= 0.1.12)
-  - OCCreekSDK/Protos (0.1.12):
+  - OCCreekSDK (0.1.14):
+    - OCCreekSDK/Protos (= 0.1.14)
+  - OCCreekSDK/Protos (0.1.14):
     - Protobuf (~> 3.11)
-  - Protobuf (3.25.3)
+  - Protobuf (3.27.0)
   - SnapKit (5.7.1)
-  - Toast-Swift (5.1.0)
-  - TZImagePickerController (3.8.4):
-    - TZImagePickerController/Basic (= 3.8.4)
-    - TZImagePickerController/Location (= 3.8.4)
-  - TZImagePickerController/Basic (3.8.4)
-  - TZImagePickerController/Location (3.8.4)
-  - ZIPFoundation (0.9.18)
+  - Toast-Swift (5.1.1)
+  - TZImagePickerController (3.8.5):
+    - TZImagePickerController/Basic (= 3.8.5)
+    - TZImagePickerController/Location (= 3.8.5)
+  - TZImagePickerController/Basic (3.8.5)
+  - TZImagePickerController/Location (3.8.5)
+  - ZIPFoundation (0.9.19)
 
 DEPENDENCIES:
   - CropViewController
@@ -29,7 +29,7 @@ DEPENDENCIES:
   - ZIPFoundation
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - CropViewController
     - ESTabBarController-swift
     - IQKeyboardManagerSwift
@@ -45,16 +45,16 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CropViewController: 919f4e49dc298a610265bb1eeaa7e195298e3c5b
+  CropViewController: 3489bbf95a3e11c654382b0bae08ac645cdf1b93
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
-  IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
+  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OCCreekSDK: d0774266cb8a75c04d4d0af91e3c49c83e595e7f
-  Protobuf: 8e9074797a13c484a79959fdb819ef4ae6da7dbe
+  OCCreekSDK: 46e3a4adf1d998efad52835e682491f91162f742
+  Protobuf: 2c02b2e18bb9040d3bf3fd2cecaefb2a8b55265b
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
-  Toast-Swift: dd369e68ee529f542c65bd0d0c6c50cd743cf6f2
-  TZImagePickerController: f1c9f1cae6ac0e30b31aaa9698f9bf4a7cf5b84f
-  ZIPFoundation: fa9ae5af13b7cf168245f24d1c672a4fb972e37f
+  Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
+  TZImagePickerController: c0f8e83c27cb08f7d812b1d066a5934d30ff78ad
+  ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
 
 PODFILE CHECKSUM: cb471270cf9b734346f7ad7b4343cbec7263eb2b
 

@@ -203,17 +203,13 @@ void Setprotocol_call_switch_inquire_reply_Operate_RawValue(protocol_call_switch
 
 @implementation protocol_call_remind
 
-@dynamic contactLen;
-@dynamic contactText;
-@dynamic phoneNumberLen;
+@dynamic contactName;
 @dynamic phoneNumber;
 
 typedef struct protocol_call_remind__storage_ {
   uint32_t _has_storage_[1];
-  uint32_t contactLen;
-  uint32_t phoneNumberLen;
-  NSString *contactText;
-  NSString *phoneNumber;
+  NSData *contactName;
+  NSData *phoneNumber;
 } protocol_call_remind__storage_;
 
 // This method is threadsafe because it is initially called
@@ -223,40 +219,22 @@ typedef struct protocol_call_remind__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "contactLen",
+        .name = "contactName",
         .dataTypeSpecific.clazz = Nil,
-        .number = protocol_call_remind_FieldNumber_ContactLen,
+        .number = protocol_call_remind_FieldNumber_ContactName,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(protocol_call_remind__storage_, contactLen),
+        .offset = (uint32_t)offsetof(protocol_call_remind__storage_, contactName),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeUInt32,
-      },
-      {
-        .name = "contactText",
-        .dataTypeSpecific.clazz = Nil,
-        .number = protocol_call_remind_FieldNumber_ContactText,
-        .hasIndex = 1,
-        .offset = (uint32_t)offsetof(protocol_call_remind__storage_, contactText),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeString,
-      },
-      {
-        .name = "phoneNumberLen",
-        .dataTypeSpecific.clazz = Nil,
-        .number = protocol_call_remind_FieldNumber_PhoneNumberLen,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(protocol_call_remind__storage_, phoneNumberLen),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeUInt32,
+        .dataType = GPBDataTypeBytes,
       },
       {
         .name = "phoneNumber",
         .dataTypeSpecific.clazz = Nil,
         .number = protocol_call_remind_FieldNumber_PhoneNumber,
-        .hasIndex = 3,
+        .hasIndex = 1,
         .offset = (uint32_t)offsetof(protocol_call_remind__storage_, phoneNumber),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeString,
+        .dataType = GPBDataTypeBytes,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -281,10 +259,12 @@ typedef struct protocol_call_remind__storage_ {
 
 @implementation protocol_call_remind_status
 
+@dynamic tranType;
 @dynamic status;
 
 typedef struct protocol_call_remind_status__storage_ {
   uint32_t _has_storage_[1];
+  tran_direction_type tranType;
   call_status status;
 } protocol_call_remind_status__storage_;
 
@@ -295,10 +275,19 @@ typedef struct protocol_call_remind_status__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
+        .name = "tranType",
+        .dataTypeSpecific.enumDescFunc = tran_direction_type_EnumDescriptor,
+        .number = protocol_call_remind_status_FieldNumber_TranType,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(protocol_call_remind_status__storage_, tranType),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeEnum,
+      },
+      {
         .name = "status",
         .dataTypeSpecific.enumDescFunc = call_status_EnumDescriptor,
         .number = protocol_call_remind_status_FieldNumber_Status,
-        .hasIndex = 0,
+        .hasIndex = 1,
         .offset = (uint32_t)offsetof(protocol_call_remind_status__storage_, status),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeEnum,
@@ -321,6 +310,18 @@ typedef struct protocol_call_remind_status__storage_ {
 }
 
 @end
+
+int32_t protocol_call_remind_status_TranType_RawValue(protocol_call_remind_status *message) {
+  GPBDescriptor *descriptor = [protocol_call_remind_status descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:protocol_call_remind_status_FieldNumber_TranType];
+  return GPBGetMessageRawEnumField(message, field);
+}
+
+void Setprotocol_call_remind_status_TranType_RawValue(protocol_call_remind_status *message, int32_t value) {
+  GPBDescriptor *descriptor = [protocol_call_remind_status descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:protocol_call_remind_status_FieldNumber_TranType];
+  GPBSetMessageRawEnumField(message, field, value);
+}
 
 int32_t protocol_call_remind_status_Status_RawValue(protocol_call_remind_status *message) {
   GPBDescriptor *descriptor = [protocol_call_remind_status descriptor];

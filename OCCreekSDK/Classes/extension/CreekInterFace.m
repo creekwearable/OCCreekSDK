@@ -930,12 +930,22 @@ static CreekInterFace * instance =nil;
         ActivitysClosure block = [self.activitysClosureDic objectForKey:[call method]];
         if(block){
             block(modelArr);
-            [self.watchDialDic removeObjectForKey:[call method]];
+            [self.activitysClosureDic removeObjectForKey:[call method]];
         }else{
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
         
     }else if ([[call method] containsString:@"getHeartRateUploadStatus"]){
+        NSString * json = (NSString*)[call arguments];
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+        NSMutableArray<HeartRateModel *> * modelArr = [HeartRateModel initWithArray:dic[@"data"]];
+        HeartRatesClosure block = [self.heartRatesClosureDic objectForKey:[call method]];
+        if(block){
+            block(modelArr);
+            [self.heartRatesClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
         
     }else if ([[call method] containsString:@"getHrvUploadStatus"]){
         NSString * json = (NSString*)[call arguments];
@@ -1575,7 +1585,7 @@ static CreekInterFace * instance =nil;
  */
 - (void)setFocusSleep:(protocol_focus_mode_operate *)model success:(SuccessBase)successBlock failure:(FailureArgument)failureBlock {
     self.requestId++;
-    NSString *requestKey = [NSString stringWithFormat:@"getFocus%ld", (long)self.requestId];
+    NSString *requestKey = [NSString stringWithFormat:@"setFocus%ld", (long)self.requestId];
     [self.successDic setObject:successBlock forKey:requestKey];
     [self.failureArgumentDic setObject:failureBlock forKey:requestKey];
     @try {

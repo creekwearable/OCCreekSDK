@@ -101,6 +101,30 @@ GPBEnumDescriptor *Shape_EnumDescriptor(void);
  **/
 BOOL Shape_IsValidValue(int32_t value);
 
+#pragma mark - Enum tran_direction_type
+
+typedef GPB_ENUM(tran_direction_type) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  tran_direction_type_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  /** 手表发起 */
+  tran_direction_type_WatchTran = 0,
+
+  /** app发起 */
+  tran_direction_type_AppTran = 1,
+};
+
+GPBEnumDescriptor *tran_direction_type_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL tran_direction_type_IsValidValue(int32_t value);
+
 #pragma mark - Enum Dev_type
 
 typedef GPB_ENUM(Dev_type) {
@@ -1615,7 +1639,39 @@ typedef GPB_ENUM(message_remind_type) {
   message_remind_type_AmazonShopping = 31,
   message_remind_type_Spotify = 32,
   message_remind_type_Discord = 33,
+
+  /** 其他类型 */
   message_remind_type_Ohter = 34,
+  message_remind_type_Dailyhunt = 35,
+  message_remind_type_FastrackSmartWorld = 36,
+  message_remind_type_Inshorts = 37,
+  message_remind_type_Ola = 38,
+  message_remind_type_Phonepe = 39,
+  message_remind_type_Swiggy = 40,
+  message_remind_type_Zomato = 41,
+  message_remind_type_Amazonprime = 42,
+  message_remind_type_AmazonBusiness = 43,
+  message_remind_type_AmazonMusic = 44,
+  message_remind_type_Dunzo = 45,
+  message_remind_type_Zepto = 46,
+  message_remind_type_Flipkart = 47,
+  message_remind_type_Gaana = 48,
+  message_remind_type_GoogleDrive = 49,
+  message_remind_type_Gpay = 50,
+  message_remind_type_Hotstar = 51,
+  message_remind_type_Netflix = 52,
+  message_remind_type_JioCinema = 53,
+  message_remind_type_Rapido = 54,
+  message_remind_type_DigiLocker = 55,
+  message_remind_type_Myntra = 56,
+  message_remind_type_UrbanCompany = 57,
+  message_remind_type_Paytm = 58,
+  message_remind_type_Wynk = 59,
+  message_remind_type_Yahoo = 60,
+  message_remind_type_Ytmusic = 61,
+  message_remind_type_TitanSmartWorld = 62,
+  message_remind_type_MakeMyTrip = 63,
+  message_remind_type_JioTv = 64,
 };
 
 GPBEnumDescriptor *message_remind_type_EnumDescriptor(void);

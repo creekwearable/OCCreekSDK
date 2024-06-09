@@ -127,7 +127,37 @@ typedef GPB_ENUM(protocol_message_notify_func_support_reply_FieldNumber) {
   protocol_message_notify_func_support_reply_FieldNumber_AmazonShopping = 31,
   protocol_message_notify_func_support_reply_FieldNumber_Spotify = 32,
   protocol_message_notify_func_support_reply_FieldNumber_Discord = 33,
-  protocol_message_notify_func_support_reply_FieldNumber_RemindTypeMax = 34,
+  protocol_message_notify_func_support_reply_FieldNumber_Other = 34,
+  protocol_message_notify_func_support_reply_FieldNumber_Dailyhunt = 35,
+  protocol_message_notify_func_support_reply_FieldNumber_FastrackSmartWorld = 36,
+  protocol_message_notify_func_support_reply_FieldNumber_Inshorts = 37,
+  protocol_message_notify_func_support_reply_FieldNumber_Ola = 38,
+  protocol_message_notify_func_support_reply_FieldNumber_Phonepe = 39,
+  protocol_message_notify_func_support_reply_FieldNumber_Swiggy = 40,
+  protocol_message_notify_func_support_reply_FieldNumber_Zomato = 41,
+  protocol_message_notify_func_support_reply_FieldNumber_Amazonprime = 42,
+  protocol_message_notify_func_support_reply_FieldNumber_AmazonBusiness = 43,
+  protocol_message_notify_func_support_reply_FieldNumber_AmazonMusic = 44,
+  protocol_message_notify_func_support_reply_FieldNumber_Dunzo = 45,
+  protocol_message_notify_func_support_reply_FieldNumber_Zepto = 46,
+  protocol_message_notify_func_support_reply_FieldNumber_Flipkart = 47,
+  protocol_message_notify_func_support_reply_FieldNumber_Gaana = 48,
+  protocol_message_notify_func_support_reply_FieldNumber_GoogleDrive = 49,
+  protocol_message_notify_func_support_reply_FieldNumber_Gpay = 50,
+  protocol_message_notify_func_support_reply_FieldNumber_Hotstar = 51,
+  protocol_message_notify_func_support_reply_FieldNumber_Netflix = 52,
+  protocol_message_notify_func_support_reply_FieldNumber_JioCinema = 53,
+  protocol_message_notify_func_support_reply_FieldNumber_Rapido = 54,
+  protocol_message_notify_func_support_reply_FieldNumber_DigiLocker = 55,
+  protocol_message_notify_func_support_reply_FieldNumber_Myntra = 56,
+  protocol_message_notify_func_support_reply_FieldNumber_UrbanCompany = 57,
+  protocol_message_notify_func_support_reply_FieldNumber_Paytm = 58,
+  protocol_message_notify_func_support_reply_FieldNumber_Wynk = 59,
+  protocol_message_notify_func_support_reply_FieldNumber_Yahoo = 60,
+  protocol_message_notify_func_support_reply_FieldNumber_Ytmusic = 61,
+  protocol_message_notify_func_support_reply_FieldNumber_TitanSmartWorld = 62,
+  protocol_message_notify_func_support_reply_FieldNumber_MakeMyTrip = 63,
+  protocol_message_notify_func_support_reply_FieldNumber_JioTv = 64,
 };
 
 /**
@@ -201,7 +231,67 @@ GPB_FINAL @interface protocol_message_notify_func_support_reply : GPBMessage
 
 @property(nonatomic, readwrite) BOOL discord;
 
-@property(nonatomic, readwrite) BOOL remindTypeMax;
+@property(nonatomic, readwrite) BOOL other;
+
+@property(nonatomic, readwrite) BOOL dailyhunt;
+
+@property(nonatomic, readwrite) BOOL fastrackSmartWorld;
+
+@property(nonatomic, readwrite) BOOL inshorts;
+
+@property(nonatomic, readwrite) BOOL ola;
+
+@property(nonatomic, readwrite) BOOL phonepe;
+
+@property(nonatomic, readwrite) BOOL swiggy;
+
+@property(nonatomic, readwrite) BOOL zomato;
+
+@property(nonatomic, readwrite) BOOL amazonprime;
+
+@property(nonatomic, readwrite) BOOL amazonBusiness;
+
+@property(nonatomic, readwrite) BOOL amazonMusic;
+
+@property(nonatomic, readwrite) BOOL dunzo;
+
+@property(nonatomic, readwrite) BOOL zepto;
+
+@property(nonatomic, readwrite) BOOL flipkart;
+
+@property(nonatomic, readwrite) BOOL gaana;
+
+@property(nonatomic, readwrite) BOOL googleDrive;
+
+@property(nonatomic, readwrite) BOOL gpay;
+
+@property(nonatomic, readwrite) BOOL hotstar;
+
+@property(nonatomic, readwrite) BOOL netflix;
+
+@property(nonatomic, readwrite) BOOL jioCinema;
+
+@property(nonatomic, readwrite) BOOL rapido;
+
+@property(nonatomic, readwrite) BOOL digiLocker;
+
+@property(nonatomic, readwrite) BOOL myntra;
+
+@property(nonatomic, readwrite) BOOL urbanCompany;
+
+@property(nonatomic, readwrite) BOOL paytm;
+
+@property(nonatomic, readwrite) BOOL wynk;
+
+@property(nonatomic, readwrite) BOOL yahoo;
+
+@property(nonatomic, readwrite) BOOL ytmusic;
+
+@property(nonatomic, readwrite) BOOL titanSmartWorld;
+
+@property(nonatomic, readwrite) BOOL makeMyTrip;
+
+@property(nonatomic, readwrite) BOOL jioTv;
 
 @end
 

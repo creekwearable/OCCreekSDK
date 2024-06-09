@@ -257,7 +257,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             
         case "Get Health Monitoring":
             let data =  protocol_health_monitor_operate()
-            data.healthType = health_type.heartRate
+            data.healthType = health_type.spo2
             CreekInterFace.instance().getMonitorWith(data) { model in
                 self.view.hideRemark()
                 let str =  model.description
@@ -273,8 +273,12 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
         case "Health monitoring setting":
             
             let data =  protocol_health_monitor_operate()
-            data.healthType = health_type.heartRate
-            data.measurementInterval = 600
+            data.healthType = health_type.spo2
+            data.defaultMode = .manual
+            data.measurementInterval = 10
+            let adjust = protocol_health_monitor_auto_adjust()
+            adjust.switchFlag = true
+            data.modeAutoAdjust = adjust
             CreekInterFace.instance().setMonitorWithModel(data) {
                 self.view.hideRemark()
                 self.textView.text = "success"
@@ -608,7 +612,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             }
             break
         case "Query activity data":
-            CreekInterFace.instance().getActivityNewTimeData(withStartTime: "2024-05-24", endTime: "2024-05-24") { model in
+            CreekInterFace.instance().getActivityNewTimeData(withStartTime: "2024-05-24", endTime: "2024-06-25") { model in
                 self.view.hideRemark()
                 self.textView.text = "success"
                 let json = ActivityModel.initWithModelArray(model)
@@ -635,10 +639,11 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             }
             break
         case "Query heart rate data":
-            CreekInterFace.instance().getHeartRateNewTimeData(withStartTime: "2024-02-27", endTime: "2024-02-27") { model in
+            
+            CreekInterFace.instance().getActivityUploadStatus { model in
                 self.view.hideRemark()
                 self.textView.text = "success"
-                let json = HeartRateModel.initWithModelArray(model)
+                let json = ActivityModel.initWithModelArray(model)
                 if let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted),
                    let jsonString = String(data: jsonData, encoding: .utf8) {
                     dispatch_main_sync_safe {
@@ -646,6 +651,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
                     }
                 }
             }
+            
             break
         case "Query pressure data":
             CreekInterFace.instance().getStressNewTimeData(withStartTime: "2024-02-27", endTime: "2024-02-27") { model in
@@ -768,7 +774,7 @@ class CommandReplyViewController: CreekBaseViewController, UITextViewDelegate {
             }
             break
         case "setDBUserID":
-            CreekInterFace.instance().setDBUserWithUserID(1000)
+            CreekInterFace.instance().setDBUserWithUserID(44444444)
             self.view.hideRemark()
             
             break

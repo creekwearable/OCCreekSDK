@@ -167,10 +167,40 @@ void Setprotocol_message_notify_switch_item_NotifyFlag_RawValue(protocol_message
 @dynamic amazonShopping;
 @dynamic spotify;
 @dynamic discord;
-@dynamic remindTypeMax;
+@dynamic other;
+@dynamic dailyhunt;
+@dynamic fastrackSmartWorld;
+@dynamic inshorts;
+@dynamic ola;
+@dynamic phonepe;
+@dynamic swiggy;
+@dynamic zomato;
+@dynamic amazonprime;
+@dynamic amazonBusiness;
+@dynamic amazonMusic;
+@dynamic dunzo;
+@dynamic zepto;
+@dynamic flipkart;
+@dynamic gaana;
+@dynamic googleDrive;
+@dynamic gpay;
+@dynamic hotstar;
+@dynamic netflix;
+@dynamic jioCinema;
+@dynamic rapido;
+@dynamic digiLocker;
+@dynamic myntra;
+@dynamic urbanCompany;
+@dynamic paytm;
+@dynamic wynk;
+@dynamic yahoo;
+@dynamic ytmusic;
+@dynamic titanSmartWorld;
+@dynamic makeMyTrip;
+@dynamic jioTv;
 
 typedef struct protocol_message_notify_func_support_reply__storage_ {
-  uint32_t _has_storage_[3];
+  uint32_t _has_storage_[4];
 } protocol_message_notify_func_support_reply__storage_;
 
 // This method is threadsafe because it is initially called
@@ -477,12 +507,282 @@ typedef struct protocol_message_notify_func_support_reply__storage_ {
         .dataType = GPBDataTypeBool,
       },
       {
-        .name = "remindTypeMax",
+        .name = "other",
         .dataTypeSpecific.clazz = Nil,
-        .number = protocol_message_notify_func_support_reply_FieldNumber_RemindTypeMax,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Other,
         .hasIndex = 66,
         .offset = 67,  // Stored in _has_storage_ to save space.
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "dailyhunt",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Dailyhunt,
+        .hasIndex = 68,
+        .offset = 69,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "fastrackSmartWorld",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_FastrackSmartWorld,
+        .hasIndex = 70,
+        .offset = 71,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "inshorts",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Inshorts,
+        .hasIndex = 72,
+        .offset = 73,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "ola",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Ola,
+        .hasIndex = 74,
+        .offset = 75,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "phonepe",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Phonepe,
+        .hasIndex = 76,
+        .offset = 77,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "swiggy",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Swiggy,
+        .hasIndex = 78,
+        .offset = 79,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "zomato",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Zomato,
+        .hasIndex = 80,
+        .offset = 81,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "amazonprime",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Amazonprime,
+        .hasIndex = 82,
+        .offset = 83,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "amazonBusiness",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_AmazonBusiness,
+        .hasIndex = 84,
+        .offset = 85,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "amazonMusic",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_AmazonMusic,
+        .hasIndex = 86,
+        .offset = 87,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "dunzo",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Dunzo,
+        .hasIndex = 88,
+        .offset = 89,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "zepto",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Zepto,
+        .hasIndex = 90,
+        .offset = 91,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "flipkart",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Flipkart,
+        .hasIndex = 92,
+        .offset = 93,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "gaana",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Gaana,
+        .hasIndex = 94,
+        .offset = 95,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "googleDrive",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_GoogleDrive,
+        .hasIndex = 96,
+        .offset = 97,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "gpay",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Gpay,
+        .hasIndex = 98,
+        .offset = 99,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "hotstar",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Hotstar,
+        .hasIndex = 100,
+        .offset = 101,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "netflix",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Netflix,
+        .hasIndex = 102,
+        .offset = 103,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "jioCinema",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_JioCinema,
+        .hasIndex = 104,
+        .offset = 105,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "rapido",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Rapido,
+        .hasIndex = 106,
+        .offset = 107,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "digiLocker",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_DigiLocker,
+        .hasIndex = 108,
+        .offset = 109,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "myntra",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Myntra,
+        .hasIndex = 110,
+        .offset = 111,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "urbanCompany",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_UrbanCompany,
+        .hasIndex = 112,
+        .offset = 113,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "paytm",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Paytm,
+        .hasIndex = 114,
+        .offset = 115,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "wynk",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Wynk,
+        .hasIndex = 116,
+        .offset = 117,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "yahoo",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Yahoo,
+        .hasIndex = 118,
+        .offset = 119,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "ytmusic",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_Ytmusic,
+        .hasIndex = 120,
+        .offset = 121,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "titanSmartWorld",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_TitanSmartWorld,
+        .hasIndex = 122,
+        .offset = 123,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "makeMyTrip",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_MakeMyTrip,
+        .hasIndex = 124,
+        .offset = 125,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "jioTv",
+        .dataTypeSpecific.clazz = Nil,
+        .number = protocol_message_notify_func_support_reply_FieldNumber_JioTv,
+        .hasIndex = 126,
+        .offset = 127,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeBool,
       },
     };
@@ -496,8 +796,10 @@ typedef struct protocol_message_notify_func_support_reply__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\013\016H\000\030G\000\031D\000\032D\244\000\033D\204\247\000\034E\207\000\035c\204\000\036F\204\000\037F\250\000 G\000!G"
-        "\000";
+        "*\016H\000\030G\000\031D\000\032D\244\000\033D\204\247\000\034E\207\000\035c\204\000\036F\204\000\037F\250\000 G\000!G"
+        "\000\"e\000#I\000$H\245\245\000%H\000&C\000\'G\000(F\000)F\000*K\000+F\250\000,F\245\000-E"
+        "\000.E\000/H\0000E\0001F\245\0002D\0003G\0004G\0005C\246\0006F\0007D\246\0008F\0009E\247"
+        "\000:E\000;D\000<E\000=G\000>E\245\245\000\?D\242\244\000@C\242\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

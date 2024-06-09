@@ -29,6 +29,7 @@ CF_EXTERN_C_BEGIN
 
 GPB_ENUM_FWD_DECLARE(call_status);
 GPB_ENUM_FWD_DECLARE(operate_type);
+GPB_ENUM_FWD_DECLARE(tran_direction_type);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,14 +57,14 @@ typedef GPB_ENUM(protocol_call_switch_FieldNumber) {
 };
 
 /**
- * Incoming call configuration
+ * Call configuration
  **/
 GPB_FINAL @interface protocol_call_switch : GPBMessage
 
-/** 1bytes operation type 0: invalid operation 1: query 2: set */
+/** 1bytes operation type 0: invalid operation 1: query 2: setting */
 @property(nonatomic, readwrite) enum operate_type operate;
 
-/** 1byte call switch true on false off */
+/** 1bytes call switch true open false close */
 @property(nonatomic, readwrite) BOOL callSwitch;
 
 /** 1bytes call delay in seconds */
@@ -93,10 +94,10 @@ typedef GPB_ENUM(protocol_call_switch_inquire_reply_FieldNumber) {
 
 GPB_FINAL @interface protocol_call_switch_inquire_reply : GPBMessage
 
-/** 1bytes operation type 0: invalid operation 1: query 2: set */
+/** 1bytes operation type 0: invalid operation 1: query 2: setting */
 @property(nonatomic, readwrite) enum operate_type operate;
 
-/** 1byte call switch true on false off */
+/** 1bytes call switch true open false close */
 @property(nonatomic, readwrite) BOOL callSwitch;
 
 /** 1bytes call delay in seconds */
@@ -119,35 +120,28 @@ void Setprotocol_call_switch_inquire_reply_Operate_RawValue(protocol_call_switch
 #pragma mark - protocol_call_remind
 
 typedef GPB_ENUM(protocol_call_remind_FieldNumber) {
-  protocol_call_remind_FieldNumber_ContactLen = 1,
-  protocol_call_remind_FieldNumber_ContactText = 2,
-  protocol_call_remind_FieldNumber_PhoneNumberLen = 3,
-  protocol_call_remind_FieldNumber_PhoneNumber = 4,
+  protocol_call_remind_FieldNumber_ContactName = 1,
+  protocol_call_remind_FieldNumber_PhoneNumber = 2,
 };
 
 /**
- * incoming call
+ * Call reminder
  **/
 GPB_FINAL @interface protocol_call_remind : GPBMessage
 
-/** 2bytes contact length */
-@property(nonatomic, readwrite) uint32_t contactLen;
+/** max:64 contact name */
+@property(nonatomic, readwrite, copy, null_resettable) NSData *contactName;
 
-/** contact name */
-@property(nonatomic, readwrite, copy, null_resettable) NSString *contactText;
-
-/** 2bytes length of phone number */
-@property(nonatomic, readwrite) uint32_t phoneNumberLen;
-
-/** max:32 phone number */
-@property(nonatomic, readwrite, copy, null_resettable) NSString *phoneNumber;
+/** max:32 Phone number */
+@property(nonatomic, readwrite, copy, null_resettable) NSData *phoneNumber;
 
 @end
 
 #pragma mark - protocol_call_remind_status
 
 typedef GPB_ENUM(protocol_call_remind_status_FieldNumber) {
-  protocol_call_remind_status_FieldNumber_Status = 1,
+  protocol_call_remind_status_FieldNumber_TranType = 1,
+  protocol_call_remind_status_FieldNumber_Status = 2,
 };
 
 /**
@@ -155,10 +149,25 @@ typedef GPB_ENUM(protocol_call_remind_status_FieldNumber) {
  **/
 GPB_FINAL @interface protocol_call_remind_status : GPBMessage
 
-/** 1bytes incoming call status */
+/** Transmission direction */
+@property(nonatomic, readwrite) enum tran_direction_type tranType;
+
+/** 1bytes Call status */
 @property(nonatomic, readwrite) enum call_status status;
 
 @end
+
+/**
+ * Fetches the raw value of a @c protocol_call_remind_status's @c tranType property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t protocol_call_remind_status_TranType_RawValue(protocol_call_remind_status *message);
+/**
+ * Sets the raw value of an @c protocol_call_remind_status's @c tranType property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void Setprotocol_call_remind_status_TranType_RawValue(protocol_call_remind_status *message, int32_t value);
 
 /**
  * Fetches the raw value of a @c protocol_call_remind_status's @c status property, even
