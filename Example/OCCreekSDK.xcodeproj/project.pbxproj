@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		071B9CDD2C3578E80004A334 /* squarePhoto2.zip in Resources */ = {isa = PBXBuildFile; fileRef = 071B9CDC2C3578E80004A334 /* squarePhoto2.zip */; };
 		073E04C52C19A608009EA116 /* CW06G_TITAD101_01.zip in Resources */ = {isa = PBXBuildFile; fileRef = 073E04C42C19A608009EA116 /* CW06G_TITAD101_01.zip */; };
 		078B62162B86F69000BCEFC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B62152B86F69000BCEFC3 /* AppDelegate.swift */; };
 		078B621A2B86F69000BCEFC3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B62192B86F69000BCEFC3 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		0702F1B22BBAAB5100712684 /* AppList.pbobjc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppList.pbobjc.h; sourceTree = "<group>"; };
 		0702F1B32BBAAB5100712684 /* AppList.pbobjc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppList.pbobjc.m; sourceTree = "<group>"; };
 		0702F1B42BBAAB5100712684 /* EventTracking.pbobjc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventTracking.pbobjc.m; sourceTree = "<group>"; };
+		071B9CDC2C3578E80004A334 /* squarePhoto2.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = squarePhoto2.zip; sourceTree = "<group>"; };
 		073E04C42C19A608009EA116 /* CW06G_TITAD101_01.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = CW06G_TITAD101_01.zip; sourceTree = "<group>"; };
 		078B61802B85B1CA00BCEFC3 /* ReplaceMe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplaceMe.m; sourceTree = "<group>"; };
 		078B61822B85B1CA00BCEFC3 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 		078B62142B86F69000BCEFC3 /* SwiftCreekSDK */ = {
 			isa = PBXGroup;
 			children = (
+				071B9CDC2C3578E80004A334 /* squarePhoto2.zip */,
 				073E04C42C19A608009EA116 /* CW06G_TITAD101_01.zip */,
 				07A73BB52BF22DE6007EFFB3 /* titan.zip */,
 				07941D372BCFB35F00CBFB62 /* squarePhoto.zip */,
@@ -570,6 +573,7 @@
 				07A73BB62BF22DE6007EFFB3 /* titan.zip in Resources */,
 				07A00DF62BA54E6F00AFC4B4 /* CASIO01_01.zip in Resources */,
 				07A00DF72BA54E6F00AFC4B4 /* Fun061101_03.zip in Resources */,
+				071B9CDD2C3578E80004A334 /* squarePhoto2.zip in Resources */,
 				07A00DF92BA54E6F00AFC4B4 /* acti06_2.zip in Resources */,
 				078B621D2B86F69000BCEFC3 /* Main.storyboard in Resources */,
 				078D40D32B8DC59A00369DE4 /* lw10_v1.0.42_24020401.ota in Resources */,

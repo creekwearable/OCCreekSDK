@@ -83,6 +83,7 @@ typedef void(^SuccessBase)(void);
 typedef void(^FailureBase)(void);
 typedef void(^FailureArgument)(NSInteger code,NSString* message);
 typedef void(^ListenDeviceState)(ConnectionStatus status,NSString* deviceName);
+typedef void(^BluetoothStateListen)(BluetoothState status);
 typedef void(^NoticeUpdateListen)(NoticeUpdateModel* noticeUpdateModel);
 typedef void(^EventReportListen)(EventReportModel* eventReportModel);
 typedef void(^ExceptionListen)(NSString* exception);
@@ -944,6 +945,8 @@ model:(ParsePhotoDialBase)model;
                               fileData:(NSData *)fileData
                                  model:(UpgradeStateBase)upgradeStateBase
                          uploadFailure:(FailureArgument)uploadFailure;
+
+- (void)bluetoothStateListen:(BluetoothStateListen)state;
 
 
 

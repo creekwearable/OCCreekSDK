@@ -225,7 +225,6 @@ class DialPhotoViewController: CreekBaseViewController,CropViewControllerDelegat
        }
        
        
-      
        
     }
     
@@ -242,6 +241,9 @@ class DialPhotoViewController: CreekBaseViewController,CropViewControllerDelegat
             }else if(model.sizeInfo.height == 466 && model.sizeInfo.width == 466 && model.sizeInfo.angle == 233){
                 titleName = "circlePhoto"
                 self.croppingStyle = .circular
+            }else if(model.sizeInfo.height == 280 && model.sizeInfo.width == 240){
+                titleName = "squarePhoto2"
+                self.croppingStyle = .default
             }
             if let path =  Bundle.main.path(forResource: titleName, ofType: "zip"){
                 let fileManager = FileManager()
@@ -304,7 +306,7 @@ class DialPhotoViewController: CreekBaseViewController,CropViewControllerDelegat
         if let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             var destinationURL = documentsURL
             destinationURL.appendPathComponent("directory/\(mac)/\(name)")
-            CreekInterFace.instance().parsePhotoDial(withPath: destinationURL.path, width: width, height: height, radius: cornerRadius,platformType: .jx3085CPlatform){ [weak self] model in
+            CreekInterFace.instance().parsePhotoDial(withPath: destinationURL.path, width: width, height: height, radius: cornerRadius,platformType: .jx3085EPlatform){ [weak self] model in
                 self?.dialParseModel = model
                 self?.setDialUI()
                 dispatch_main_sync_safe {

@@ -207,5 +207,15 @@ typedef NS_ENUM(NSInteger, BindType) {
 };
 
 
+typedef NS_ENUM(NSInteger, BluetoothState) {
+    BluetoothStateUnknown = 0,    // State unknown, update imminent.
+    BluetoothStateUnauthorized,   // The application is not authorized to use the Bluetooth Low Energy role
+    BluetoothStateOn,             // Bluetooth is currently powered on and available to use.
+    BluetoothStateOff             // Bluetooth is currently powered off
+};
+
+
+
+
 
 #endif /* EnumValue_h */

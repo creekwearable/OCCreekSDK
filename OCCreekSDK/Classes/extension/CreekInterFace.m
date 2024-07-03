@@ -91,6 +91,7 @@
 @property (nonatomic, copy) ConnectBack connectBlock;
 @property (nonatomic, copy) InTransitionDeviceBack inTransitionDeviceBlock;
 @property (nonatomic, copy) ListenDeviceState listenDeviceStateBlock;
+@property (nonatomic, copy) BluetoothStateListen bluetoothStateBlock;
 @property (nonatomic, copy) NoticeUpdateListen noticeUpdateListen;
 @property (nonatomic, copy) EventReportListen eventReportListen;
 @property (nonatomic, copy) ExceptionListen exceptionListen;
@@ -1215,6 +1216,34 @@ static CreekInterFace * instance =nil;
         if(block){
             block(model);
             [self.upgradeStateClosureDic removeObjectForKey:[call method]];
+        }else{
+            NSLog(@"Method %@ not found or not a valid block.", [call method]);
+        }
+        
+    }else if ([[call method] containsString:@"bluetoothStateListen"]){
+        int value = [[call arguments] intValue];
+        BluetoothState blueState;
+        switch (value) {
+            case 0:
+                blueState = BluetoothStateUnknown;
+                break;
+            case 2:
+                blueState = BluetoothStateUnauthorized;
+                break;
+            case 4:
+                blueState = BluetoothStateOn;
+                break;
+            case 6:
+                blueState = BluetoothStateOff;
+                break;
+                
+            default:
+                blueState = BluetoothStateUnknown;
+                break;
+        }
+        
+        if (self.bluetoothStateBlock) {
+            self.bluetoothStateBlock(blueState);
         }else{
             NSLog(@"Method %@ not found or not a valid block.", [call method]);
         }
@@ -2699,6 +2728,10 @@ static CreekInterFace * instance =nil;
     } else {
         NSLog(@"Error converting dictionary to JSON: %@", error.localizedDescription);
     }
+}
+
+- (void)bluetoothStateListen:(BluetoothStateListen)state {
+    self.bluetoothStateBlock = state;
 }
 
 @end
