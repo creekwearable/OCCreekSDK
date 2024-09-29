@@ -67,6 +67,7 @@ typedef GPB_ENUM(Platform) {
   Platform_Jx3085CPlatform = 0,
   Platform_Jx3085LPlatform = 1,
   Platform_Jx3085EPlatform = 2,
+  Platform_Jx3085SPlatform = 3,
 };
 
 GPBEnumDescriptor *Platform_EnumDescriptor(void);
@@ -100,30 +101,6 @@ GPBEnumDescriptor *Shape_EnumDescriptor(void);
  * the time this source was generated.
  **/
 BOOL Shape_IsValidValue(int32_t value);
-
-#pragma mark - Enum tran_direction_type
-
-typedef GPB_ENUM(tran_direction_type) {
-  /**
-   * Value used if any message's field encounters a value that is not defined
-   * by this enum. The message will also have C functions to get/set the rawValue
-   * of the field.
-   **/
-  tran_direction_type_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  /** 手表发起 */
-  tran_direction_type_WatchTran = 0,
-
-  /** app发起 */
-  tran_direction_type_AppTran = 1,
-};
-
-GPBEnumDescriptor *tran_direction_type_EnumDescriptor(void);
-
-/**
- * Checks to see if the given value is defined by the enum or was not known at
- * the time this source was generated.
- **/
-BOOL tran_direction_type_IsValidValue(int32_t value);
 
 #pragma mark - Enum Dev_type
 
@@ -531,7 +508,7 @@ typedef GPB_ENUM(language) {
   /** Polish */
   language_Polish = 11,
 
-  /** Czech language */
+  /** Czech */
   language_Czech = 12,
 
   /** Slovak */
@@ -555,7 +532,7 @@ typedef GPB_ENUM(language) {
   /** Bulgarian */
   language_Bulgarian = 19,
 
-  /** Malay language */
+  /** Malay */
   language_Malay = 20,
 
   /** Indonesian */
@@ -570,11 +547,26 @@ typedef GPB_ENUM(language) {
   /** Hebrew */
   language_Hebrew = 24,
 
-  /** Devagna */
+  /** Devanagari */
   language_Devanagari = 25,
 
   /** Turkish */
   language_Turkey = 26,
+
+  /** Romanian */
+  language_Romanian = 27,
+
+  /** Dutch */
+  language_Dutch = 28,
+
+  /** Ukrainian */
+  language_Ukrainian = 29,
+
+  /** Arabic */
+  language_Arabic = 30,
+
+  /** Persian */
+  language_Farsi = 31,
 };
 
 GPBEnumDescriptor *language_EnumDescriptor(void);
@@ -1640,7 +1632,7 @@ typedef GPB_ENUM(message_remind_type) {
   message_remind_type_Spotify = 32,
   message_remind_type_Discord = 33,
 
-  /** 其他类型 */
+  /** ohter */
   message_remind_type_Ohter = 34,
   message_remind_type_Dailyhunt = 35,
   message_remind_type_FastrackSmartWorld = 36,
@@ -1681,6 +1673,30 @@ GPBEnumDescriptor *message_remind_type_EnumDescriptor(void);
  * the time this source was generated.
  **/
 BOOL message_remind_type_IsValidValue(int32_t value);
+
+#pragma mark - Enum tran_direction_type
+
+typedef GPB_ENUM(tran_direction_type) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  tran_direction_type_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  /** Initiated by watch */
+  tran_direction_type_WatchTran = 0,
+
+  /** Initiated by app */
+  tran_direction_type_AppTran = 1,
+};
+
+GPBEnumDescriptor *tran_direction_type_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL tran_direction_type_IsValidValue(int32_t value);
 
 #pragma mark - Enum notify_os_platform
 
@@ -1857,6 +1873,54 @@ GPBEnumDescriptor *app_list_EnumDescriptor(void);
  * the time this source was generated.
  **/
 BOOL app_list_IsValidValue(int32_t value);
+
+#pragma mark - Enum msg_send_type
+
+typedef GPB_ENUM(msg_send_type) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  msg_send_type_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  /** Send from watch */
+  msg_send_type_WatchMsgSend = 0,
+
+  /** App reply */
+  msg_send_type_AppMsgReply = 1,
+};
+
+GPBEnumDescriptor *msg_send_type_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL msg_send_type_IsValidValue(int32_t value);
+
+#pragma mark - Enum msg_reply_type
+
+typedef GPB_ENUM(msg_reply_type) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  msg_reply_type_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  /** Quick reply to message */
+  msg_reply_type_MsgReplyMsg = 0,
+
+  /** Quick reply to call */
+  msg_reply_type_MsgReplyCall = 1,
+};
+
+GPBEnumDescriptor *msg_reply_type_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL msg_reply_type_IsValidValue(int32_t value);
 
 #pragma mark - EnumsRoot
 

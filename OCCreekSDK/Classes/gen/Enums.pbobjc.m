@@ -74,13 +74,14 @@ GPBEnumDescriptor *Platform_EnumDescriptor(void) {
   if (!descriptor) {
     static const char *valueNames =
         "Jx3085CPlatform\000Jx3085LPlatform\000Jx3085EP"
-        "latform\000";
+        "latform\000Jx3085SPlatform\000";
     static const int32_t values[] = {
         Platform_Jx3085CPlatform,
         Platform_Jx3085LPlatform,
         Platform_Jx3085EPlatform,
+        Platform_Jx3085SPlatform,
     };
-    static const char *extraTextFormatInfo = "\003\000b\205\350\000\001b\205\350\000\002b\205\350\000";
+    static const char *extraTextFormatInfo = "\004\000b\205\350\000\001b\205\350\000\002b\205\350\000\003b\205\350\000";
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(Platform)
                                        valueNames:valueNames
@@ -101,6 +102,7 @@ BOOL Platform_IsValidValue(int32_t value__) {
     case Platform_Jx3085CPlatform:
     case Platform_Jx3085LPlatform:
     case Platform_Jx3085EPlatform:
+    case Platform_Jx3085SPlatform:
       return YES;
     default:
       return NO;
@@ -136,41 +138,6 @@ BOOL Shape_IsValidValue(int32_t value__) {
   switch (value__) {
     case Shape_SquareShape:
     case Shape_RoundShape:
-      return YES;
-    default:
-      return NO;
-  }
-}
-
-#pragma mark - Enum tran_direction_type
-
-GPBEnumDescriptor *tran_direction_type_EnumDescriptor(void) {
-  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
-  if (!descriptor) {
-    static const char *valueNames =
-        "WatchTran\000AppTran\000";
-    static const int32_t values[] = {
-        tran_direction_type_WatchTran,
-        tran_direction_type_AppTran,
-    };
-    GPBEnumDescriptor *worker =
-        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(tran_direction_type)
-                                       valueNames:valueNames
-                                           values:values
-                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:tran_direction_type_IsValidValue];
-    GPBEnumDescriptor *expected = nil;
-    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
-      [worker release];
-    }
-  }
-  return descriptor;
-}
-
-BOOL tran_direction_type_IsValidValue(int32_t value__) {
-  switch (value__) {
-    case tran_direction_type_WatchTran:
-    case tran_direction_type_AppTran:
       return YES;
     default:
       return NO;
@@ -683,7 +650,8 @@ GPBEnumDescriptor *language_EnumDescriptor(void) {
         "rench\000Korean\000Polish\000Czech\000Slovak\000Hungari"
         "an\000Greek\000Lithuanian\000Latvian\000Estonian\000Bul"
         "garian\000Malay\000Indonesian\000Thailand\000Vietnam"
-        "ese\000Hebrew\000Devanagari\000Turkey\000";
+        "ese\000Hebrew\000Devanagari\000Turkey\000Romanian\000Du"
+        "tch\000Ukrainian\000Arabic\000Farsi\000";
     static const int32_t values[] = {
         language_LangInvalid,
         language_Chinese,
@@ -712,6 +680,11 @@ GPBEnumDescriptor *language_EnumDescriptor(void) {
         language_Hebrew,
         language_Devanagari,
         language_Turkey,
+        language_Romanian,
+        language_Dutch,
+        language_Ukrainian,
+        language_Arabic,
+        language_Farsi,
     };
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(language)
@@ -756,6 +729,11 @@ BOOL language_IsValidValue(int32_t value__) {
     case language_Hebrew:
     case language_Devanagari:
     case language_Turkey:
+    case language_Romanian:
+    case language_Dutch:
+    case language_Ukrainian:
+    case language_Arabic:
+    case language_Farsi:
       return YES;
     default:
       return NO;
@@ -2002,6 +1980,41 @@ BOOL message_remind_type_IsValidValue(int32_t value__) {
   }
 }
 
+#pragma mark - Enum tran_direction_type
+
+GPBEnumDescriptor *tran_direction_type_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "WatchTran\000AppTran\000";
+    static const int32_t values[] = {
+        tran_direction_type_WatchTran,
+        tran_direction_type_AppTran,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(tran_direction_type)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:tran_direction_type_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL tran_direction_type_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case tran_direction_type_WatchTran:
+    case tran_direction_type_AppTran:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
 #pragma mark - Enum notify_os_platform
 
 GPBEnumDescriptor *notify_os_platform_EnumDescriptor(void) {
@@ -2227,6 +2240,76 @@ BOOL app_list_IsValidValue(int32_t value__) {
     case app_list_AppListFindPhone:
     case app_list_AppListWorldClock:
     case app_list_AppListSettings:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
+#pragma mark - Enum msg_send_type
+
+GPBEnumDescriptor *msg_send_type_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "WatchMsgSend\000AppMsgReply\000";
+    static const int32_t values[] = {
+        msg_send_type_WatchMsgSend,
+        msg_send_type_AppMsgReply,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(msg_send_type)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:msg_send_type_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL msg_send_type_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case msg_send_type_WatchMsgSend:
+    case msg_send_type_AppMsgReply:
+      return YES;
+    default:
+      return NO;
+  }
+}
+
+#pragma mark - Enum msg_reply_type
+
+GPBEnumDescriptor *msg_reply_type_EnumDescriptor(void) {
+  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
+  if (!descriptor) {
+    static const char *valueNames =
+        "MsgReplyMsg\000MsgReplyCall\000";
+    static const int32_t values[] = {
+        msg_reply_type_MsgReplyMsg,
+        msg_reply_type_MsgReplyCall,
+    };
+    GPBEnumDescriptor *worker =
+        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(msg_reply_type)
+                                       valueNames:valueNames
+                                           values:values
+                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
+                                     enumVerifier:msg_reply_type_IsValidValue];
+    GPBEnumDescriptor *expected = nil;
+    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
+      [worker release];
+    }
+  }
+  return descriptor;
+}
+
+BOOL msg_reply_type_IsValidValue(int32_t value__) {
+  switch (value__) {
+    case msg_reply_type_MsgReplyMsg:
+    case msg_reply_type_MsgReplyCall:
       return YES;
     default:
       return NO;

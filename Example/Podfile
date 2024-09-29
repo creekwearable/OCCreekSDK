@@ -4,7 +4,7 @@ target 'SwiftCreekSDK' do
   use_frameworks!
   pod 'OCCreekSDK', :path => '../'
   pod 'SnapKit'
-  pod 'IQKeyboardManagerSwift'
+#  pod 'IQKeyboardManagerSwift'
   pod 'MBProgressHUD'
   pod 'Toast-Swift'
   pod 'ZIPFoundation'
