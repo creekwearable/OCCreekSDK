@@ -201,7 +201,7 @@ static CreekInterFace * instance =nil;
     [_flutterEngine run];
     [GeneratedPluginRegistrant registerWithRegistry:_flutterEngine];
     _methodChannel = [FlutterMethodChannel methodChannelWithName:@"com.watchic.app/sdk" binaryMessenger: [_flutterEngine binaryMessenger]];
-    __unsafe_unretained typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     [_methodChannel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
         
         [weakSelf handleMethodCall:call result:result];
@@ -211,1047 +211,1055 @@ static CreekInterFace * instance =nil;
 
 -(void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result{
     NSLog(@"ios%@",[call method]);
-    if ([[call method] containsString:@"scanBase"]) {
-        NSString * json = (NSString*)[call arguments];
-        NSError *error = nil;
-        ScanDeviceArray* arr =  ScanDeviceArrayFromJSON(json, &error);
-        DevicesBack block = [self.devicesBackDic objectForKey:[call method]];
-        if(block){
-            block(arr);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-    }else if ([[call method] containsString:@"endScan"]){
-        EndScanBase block = [self.endScanDic objectForKey:[call method]];
-        if(block){
-            block();
-            [self.endScanDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    } else if ([[call method] containsString:@"scanConnect"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        ScanDeviceModel *model = [ScanDeviceModel fromJSONDictionary:dict];
-        DeviceBack block = [self.deviceBackDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.deviceBackDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-        
-    }else if ([@"connect" isEqualToString:[call method]]){
-        BOOL isBool = (BOOL)[call arguments];
-        if (self.connectBlock) {
-            self.connectBlock(isBool);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([@"inTransitionDevice" isEqualToString:[call method]]){
-        BOOL isBool = (BOOL)[call arguments];
-        if (self.inTransitionDeviceBlock) {
-            self.inTransitionDeviceBlock(isBool);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getFirmware"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        
-        protocol_device_info* model = [[protocol_device_info alloc] initWithData:data.data error:&error];
-        FirmwareBase block = [self.firmwareDic objectForKey:[call method]];
-        if(block){
-            block(model);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([@"progress" isEqualToString:[call method]]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSInteger message = 0;
-        NSString* key = @"";
-        if ([dict objectForKey:@"message"]) {
-            message = [[dict objectForKey:@"message"] intValue];
-        }
-        if ([dict objectForKey:@"key"]) {
-            key = [dict objectForKey:@"key"];
-        }
-        ProgressBase block = [self.progressDic objectForKey:key];
-        if(block){
-            block(message);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([@"success" isEqualToString:[call method]]){
-        SuccessBase block = [self.successDic objectForKey:[call arguments]];
-        if(block){
-            block();
-            [self.successDic removeObjectForKey:[call arguments]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call arguments]);
-        }
-        
-    }else if ([@"failure" isEqualToString:[call method]]){
-        FailureBase block = [self.failureDic objectForKey:[call arguments]];
-        if(block){
-            block();
-            [self.failureDic removeObjectForKey:[call arguments]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call arguments]);
-        }
-        
-    }else if ([[call method] isEqualToString:@"failureArgument"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSInteger code = 0;
-        NSString* message = @"";
-        NSString* key = @"";
-        if ([dict objectForKey:@"message"]) {
-            message = [dict objectForKey:@"message"];
-        }
-        if ([dict objectForKey:@"key"]) {
-            key = [dict objectForKey:@"key"];
-        }
-        if ([dict objectForKey:@"code"]) {
-            code = [[dict objectForKey:@"code"] intValue];
-        }
-        FailureArgument block = [self.failureArgumentDic objectForKey:key];
-        if(block){
-            block(code,message);
-            [self.failureArgumentDic removeObjectForKey:key];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", key);
-        }
-        
-        
-    }else if ([@"listenDeviceState" isEqualToString:[call method]]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSInteger status = 0;
-        NSString* deviceName = @"";
-        if ([dict objectForKey:@"status"]) {
-            status = [[dict objectForKey:@"status"] intValue];
-        }
-        if ([dict objectForKey:@"deviceName"]) {
-            deviceName = [dict objectForKey:@"deviceName"];
-        }
-        ConnectionStatus cStatus = (ConnectionStatus)status;
-        if(cStatus != ConnectionStatusSync || cStatus != ConnectionStatusSyncComplete){
-            self.connectStatus = (ConnectionStatus)status;
-        }
-        if (self.listenDeviceStateBlock) {
-            self.listenDeviceStateBlock(self.connectStatus,deviceName);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-        
-        
-        
-    }else if ([[call method] containsString:@"bluetoothStatus"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_connect_status_inquire_reply* model = [[protocol_connect_status_inquire_reply alloc] initWithData:[data data] error:&error];
-        BluetoothStatusBase block = [self.bluetoothStatusDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.bluetoothStatusDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getTime"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_device_time_inquire_reply* model = [[protocol_device_time_inquire_reply alloc] initWithData:[data data] error:&error];
-        ATimeBase block = [self.timeDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.timeDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getLanguage"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_language_inquire_reply* model = [[protocol_language_inquire_reply alloc] initWithData:[data data] error:&error];
-        LanguageBase block = [self.languageDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.languageDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getUserInfo"]){
-        
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_user_info_operate* model = [[protocol_user_info_operate alloc] initWithData:[data data] error:&error];
-        UserBase block = [self.userDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.userDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getAlarm"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_alarm_inquire_reply* model = [[protocol_alarm_inquire_reply alloc] initWithData:[data data] error:&error];
-        AlarmBase block = [self.alarmDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.alarmDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getDisturb"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_disturb_inquire_reply* model = [[protocol_disturb_inquire_reply alloc] initWithData:[data data] error:&error];
-        DisturbBase block = [self.disturbDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.disturbDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getScreen"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_screen_brightness_inquire_reply* model = [[protocol_screen_brightness_inquire_reply alloc] initWithData:[data data] error:&error];
-        ScreenBase block = [self.screenDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.screenDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getMonitor"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_health_monitor_inquire_reply* model = [[protocol_health_monitor_inquire_reply alloc] initWithData:[data data] error:&error];
-        MonitorBase block = [self.monitorDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.monitorDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSleepMonitor"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_sleep_monitor_inquire_reply* model = [[protocol_sleep_monitor_inquire_reply alloc] initWithData:[data data] error:&error];
-        SleepMonitorBase block = [self.sleepMonitorDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sleepMonitorDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getWater"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_drink_water_inquire_reply* model = [[protocol_drink_water_inquire_reply alloc] initWithData:[data data] error:&error];
-        WaterBase block = [self.waterDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.waterDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getFindPhoneWatch"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_find_phone_watch_inquire_reply* model = [[protocol_find_phone_watch_inquire_reply alloc] initWithData:[data data] error:&error];
-        FindPhoneWatchBase block = [self.findPhoneWatchDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.findPhoneWatchDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getVoice"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_voice_assistant_inquire_reply* model = [[protocol_voice_assistant_inquire_reply alloc] initWithData:[data data] error:&error];
-        VoiceBase block = [self.voiceDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.voiceDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getWorldTime"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_world_time_inquire_reply* model = [[protocol_world_time_inquire_reply alloc] initWithData:[data data] error:&error];
-        WorldTimeBase block = [self.worldTimeDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.voiceDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getStanding"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_standing_remind_inquire_reply* model = [[protocol_standing_remind_inquire_reply alloc] initWithData:[data data] error:&error];
-        StandingBase block = [self.standingDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.standingDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getMessageType"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_message_notify_func_support_reply* model = [[protocol_message_notify_func_support_reply alloc] initWithData:[data data] error:&error];
-        MessageTypeBase block = [self.messageTypeDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.messageTypeDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getMessageApp"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_message_notify_data_inquire_reply* model = [[protocol_message_notify_data_inquire_reply alloc] initWithData:[data data] error:&error];
-        MessageAppBase block = [self.messageAppDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.messageAppDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getMessageOnOff"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_message_notify_switch_inquire_reply* model = [[protocol_message_notify_switch_inquire_reply alloc] initWithData:[data data] error:&error];
-        MessageOnOffBase block = [self.messageOnOffDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.messageOnOffDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getCall"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_call_switch_inquire_reply* model = [[protocol_call_switch_inquire_reply alloc] initWithData:[data data] error:&error];
-        CallBase block = [self.callDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.callDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getContacts"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_frequent_contacts_inquire_reply* model = [[protocol_frequent_contacts_inquire_reply alloc] initWithData:[data data] error:&error];
-        ContactsBase block = [self.contactsDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.contactsDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getCard"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_quick_card_inquire_reply* model = [[protocol_quick_card_inquire_reply alloc] initWithData:[data data] error:&error];
-        CardBase block = [self.cardDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.cardDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSportIdentification"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_exercise_intelligent_recognition_inquire_reply* model = [[protocol_exercise_intelligent_recognition_inquire_reply alloc] initWithData:[data data] error:&error];
-        SportIdentificationBase block = [self.sportIdentificationDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sportIdentificationDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSportSub"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_exercise_sporting_param_sort_inquire_reply* model = [[protocol_exercise_sporting_param_sort_inquire_reply alloc] initWithData:[data data] error:&error];
-        SportSubBase block = [self.sportSubDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sportSubDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSportSort"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_exercise_sport_mode_sort_inquire_reply* model = [[protocol_exercise_sport_mode_sort_inquire_reply alloc] initWithData:[data data] error:&error];
-        SportSortBase block = [self.sportSortDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sportSortDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getSportType"]){
-        
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_exercise_func_support_reply* model = [[protocol_exercise_func_support_reply alloc] initWithData:[data data] error:&error];
-        SportTypeBase block = [self.sportTypeDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sportTypeDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getWatchDial"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_watch_dial_plate_inquire_reply* model = [[protocol_watch_dial_plate_inquire_reply alloc] initWithData:[data data] error:&error];
-        WatchDialBase block = [self.watchDialDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.watchDialDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getActivityNewTimeData"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<ActivityModel *> * modelArr = [ActivityModel initWithArray:dic[@"data"]];
-        ActivitysClosure block = [self.activitysClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.watchDialDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSleepNewTimeData"]){
-        
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<SleepModel *> * modelArr = [SleepModel initWithArray:dic[@"data"]];
-        SleepsClosure block = [self.sleepsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sleepsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getHeartRateNewTimeData"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<HeartRateModel *> * modelArr = [HeartRateModel initWithArray:dic[@"data"]];
-        HeartRatesClosure block = [self.heartRatesClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.heartRatesClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getStressNewTimeData"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<StressModel *> * modelArr = [StressModel initWithArray:dic[@"data"]];
-        StresssClosure block = [self.stresssClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.stresssClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getNoiseNewTimeData"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<NoiseModel *> * modelArr = [NoiseModel initWithArray:dic[@"data"]];
-        NoisesClosure block = [self.noisesClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.noisesClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getSpoNewTimeData"]){
-        
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<OxygenModel *> * modelArr = [OxygenModel initWithArray:dic[@"data"]];
-        OxygensClosure block = [self.oxygensClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.oxygensClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getSportRecord"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<SportModel *> * modelArr = [SportModel initWithArray:dic[@"data"]];
-        SportsClosure block = [self.sportsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sportsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getSportDetails"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        SportModel * model = [[SportModel alloc] initWithDictionary: dic[@"data"]];
-        SportClosure block = [self.sportClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sportClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSportTimeData"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<SportModel *> * modelArr = [SportModel initWithArray:dic[@"data"]];
-        SportsClosure block = [self.sportsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sportsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"delSportRecord"]){
-        SuccessBase block = [self.successDic objectForKey:[call method]];
-        if(block){
-            block();
-            [self.successDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getHrvNewTimeData"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<HrvModel *> * modelArr = [HrvModel initWithArray:dic[@"data"]];
-        HrvsClosure block = [self.hrvsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sportsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getBindDevice"]){
-        NSString * json = (NSString*)[call arguments];
-        NSError *error = nil;
-        ScanDeviceArray* arr =  ScanDeviceArrayFromJSON(json, &error);
-        DevicesBack block = [self.devicesBackDic objectForKey:[call method]];
-        if(block){
-            block(arr);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getHotKey"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_button_crown_inquire_reply* model = [[protocol_button_crown_inquire_reply alloc] initWithData:[data data] error:&error];
-        HotKeyBase block = [self.hotKeyDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.hotKeyDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([ [call method] containsString:@"getMenstrual"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_menstruation_inquire_reply* model = [[protocol_menstruation_inquire_reply alloc] initWithData:[data data] error:&error];
-        MenstrualBase block = [self.menstrualDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.menstrualDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getTable"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_function_table* model = [[protocol_function_table alloc] initWithData:[data data] error:&error];
-        TableBase block = [self.tableDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.tableDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSOSContacts"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_emergency_contacts_inquire_reply* model = [[protocol_emergency_contacts_inquire_reply alloc] initWithData:[data data] error:&error];
-        SosContactsBase block = [self.sosContactsDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.sosContactsDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getFocus"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_focus_mode_inquire_reply* model = [[protocol_focus_mode_inquire_reply alloc] initWithData:[data data] error:&error];
-        FocusBase block = [self.focusDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.focusDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getAppList"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_app_list_inquire_reply* model = [[protocol_app_list_inquire_reply alloc] initWithData:[data data] error:&error];
-        AppListBase block = [self.appListDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.appListDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getEventTracking"]){
-        FlutterStandardTypedData *data = [call arguments];
-        NSError *error = nil;
-        protocol_event_tracking_inquire_reply* model = [[protocol_event_tracking_inquire_reply alloc] initWithData:[data data] error:&error];
-        EventTrackingBase block = [self.eventTrackingDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.eventTrackingDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([@"noticeUpdate" isEqualToString:[call method]]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NoticeUpdateModel * model = [[NoticeUpdateModel alloc] initWithDictionary:dic];
-        if(self.noticeUpdateListen){
-            self.noticeUpdateListen(model);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([@"eventReport" isEqualToString:[call method]]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        EventReportModel * model = [[EventReportModel alloc] initWithDictionary:dic];
-        if(self.eventReportListen){
-            self.eventReportListen(model);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-        
-    }else if ([@"exceptionListen" isEqualToString:[call method]]){
-        NSString * json = (NSString*)[call arguments];
-        if(self.exceptionListen){
-            self.exceptionListen(json);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSportUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<SportModel *> * modelArr = [SportModel initWithArray:dic[@"data"]];
-        SportsClosure block = [self.sportsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sportsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getActivityUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<ActivityModel *> * modelArr = [ActivityModel initWithArray:dic[@"data"]];
-        ActivitysClosure block = [self.activitysClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.activitysClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getHeartRateUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<HeartRateModel *> * modelArr = [HeartRateModel initWithArray:dic[@"data"]];
-        HeartRatesClosure block = [self.heartRatesClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.heartRatesClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getHrvUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<HrvModel *> * modelArr = [HrvModel initWithArray:dic[@"data"]];
-        HrvsClosure block = [self.hrvsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sportsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getNoiseUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<NoiseModel *> * modelArr = [NoiseModel initWithArray:dic[@"data"]];
-        NoisesClosure block = [self.noisesClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.noisesClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getStressUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<StressModel *> * modelArr = [StressModel initWithArray:dic[@"data"]];
-        StresssClosure block = [self.stresssClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.stresssClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSleepUploadDays"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<SleepModel *> * modelArr = [SleepModel initWithArray:dic[@"data"]];
-        SleepsClosure block = [self.sleepsClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.sleepsClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSpoUploadStatus"]){
-        NSString * json = (NSString*)[call arguments];
-        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
-        NSMutableArray<OxygenModel *> * modelArr = [OxygenModel initWithArray:dic[@"data"]];
-        OxygensClosure block = [self.oxygensClosureDic objectForKey:[call method]];
-        if(block){
-            block(modelArr);
-            [self.oxygensClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"rawQueryDB"]){
-        NSString * json = (NSString*)[call arguments];
-        RawQueryDBClosure block = [self.rawQueryDBClosureDic objectForKey:[call method]];
-        if(block){
-            block(json);
-            [self.rawQueryDBClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-        
-    }else if ([[call method] containsString:@"encodeOnlineFile"] || [ [call method] containsString:@"encodeOfflineFile"] || [ [call method] containsString:@"encodePhoneFile"]){
-        FlutterStandardTypedData *data = [call arguments];
-        EphemerisData block = [self.ephemerisClosureDic objectForKey:[call method]];
-        if(block){
-            block(data.data);
-            [self.ephemerisClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([@"logPath" isEqualToString:[call method]]){
-        NSString * json = (NSString*)[call arguments];
-        if(self.logPathClosure){
-            self.logPathClosure(json);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getSNFirmware"]){
-        NSString * json = (NSString*)[call arguments];
-        SNFirmwareBase block = [self.SNFirmwareDic objectForKey:[call method]];
-        if(block){
-            block(json);
-            [self.SNFirmwareDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"parseDial"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
-        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parseDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"parsePhotoDial"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
-        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"setCurrentColor"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
-        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parseDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"setCurrentPhotoColor"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
-        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"setCurrentBackgroundImagePath"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
-        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parseDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"setCurrentClockPosition"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
-        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"setCurrentPhotoBackgroundImagePath"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
-        ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"setCurrentFunction"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
-        ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.parseDialClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getPreviewImage"]){
-        FlutterStandardTypedData *data = [call arguments];
-        
-        PreviewImageBase block = [self.previewImageClosureDic objectForKey:[call method]];
-        if(block){
-            block(data.data);
-            [self.previewImageClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"encodeDial"]){
-        FlutterStandardTypedData *data = [call arguments];
-        
-        DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
-        if(block){
-            block(data.data);
-            [self.previewImageClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"encodePhotoDial"]){
-        FlutterStandardTypedData *data = [call arguments];
-        
-        DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
-        if(block){
-            block(data.data);
-            [self.previewImageClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"ephemerisInit"]){
-        if (_gpsClosure) {
-            EphemerisGPSModel *result = _gpsClosure();
-            [self ephemerisInitGPSWithEphemerisGPSModel:result];
-        }
-        
-    }else if ([[call method] containsString:@"ephemerisGPS"]){
-        
-        
-    }else if ([[call method] containsString:@"checkPhoneBookPermissions"]){
-        NSLog(@"checkPhoneBookPermissions %@ ", [call arguments]);
-        int isBool = [[call arguments] intValue];
-        BoolBase block = [self.boolClosureDic objectForKey:[call method]];
-        if (block) {
-            block(isBool == 0 ? NO : YES);
-            [self.boolClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"requestPhoneBookPermissions"]){
-        int isBool = [[call arguments] intValue];
-        BoolBase block = [self.boolClosureDic objectForKey:[call method]];
-        if (block) {
-            block(isBool == 0 ? NO : YES);
-            [self.boolClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getOTAUpgradeVersion"]){
-        int value = [[call arguments] intValue];
-        
-        ValueBase block = [self.valueClosureDic objectForKey:[call method]];
-        if(block){
-            block(@(value));
-            [self.valueClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"getOTAUpgradeState"]){
-        NSDictionary * dic = (NSDictionary*)[call arguments];
-        UpgradeModel* model =  [[UpgradeModel alloc] initWithDictionary:dic];
-        UpgradeStateBase block = [self.upgradeStateClosureDic objectForKey:[call method]];
-        if(block){
-            block(model);
-            [self.upgradeStateClosureDic removeObjectForKey:[call method]];
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else if ([[call method] containsString:@"bluetoothStateListen"]){
-        int value = [[call arguments] intValue];
-        BluetoothState blueState;
-        switch (value) {
-            case 0:
-                blueState = BluetoothStateUnknown;
-                break;
-            case 2:
-                blueState = BluetoothStateUnauthorized;
-                break;
-            case 4:
-                blueState = BluetoothStateOn;
-                break;
-            case 6:
-                blueState = BluetoothStateOff;
-                break;
-                
-            default:
-                blueState = BluetoothStateUnknown;
-                break;
-        }
-        
-        if (self.bluetoothStateBlock) {
-            self.bluetoothStateBlock(blueState);
-        }else{
-            NSLog(@"Method %@ not found or not a valid block.", [call method]);
-        }
-        
-    }else {
-        
-        result(FlutterMethodNotImplemented);
+    @try {
+        if ([[call method] containsString:@"scanBase"]) {
+            NSString * json = (NSString*)[call arguments];
+            NSError *error = nil;
+            ScanDeviceArray* arr =  ScanDeviceArrayFromJSON(json, &error);
+            DevicesBack block = [self.devicesBackDic objectForKey:[call method]];
+            if(block){
+                block(arr);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+        }else if ([[call method] containsString:@"endScan"]){
+            EndScanBase block = [self.endScanDic objectForKey:[call method]];
+            if(block){
+                block();
+                [self.endScanDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        } else if ([[call method] containsString:@"scanConnect"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            ScanDeviceModel *model = [ScanDeviceModel fromJSONDictionary:dict];
+            DeviceBack block = [self.deviceBackDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.deviceBackDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+            
+        }else if ([@"connect" isEqualToString:[call method]]){
+            BOOL isBool = (BOOL)[call arguments];
+            if (self.connectBlock) {
+                self.connectBlock(isBool);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([@"inTransitionDevice" isEqualToString:[call method]]){
+            BOOL isBool = (BOOL)[call arguments];
+            if (self.inTransitionDeviceBlock) {
+                self.inTransitionDeviceBlock(isBool);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getFirmware"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            
+            protocol_device_info* model = [[protocol_device_info alloc] initWithData:data.data error:&error];
+            FirmwareBase block = [self.firmwareDic objectForKey:[call method]];
+            if(block){
+                block(model);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([@"progress" isEqualToString:[call method]]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSInteger message = 0;
+            NSString* key = @"";
+            if ([dict objectForKey:@"message"]) {
+                message = [[dict objectForKey:@"message"] intValue];
+            }
+            if ([dict objectForKey:@"key"]) {
+                key = [dict objectForKey:@"key"];
+            }
+            ProgressBase block = [self.progressDic objectForKey:key];
+            if(block){
+                block(message);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([@"success" isEqualToString:[call method]]){
+            SuccessBase block = [self.successDic objectForKey:[call arguments]];
+            if(block){
+                block();
+                [self.successDic removeObjectForKey:[call arguments]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call arguments]);
+            }
+            
+        }else if ([@"failure" isEqualToString:[call method]]){
+            FailureBase block = [self.failureDic objectForKey:[call arguments]];
+            if(block){
+                block();
+                [self.failureDic removeObjectForKey:[call arguments]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call arguments]);
+            }
+            
+        }else if ([[call method] isEqualToString:@"failureArgument"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSInteger code = 0;
+            NSString* message = @"";
+            NSString* key = @"";
+            if ([dict objectForKey:@"message"]) {
+                message = [dict objectForKey:@"message"];
+            }
+            if ([dict objectForKey:@"key"]) {
+                key = [dict objectForKey:@"key"];
+            }
+            if ([dict objectForKey:@"code"]) {
+                code = [[dict objectForKey:@"code"] intValue];
+            }
+            FailureArgument block = [self.failureArgumentDic objectForKey:key];
+            if(block){
+                block(code,message);
+                [self.failureArgumentDic removeObjectForKey:key];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", key);
+            }
+            
+            
+        }else if ([@"listenDeviceState" isEqualToString:[call method]]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSInteger status = 0;
+            NSString* deviceName = @"";
+            if ([dict objectForKey:@"status"]) {
+                status = [[dict objectForKey:@"status"] intValue];
+            }
+            if ([dict objectForKey:@"deviceName"]) {
+                deviceName = [dict objectForKey:@"deviceName"];
+            }
+            ConnectionStatus cStatus = (ConnectionStatus)status;
+            if(cStatus != ConnectionStatusSync || cStatus != ConnectionStatusSyncComplete){
+                self.connectStatus = (ConnectionStatus)status;
+            }
+            if (self.listenDeviceStateBlock) {
+                self.listenDeviceStateBlock(self.connectStatus,deviceName);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+            
+            
+            
+        }else if ([[call method] containsString:@"bluetoothStatus"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_connect_status_inquire_reply* model = [[protocol_connect_status_inquire_reply alloc] initWithData:[data data] error:&error];
+            BluetoothStatusBase block = [self.bluetoothStatusDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.bluetoothStatusDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getTime"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_device_time_inquire_reply* model = [[protocol_device_time_inquire_reply alloc] initWithData:[data data] error:&error];
+            ATimeBase block = [self.timeDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.timeDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getLanguage"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_language_inquire_reply* model = [[protocol_language_inquire_reply alloc] initWithData:[data data] error:&error];
+            LanguageBase block = [self.languageDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.languageDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getUserInfo"]){
+            
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_user_info_operate* model = [[protocol_user_info_operate alloc] initWithData:[data data] error:&error];
+            UserBase block = [self.userDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.userDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getAlarm"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_alarm_inquire_reply* model = [[protocol_alarm_inquire_reply alloc] initWithData:[data data] error:&error];
+            AlarmBase block = [self.alarmDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.alarmDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getDisturb"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_disturb_inquire_reply* model = [[protocol_disturb_inquire_reply alloc] initWithData:[data data] error:&error];
+            DisturbBase block = [self.disturbDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.disturbDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getScreen"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_screen_brightness_inquire_reply* model = [[protocol_screen_brightness_inquire_reply alloc] initWithData:[data data] error:&error];
+            ScreenBase block = [self.screenDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.screenDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getMonitor"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_health_monitor_inquire_reply* model = [[protocol_health_monitor_inquire_reply alloc] initWithData:[data data] error:&error];
+            MonitorBase block = [self.monitorDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.monitorDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSleepMonitor"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_sleep_monitor_inquire_reply* model = [[protocol_sleep_monitor_inquire_reply alloc] initWithData:[data data] error:&error];
+            SleepMonitorBase block = [self.sleepMonitorDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sleepMonitorDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getWater"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_drink_water_inquire_reply* model = [[protocol_drink_water_inquire_reply alloc] initWithData:[data data] error:&error];
+            WaterBase block = [self.waterDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.waterDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getFindPhoneWatch"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_find_phone_watch_inquire_reply* model = [[protocol_find_phone_watch_inquire_reply alloc] initWithData:[data data] error:&error];
+            FindPhoneWatchBase block = [self.findPhoneWatchDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.findPhoneWatchDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getVoice"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_voice_assistant_inquire_reply* model = [[protocol_voice_assistant_inquire_reply alloc] initWithData:[data data] error:&error];
+            VoiceBase block = [self.voiceDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.voiceDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getWorldTime"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_world_time_inquire_reply* model = [[protocol_world_time_inquire_reply alloc] initWithData:[data data] error:&error];
+            WorldTimeBase block = [self.worldTimeDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.voiceDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getStanding"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_standing_remind_inquire_reply* model = [[protocol_standing_remind_inquire_reply alloc] initWithData:[data data] error:&error];
+            StandingBase block = [self.standingDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.standingDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getMessageType"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_message_notify_func_support_reply* model = [[protocol_message_notify_func_support_reply alloc] initWithData:[data data] error:&error];
+            MessageTypeBase block = [self.messageTypeDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.messageTypeDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getMessageApp"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_message_notify_data_inquire_reply* model = [[protocol_message_notify_data_inquire_reply alloc] initWithData:[data data] error:&error];
+            MessageAppBase block = [self.messageAppDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.messageAppDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getMessageOnOff"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_message_notify_switch_inquire_reply* model = [[protocol_message_notify_switch_inquire_reply alloc] initWithData:[data data] error:&error];
+            MessageOnOffBase block = [self.messageOnOffDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.messageOnOffDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getCall"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_call_switch_inquire_reply* model = [[protocol_call_switch_inquire_reply alloc] initWithData:[data data] error:&error];
+            CallBase block = [self.callDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.callDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getContacts"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_frequent_contacts_inquire_reply* model = [[protocol_frequent_contacts_inquire_reply alloc] initWithData:[data data] error:&error];
+            ContactsBase block = [self.contactsDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.contactsDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getCard"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_quick_card_inquire_reply* model = [[protocol_quick_card_inquire_reply alloc] initWithData:[data data] error:&error];
+            CardBase block = [self.cardDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.cardDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSportIdentification"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_exercise_intelligent_recognition_inquire_reply* model = [[protocol_exercise_intelligent_recognition_inquire_reply alloc] initWithData:[data data] error:&error];
+            SportIdentificationBase block = [self.sportIdentificationDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sportIdentificationDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSportSub"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_exercise_sporting_param_sort_inquire_reply* model = [[protocol_exercise_sporting_param_sort_inquire_reply alloc] initWithData:[data data] error:&error];
+            SportSubBase block = [self.sportSubDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sportSubDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSportSort"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_exercise_sport_mode_sort_inquire_reply* model = [[protocol_exercise_sport_mode_sort_inquire_reply alloc] initWithData:[data data] error:&error];
+            SportSortBase block = [self.sportSortDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sportSortDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getSportType"]){
+            
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_exercise_func_support_reply* model = [[protocol_exercise_func_support_reply alloc] initWithData:[data data] error:&error];
+            SportTypeBase block = [self.sportTypeDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sportTypeDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getWatchDial"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_watch_dial_plate_inquire_reply* model = [[protocol_watch_dial_plate_inquire_reply alloc] initWithData:[data data] error:&error];
+            WatchDialBase block = [self.watchDialDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.watchDialDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getActivityNewTimeData"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<ActivityModel *> * modelArr = [ActivityModel initWithArray:dic[@"data"]];
+            ActivitysClosure block = [self.activitysClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.watchDialDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSleepNewTimeData"]){
+            
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<SleepModel *> * modelArr = [SleepModel initWithArray:dic[@"data"]];
+            SleepsClosure block = [self.sleepsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sleepsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getHeartRateNewTimeData"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<HeartRateModel *> * modelArr = [HeartRateModel initWithArray:dic[@"data"]];
+            HeartRatesClosure block = [self.heartRatesClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.heartRatesClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getStressNewTimeData"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<StressModel *> * modelArr = [StressModel initWithArray:dic[@"data"]];
+            StresssClosure block = [self.stresssClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.stresssClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getNoiseNewTimeData"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<NoiseModel *> * modelArr = [NoiseModel initWithArray:dic[@"data"]];
+            NoisesClosure block = [self.noisesClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.noisesClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getSpoNewTimeData"]){
+            
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<OxygenModel *> * modelArr = [OxygenModel initWithArray:dic[@"data"]];
+            OxygensClosure block = [self.oxygensClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.oxygensClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getSportRecord"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<SportModel *> * modelArr = [SportModel initWithArray:dic[@"data"]];
+            SportsClosure block = [self.sportsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sportsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getSportDetails"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            SportModel * model = [[SportModel alloc] initWithDictionary: dic[@"data"]];
+            SportClosure block = [self.sportClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sportClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSportTimeData"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<SportModel *> * modelArr = [SportModel initWithArray:dic[@"data"]];
+            SportsClosure block = [self.sportsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sportsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"delSportRecord"]){
+            SuccessBase block = [self.successDic objectForKey:[call method]];
+            if(block){
+                block();
+                [self.successDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getHrvNewTimeData"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<HrvModel *> * modelArr = [HrvModel initWithArray:dic[@"data"]];
+            HrvsClosure block = [self.hrvsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sportsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getBindDevice"]){
+            NSString * json = (NSString*)[call arguments];
+            NSError *error = nil;
+            ScanDeviceArray* arr =  ScanDeviceArrayFromJSON(json, &error);
+            DevicesBack block = [self.devicesBackDic objectForKey:[call method]];
+            if(block){
+                block(arr);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getHotKey"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_button_crown_inquire_reply* model = [[protocol_button_crown_inquire_reply alloc] initWithData:[data data] error:&error];
+            HotKeyBase block = [self.hotKeyDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.hotKeyDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([ [call method] containsString:@"getMenstrual"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_menstruation_inquire_reply* model = [[protocol_menstruation_inquire_reply alloc] initWithData:[data data] error:&error];
+            MenstrualBase block = [self.menstrualDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.menstrualDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getTable"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_function_table* model = [[protocol_function_table alloc] initWithData:[data data] error:&error];
+            TableBase block = [self.tableDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.tableDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSOSContacts"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_emergency_contacts_inquire_reply* model = [[protocol_emergency_contacts_inquire_reply alloc] initWithData:[data data] error:&error];
+            SosContactsBase block = [self.sosContactsDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.sosContactsDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getFocus"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_focus_mode_inquire_reply* model = [[protocol_focus_mode_inquire_reply alloc] initWithData:[data data] error:&error];
+            FocusBase block = [self.focusDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.focusDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getAppList"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_app_list_inquire_reply* model = [[protocol_app_list_inquire_reply alloc] initWithData:[data data] error:&error];
+            AppListBase block = [self.appListDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.appListDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getEventTracking"]){
+            FlutterStandardTypedData *data = [call arguments];
+            NSError *error = nil;
+            protocol_event_tracking_inquire_reply* model = [[protocol_event_tracking_inquire_reply alloc] initWithData:[data data] error:&error];
+            EventTrackingBase block = [self.eventTrackingDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.eventTrackingDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([@"noticeUpdate" isEqualToString:[call method]]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NoticeUpdateModel * model = [[NoticeUpdateModel alloc] initWithDictionary:dic];
+            if(self.noticeUpdateListen){
+                self.noticeUpdateListen(model);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([@"eventReport" isEqualToString:[call method]]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            EventReportModel * model = [[EventReportModel alloc] initWithDictionary:dic];
+            if(self.eventReportListen){
+                self.eventReportListen(model);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+            
+        }else if ([@"exceptionListen" isEqualToString:[call method]]){
+            NSString * json = (NSString*)[call arguments];
+            if(self.exceptionListen){
+                self.exceptionListen(json);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSportUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<SportModel *> * modelArr = [SportModel initWithArray:dic[@"data"]];
+            SportsClosure block = [self.sportsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sportsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getActivityUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<ActivityModel *> * modelArr = [ActivityModel initWithArray:dic[@"data"]];
+            ActivitysClosure block = [self.activitysClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.activitysClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getHeartRateUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<HeartRateModel *> * modelArr = [HeartRateModel initWithArray:dic[@"data"]];
+            HeartRatesClosure block = [self.heartRatesClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.heartRatesClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getHrvUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<HrvModel *> * modelArr = [HrvModel initWithArray:dic[@"data"]];
+            HrvsClosure block = [self.hrvsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sportsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getNoiseUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<NoiseModel *> * modelArr = [NoiseModel initWithArray:dic[@"data"]];
+            NoisesClosure block = [self.noisesClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.noisesClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getStressUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<StressModel *> * modelArr = [StressModel initWithArray:dic[@"data"]];
+            StresssClosure block = [self.stresssClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.stresssClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSleepUploadDays"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<SleepModel *> * modelArr = [SleepModel initWithArray:dic[@"data"]];
+            SleepsClosure block = [self.sleepsClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.sleepsClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSpoUploadStatus"]){
+            NSString * json = (NSString*)[call arguments];
+            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
+            NSMutableArray<OxygenModel *> * modelArr = [OxygenModel initWithArray:dic[@"data"]];
+            OxygensClosure block = [self.oxygensClosureDic objectForKey:[call method]];
+            if(block){
+                block(modelArr);
+                [self.oxygensClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"rawQueryDB"]){
+            NSString * json = (NSString*)[call arguments];
+            RawQueryDBClosure block = [self.rawQueryDBClosureDic objectForKey:[call method]];
+            if(block){
+                block(json);
+                [self.rawQueryDBClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+            
+        }else if ([[call method] containsString:@"encodeOnlineFile"] || [ [call method] containsString:@"encodeOfflineFile"] || [ [call method] containsString:@"encodePhoneFile"]){
+            FlutterStandardTypedData *data = [call arguments];
+            EphemerisData block = [self.ephemerisClosureDic objectForKey:[call method]];
+            if(block){
+                block(data.data);
+                [self.ephemerisClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([@"logPath" isEqualToString:[call method]]){
+            NSString * json = (NSString*)[call arguments];
+            if(self.logPathClosure){
+                self.logPathClosure(json);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getSNFirmware"]){
+            NSString * json = (NSString*)[call arguments];
+            SNFirmwareBase block = [self.SNFirmwareDic objectForKey:[call method]];
+            if(block){
+                block(json);
+                [self.SNFirmwareDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"parseDial"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+            ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parseDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"parsePhotoDial"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+            ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"setCurrentColor"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+            ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parseDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"setCurrentPhotoColor"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+            ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"setCurrentBackgroundImagePath"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+            ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parseDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"setCurrentClockPosition"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+            ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"setCurrentPhotoBackgroundImagePath"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialPhotoParseModel* model =  [[DialPhotoParseModel alloc] initWithDictionary:dic];
+            ParsePhotoDialBase block = [self.parsePhotoDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parsePhotoDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"setCurrentFunction"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            DialParseModel* model =  [[DialParseModel alloc] initWithDictionary:dic];
+            ParseDialBase block = [self.parseDialClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.parseDialClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getPreviewImage"]){
+            FlutterStandardTypedData *data = [call arguments];
+            
+            PreviewImageBase block = [self.previewImageClosureDic objectForKey:[call method]];
+            if(block){
+                block(data.data);
+                [self.previewImageClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"encodeDial"]){
+            FlutterStandardTypedData *data = [call arguments];
+            
+            DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
+            if(block){
+                block(data.data);
+                [self.previewImageClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"encodePhotoDial"]){
+            FlutterStandardTypedData *data = [call arguments];
+            
+            DialDataBase block = [self.dialDataClosureDic objectForKey:[call method]];
+            if(block){
+                block(data.data);
+                [self.previewImageClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"ephemerisInit"]){
+            if (_gpsClosure) {
+                EphemerisGPSModel *result = _gpsClosure();
+                [self ephemerisInitGPSWithEphemerisGPSModel:result];
+            }
+            
+        }else if ([[call method] containsString:@"ephemerisGPS"]){
+            
+            
+        }else if ([[call method] containsString:@"checkPhoneBookPermissions"]){
+            NSLog(@"checkPhoneBookPermissions %@ ", [call arguments]);
+            int isBool = [[call arguments] intValue];
+            BoolBase block = [self.boolClosureDic objectForKey:[call method]];
+            if (block) {
+                block(isBool == 0 ? NO : YES);
+                [self.boolClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"requestPhoneBookPermissions"]){
+            int isBool = [[call arguments] intValue];
+            BoolBase block = [self.boolClosureDic objectForKey:[call method]];
+            if (block) {
+                block(isBool == 0 ? NO : YES);
+                [self.boolClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getOTAUpgradeVersion"]){
+            int value = [[call arguments] intValue];
+            
+            ValueBase block = [self.valueClosureDic objectForKey:[call method]];
+            if(block){
+                block(@(value));
+                [self.valueClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"getOTAUpgradeState"]){
+            NSDictionary * dic = (NSDictionary*)[call arguments];
+            UpgradeModel* model =  [[UpgradeModel alloc] initWithDictionary:dic];
+            UpgradeStateBase block = [self.upgradeStateClosureDic objectForKey:[call method]];
+            if(block){
+                block(model);
+                [self.upgradeStateClosureDic removeObjectForKey:[call method]];
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else if ([[call method] containsString:@"bluetoothStateListen"]){
+            int value = [[call arguments] intValue];
+            BluetoothState blueState;
+            switch (value) {
+                case 0:
+                    blueState = BluetoothStateUnknown;
+                    break;
+                case 2:
+                    blueState = BluetoothStateUnauthorized;
+                    break;
+                case 4:
+                    blueState = BluetoothStateOn;
+                    break;
+                case 6:
+                    blueState = BluetoothStateOff;
+                    break;
+                    
+                default:
+                    blueState = BluetoothStateUnknown;
+                    break;
+            }
+            
+            if (self.bluetoothStateBlock) {
+                self.bluetoothStateBlock(blueState);
+            }else{
+                NSLog(@"Method %@ not found or not a valid block.", [call method]);
+            }
+            
+        }else {
+            
+            result(FlutterMethodNotImplemented);
+        }
+    }@catch (NSException *exception) {
+        NSLog(@"Exception caught: %@", exception);
+        result([FlutterError errorWithCode:@"EXCEPTION"
+                                   message:@"An exception occurred."
+                                   details:exception.reason]);
     }
+   
     
 }
 

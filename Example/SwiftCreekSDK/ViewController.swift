@@ -34,6 +34,17 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             } syncFailure: {
                 print("syncFailure")
             }
+            //            CreekInterFace.instance().getBindDevice { models in
+            //                models.forEach { model in
+            //                    if model.isLastBind == true{
+            //                        CreekInterFace.instance().bindingDevice(with: .bindRemove, idString: model.device.identifier, code: nil) {
+            //                            print("Success")
+            //                        } failure: {
+            //                            print("Failure")
+            //                        }
+            //                    }
+            //                }
+            //            }
             
             
             break
@@ -84,9 +95,9 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
                     } uploadFailure: { code, msg in
                         print(msg)
                     }
-
                     
-                   
+                    
+                    
                     
                 } catch {
                     print("\(error)")
@@ -100,27 +111,27 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             
             break
         case "Binding":
-            //            CreekInterFace.instance().bindingDevice(with: .binNormal, id: nil, code: nil) {
-            //                print("Success")
-            //            } failure: {
-            //                print("Failure")
-            //            }
-            
-            
-            if(textField.text == "123"){
-                CreekInterFace.instance().bindingDevice(with: .bindPairingCode, idString: nil, code: nil) {
-                    
-                } failure: {
-                    
-                }
-
-            }else{
-                CreekInterFace.instance().bindingDevice(with: .bindPairingCode, idString: nil, code: textField.text) {
-                    print("Success")
-                } failure: {
-                    print("Failure")
-                }
+            CreekInterFace.instance().bindingDevice(with: .binNormal, idString: nil, code: nil) {
+                print("Success")
+            } failure: {
+                print("Failure")
             }
+            
+            //
+            //            if(textField.text == "123"){
+            //                CreekInterFace.instance().bindingDevice(with: .bindPairingCode, idString: nil, code: nil) {
+            //
+            //                } failure: {
+            //
+            //                }
+            //
+            //            }else{
+            //                CreekInterFace.instance().bindingDevice(with: .bindPairingCode, idString: nil, code: textField.text) {
+            //                    print("Success")
+            //                } failure: {
+            //                    print("Failure")
+            //                }
+            //            }
             break
             
         case "getLogPath":
@@ -142,28 +153,28 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             break
             
         case "requst contacts permission":
-      
-//           CreekInterFace.instance().checkPhoneBookPermissions { model in
-//              if !model{
-//                  CreekInterFace.instance().requestPhoneBookPermissions { model in
-//                     if model {
-//                        print("Permissions  Success")
-//                     }else{
-//                        print("Permissions  Failure")
-//                     }
-//                  }
-//              }
-//           }
+            
+            //           CreekInterFace.instance().checkPhoneBookPermissions { model in
+            //              if !model{
+            //                  CreekInterFace.instance().requestPhoneBookPermissions { model in
+            //                     if model {
+            //                        print("Permissions  Success")
+            //                     }else{
+            //                        print("Permissions  Failure")
+            //                     }
+            //                  }
+            //              }
+            //           }
             
             CreekInterFace.instance().requestPhoneBookPermissions { model in
-               if model {
-                  print("Permissions  Success")
-               }else{
-                  print("Permissions  Failure")
-               }
+                if model {
+                    print("Permissions  Success")
+                }else{
+                    print("Permissions  Failure")
+                }
             }
             
-    
+            
             break
             
         default:
@@ -175,22 +186,22 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
     func checkContactPermission() {
         let contactStore = CNContactStore()
         switch CNContactStore.authorizationStatus(for: .contacts) {
-            case .authorized:
-                // 已经授权，你可以获取和使用联系人数据
-                break
-
-            case .denied, .notDetermined:
-                // 用户还未决定或者已经拒绝，你需要请求权限
-                contactStore.requestAccess(for: .contacts) { granted, error in
-                    if granted {
-                        // 用户授权成功，你可以获取和使用联系人数据
-                    } else {
-                        // 用户拒绝授权，你不能获取和使用联系人数据
-                    }
+        case .authorized:
+            // 已经授权，你可以获取和使用联系人数据
+            break
+            
+        case .denied, .notDetermined:
+            // 用户还未决定或者已经拒绝，你需要请求权限
+            contactStore.requestAccess(for: .contacts) { granted, error in
+                if granted {
+                    // 用户授权成功，你可以获取和使用联系人数据
+                } else {
+                    // 用户拒绝授权，你不能获取和使用联系人数据
                 }
-            default:
-                // 其他情况，例如权限被系统限制
-                break
+            }
+        default:
+            // 其他情况，例如权限被系统限制
+            break
         }
     }
     
@@ -270,17 +281,17 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
         CreekInterFace.instance().bluetoothStateListen { state in
             switch(state){
             case .unknown:
-               print("State unknown")
-               break
+                print("State unknown")
+                break
             case .unauthorized:
-               print("The application is not authorized to use the Bluetooth Low Energy role")
-               break
+                print("The application is not authorized to use the Bluetooth Low Energy role")
+                break
             case .on:
-               print("Bluetooth is currently powered on and available to use")
-               break
+                print("Bluetooth is currently powered on and available to use")
+                break
             case .off:
-               print("Bluetooth is currently powered off")
-               break
+                print("Bluetooth is currently powered off")
+                break
             default:
                 print("State unknown")
             }
@@ -296,7 +307,7 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             model.isVaild = true
             return model
         }
-
+        
         CreekInterFace.instance().noticeUpdateListen { model in
             print("noticeUpdateListen \(model.toDictionary())")
             
@@ -313,7 +324,7 @@ class ViewController: CreekBaseViewController,UITableViewDelegate,UITableViewDat
             } failure: { code, message in
                 
             }
-
+            
         }
         
     }

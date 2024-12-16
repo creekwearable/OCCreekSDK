@@ -1,11 +1,10 @@
 PODS:
   - CropViewController (2.7.4)
   - ESTabBarController-swift (2.8.0)
-  - IQKeyboardManagerSwift (6.5.16)
   - MBProgressHUD (1.2.0)
-  - OCCreekSDK (0.1.20):
-    - OCCreekSDK/Protos (= 0.1.20)
-  - OCCreekSDK/Protos (0.1.20):
+  - OCCreekSDK (0.1.24):
+    - OCCreekSDK/Protos (= 0.1.24)
+  - OCCreekSDK/Protos (0.1.24):
     - Protobuf (~> 3.11)
   - Protobuf (3.27.0)
   - SnapKit (5.7.1)
@@ -20,7 +19,6 @@ PODS:
 DEPENDENCIES:
   - CropViewController
   - ESTabBarController-swift
-  - IQKeyboardManagerSwift
   - MBProgressHUD
   - OCCreekSDK (from `../`)
   - SnapKit
@@ -32,7 +30,6 @@ SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - CropViewController
     - ESTabBarController-swift
-    - IQKeyboardManagerSwift
     - MBProgressHUD
     - Protobuf
     - SnapKit
@@ -47,15 +44,14 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   CropViewController: 3489bbf95a3e11c654382b0bae08ac645cdf1b93
   ESTabBarController-swift: 05593a6ad64700b03c0eb60ff625916370aa4136
-  IQKeyboardManagerSwift: 12d89768845bb77b55cc092ecc2b1f9370f06b76
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
-  OCCreekSDK: e154d6d10f01ca2cc49e4b58dbad527da1da9357
+  OCCreekSDK: 7c69b22615594d083b50c49785530644eb7e529c
   Protobuf: 2c02b2e18bb9040d3bf3fd2cecaefb2a8b55265b
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   Toast-Swift: 7a03a532afe3a560d4044bc7c237e2864d295173
   TZImagePickerController: c0f8e83c27cb08f7d812b1d066a5934d30ff78ad
   ZIPFoundation: b8c29ea7ae353b309bc810586181fd073cb3312c
 
-PODFILE CHECKSUM: cb471270cf9b734346f7ad7b4343cbec7263eb2b
+PODFILE CHECKSUM: d7f50878066dd6e5ff19f0dc9596844ee20c1a26
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.16.2
